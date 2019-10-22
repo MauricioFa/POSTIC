@@ -8,52 +8,10 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import { connect } from 'react-redux'
 
-export default function Inventario() {
-  const [state, setState] = React.useState({
-    columns: [
-      { title: "Producto", field: "name" },
-      { title: "SKU", field: "sku" },
-      { title: "Presentación", field: "description" },
-      { title: "Categoría", field: "categoria" },
-      { title: "Valor unitario", field: "unitValue", type: "currency" }
-    ],
-    data: [
-      {
-        name: "Ariel con Downy",
-        sku: "89ER5",
-        description: "Bolsa x 850g",
-        categoria: "Detergentes",
-        unitValue: 7800,
-        inventario: 200
-      },
-      {
-        name: "Chocolate SOL Vainilla",
-        sku: "E2589",
-        description: "Pack por 12 unidades",
-        categoria: "Chocolates",
-        unitValue: 6800,
-        inventario: 400
-      },
-      {
-        name: "Chocolate SOL Tradicional",
-        sku: "897KL44",
-        description: "Pack por 12 unidades",
-        categoria: "Chocolates",
-        unitValue: 5900,
-        inventario: 400
-      },
-      {
-        name: "Aceite Oleocali",
-        sku: "E2589",
-        description: "Botella por 3 litros",
-        categoria: "Aceites",
-        unitValue: 15800,
-        inventario: 100
-      }
-    ]
-  });
-
+const Inventario = ({ columns, data }) => {
+  
   const tableIcons = {
     Search: forwardRef((props, ref) => <SearchIcon {...props} ref={ref} />),
     Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
@@ -72,8 +30,8 @@ export default function Inventario() {
   return (
     <MaterialTable
       title="Consulta Productos"
-      columns={state.columns}
-      data={state.data}
+      columns={columns}
+      data={data}
       icons={tableIcons}
       actions={[
         {
@@ -121,4 +79,12 @@ export default function Inventario() {
       }}
     />
   );
-}
+};
+const mapStateToProps = state => {
+  return {
+    data: state.listaProductos.data,
+    columns: state.listaProductos.columns,
+  };
+};
+
+export default connect(mapStateToProps, null)(Inventario)
