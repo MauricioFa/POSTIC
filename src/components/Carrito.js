@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { removeFromCart } from '../actions';
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -9,6 +11,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Paper from "@material-ui/core/Paper";
+import '../styles/Carrito.css';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,28 +51,37 @@ function generate(element) {
   );
 }
 
-export default function Carrito() {
-  const classes = useStyles();
 
+const Carrito = (props) => {
+  const classes = useStyles();
+  const { cart, checkOutTotal } = props;
+
+
+  const handleCartItems = (elementIndex) => {
+    props.removeFromCart(elementIndex)
+  }
+  
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={12}>
         <Typography variant="h6" className={classes.title}>
           Artículos a facturar
         </Typography>
-        <div className={classes.demo}>
-          <List>
-            {generate(
-              <ListItem>
-                <ListItemText primary="Nombre Artículo" />
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            )}
-          </List>
+        <div className="Checkout-content">
+          {cart.length > 0 ? <h3>Lista de Pedidos:</h3> : <h2>Sin Pedidos</h2>}
+          {cart.map((item, index) => (
+            <div key={index} className="Checkout-item">
+              <div className="Checkout-element">
+                <h4>{item.title}</h4>
+                <span>
+                  $
+                {item.price}
+                </span>
+              </div>
+              <DeleteIcon onClick = {() => handleCartItems(index)}/>
+              {/* <i className="fas fa-trash-alt"  onClick={() => handleCartItems(index)}  /> */}
+            </div>
+          ))}
         </div>
         <Grid item xs={12}>
           <Paper className={classes.paper}>SUBTOTAL: $87,500</Paper>
@@ -77,3 +90,16 @@ export default function Carrito() {
     </Grid>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+    checkOutTotal: state.checkOutTotal,
+  };
+};
+
+const mapDispathToProps = {
+  removeFromCart,
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(Carrito);

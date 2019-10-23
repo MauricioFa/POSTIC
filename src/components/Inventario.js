@@ -1,15 +1,16 @@
 import React from "react";
 import { connect } from 'react-redux';
 import '../styles/Inventario.css';
+import { addToCart } from '../actions';
 
 
 const Inventario = (props) => {
   const { products } = props;
 
-/*   const handleAddToCart = (product) => {
+  const handleAddToCart = (product) => {
     props.addToCart(product);
   }
- */
+
  
   return (
     <div className="Products">
@@ -27,7 +28,7 @@ const Inventario = (props) => {
               </h2>
               <p>{product.description}</p>
             </div>
-            <button type="button" /* onClick={() => handleAddToCart(product)} */>Comprar</button>
+            <button type="button" onClick={() => handleAddToCart(product)}>Comprar</button>
           </div>
         ))}
       </div>
@@ -41,8 +42,8 @@ const mapStateToProps = state => {
   };
 };
 
-/* const mapDispatchToProps = {
+const mapDispatchToProps = {
   addToCart,
 };
- */
-export default connect(mapStateToProps, null)(Inventario);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Inventario);
