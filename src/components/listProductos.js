@@ -11,51 +11,12 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CheckIcon from "@material-ui/icons/Check";
+import { connect } from 'react-redux'
 
-export default function ListProductos() {
+
+const ListProductos = ({ columns, data }) => {
   const [state, setState] = React.useState({
-    columns: [
-      { title: "Producto", field: "name" },
-      { title: "SKU", field: "sku" },
-      { title: "Presentación", field: "description" },
-      { title: "Categoría", field: "categoria" },
-      { title: "Valor unitario", field: "unitValue", type: "currency" },
-      { title: "Unidades Disponibles", field: "inventario", type: "numeric" }
-    ],
-    data: [
-      {
-        name: "Ariel con Downy",
-        sku: "89ER5",
-        description: "Bolsa x 850g",
-        categoria: "Detergentes",
-        unitValue: 7800,
-        inventario: 200
-      },
-      {
-        name: "Chocolate SOL Vainilla",
-        sku: "E2589",
-        description: "Pack por 12 unidades",
-        categoria: "Chocolates",
-        unitValue: 6800,
-        inventario: 400
-      },
-      {
-        name: "Chocolate SOL Tradicional",
-        sku: "897KL44",
-        description: "Pack por 12 unidades",
-        categoria: "Chocolates",
-        unitValue: 5900,
-        inventario: 400
-      },
-      {
-        name: "Aceite Oleocali",
-        sku: "E2589",
-        description: "Botella por 3 litros",
-        categoria: "Aceites",
-        unitValue: 15800,
-        inventario: 100
-      }
-    ]
+    columns: columns, data: data
   });
 
   const tableIcons = {
@@ -150,3 +111,12 @@ export default function ListProductos() {
     />
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    data: state.listaProductos.data,
+    columns: state.listaProductos.columns,
+  };
+};
+
+export default connect(mapStateToProps, null)(ListProductos)

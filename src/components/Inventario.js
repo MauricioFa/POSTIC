@@ -5,7 +5,7 @@ import { addToCart } from '../actions';
 
 
 const Inventario = (props) => {
-  const { products } = props;
+  const  products  = props.products;
 
   const handleAddToCart = (product) => {
     props.addToCart(product);
@@ -16,14 +16,14 @@ const Inventario = (props) => {
     <div className="Products">
       <div className="Products-items">
         {products.map(product => (
-          <div className="Products-item" key={product.id}>
-            <img src={product.image} alt={product.title} />
+          <div className="Products-item" key={product.sku}>
+            <img src={product.image} alt={product.name} />
             <div className="Products-item-info">
               <h2>
-                {product.title}
+                {product.name}
                 <span>
                   $
-                  {product.price}
+                  {product.unitValue}
                 </span>
               </h2>
               <p>{product.description}</p>
@@ -38,7 +38,7 @@ const Inventario = (props) => {
 
 const mapStateToProps = state => {
   return {
-    products: state.products,
+    products: state.listaProductos.data,
   };
 };
 

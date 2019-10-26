@@ -54,7 +54,7 @@ function generate(element) {
 
 const Carrito = (props) => {
   const classes = useStyles();
-  const { cart, checkOutTotal } = props;
+  const cart = props.cart;
 
 
   const handleCartItems = (elementIndex) => {
@@ -72,10 +72,10 @@ const Carrito = (props) => {
           {cart.map((item, index) => (
             <div key={index} className="Checkout-item">
               <div className="Checkout-element">
-                <h4>{item.title}</h4>
+                <h4>{item.name}</h4>
                 <span>
                   $
-                {item.price}
+                {item.unitValue}
                 </span>
               </div>
               <DeleteIcon onClick = {() => handleCartItems(index)}/>
@@ -93,8 +93,8 @@ const Carrito = (props) => {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart,
-    checkOutTotal: state.checkOutTotal,
+    cart: state.listaCarrito,
+    /* checkOutTotal: state.checkOutTotal, */
   };
 };
 

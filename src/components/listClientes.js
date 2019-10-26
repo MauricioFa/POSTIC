@@ -12,50 +12,11 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CheckIcon from "@material-ui/icons/Check";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { connect } from 'react-redux'
 
-export default function ListClientes() {
+const ListClientes = ({ columns,data }) => {
   const [state, setState] = React.useState({
-    columns: [
-      { title: "Nombres", field: "name" },
-      { title: "Apellidos", field: "surname" },
-      { title: "Teléfono", field: "telefono" },
-      { title: "Email", field: "email" },
-      {
-        title: "Autoriza promociones por email",
-        field: "autorizaEmail",
-        lookup: { 1: "Sí", 2: "No" }
-      }
-    ],
-    data: [
-      {
-        name: "Freddy",
-        surname: "Vega",
-        telefono: 3135263232,
-        email: "freddier@platzi.com",
-        autorizaEmail: 1
-      },
-      {
-        name: "Elvis",
-        surname: "Ko",
-        telefono: 3175235663,
-        email: "elviskohermoso@hotmail.com",
-        autorizaEmail: 1
-      },
-      {
-        name: "Paulo",
-        surname: "Veinteañero",
-        telefono: 3245263636,
-        email: "paulo@gmail.com",
-        autorizaEmail: 2
-      },
-      {
-        name: "Que",
-        surname: "Tomás",
-        telefono: 3015268585,
-        email: "Ktomas@yahoo.com",
-        autorizaEmail: 1
-      }
-    ]
+    columns: columns, data: data
   });
 
   const tableIcons = {
@@ -153,3 +114,12 @@ export default function ListClientes() {
     />
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    columns: state.Clientes.columns,
+    data: state.Clientes.data,
+  };
+};
+
+export default connect(mapStateToProps, null)(ListClientes)
