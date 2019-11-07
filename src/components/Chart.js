@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { connect } from 'react-redux';
 import {
   XAxis,
   YAxis,
@@ -7,14 +8,13 @@ import {
   Tooltip,
   CartesianGrid,
   AreaChart,
-  Area
-} from "recharts";
-import Title from "./Title";
-import { connect } from 'react-redux'
+  Area,
+} from 'recharts';
+import Title from './Title';
 
-const Chart = ({listaGrafico}) => {
+const Chart = ({ listaGrafico }) => {
   return (
-    <React.Fragment>
+    <>
       <Title>Hoy</Title>
       <ResponsiveContainer>
         <AreaChart
@@ -23,42 +23,45 @@ const Chart = ({listaGrafico}) => {
             top: 16,
             right: 16,
             bottom: 0,
-            left: 24
+            left: 24,
           }}
         >
           <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+            <linearGradient id='colorUv' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#8884d8' stopOpacity={0.8} />
+              <stop offset='95%' stopColor='#8884d8' stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="time" />
+          <XAxis dataKey='time' />
           <YAxis>
-            <Label angle={270} position="left" style={{ textAnchor: "middle" }}>
+            <Label angle={270} position='left' style={{ textAnchor: 'middle' }}>
               Ventas ($)
             </Label>
           </YAxis>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray='3 3' />
           <Tooltip />
           <Area
-            name="Venta"
-            type="monotone"
-            dataKey="amount"
-            stroke="#556CD6"
+            name='Venta'
+            type='monotone'
+            dataKey='amount'
+            stroke='#556CD6'
             dot={true}
             fillOpacity={1}
-            fill="url(#colorUv)"
+            fill='url(#colorUv)'
           />
         </AreaChart>
       </ResponsiveContainer>
-    </React.Fragment>
+    </>
   );
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    listaGrafico: state.listaGrafico
+    listaGrafico: state.listaGrafico,
   };
 };
 
-export default connect(mapStateToProps, null)(Chart)
+export default connect(
+  mapStateToProps,
+  null
+)(Chart);

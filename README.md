@@ -16,7 +16,7 @@ Un sistema POS o Point Of Sale en este contexto hace referencia a aplicaciones y
 
 ## Entorno de desarrollo
 
-El archivo `.nvmrc` indica la versión de node.js a usar en el proyecto, se estará usando la última versión para el momento **node.js 12.12.0**.
+El archivo `.nvmrc` indica la versión de node.js a usar en el proyecto, se estará usando la última versión para el momento **node.js 10.16.3**.
 
 La documentación inicial se presentará en la [wiki del repositorio](#).
 

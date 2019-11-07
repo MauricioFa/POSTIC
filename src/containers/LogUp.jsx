@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
-import { Person as PersonIcon, Visibility as VisibilityIcon, VisibilityOff as VisibilityOffIcon } from '@material-ui/icons';
-import { faGoogle, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from '@material-ui/core';
+import {
+  Person as PersonIcon,
+  Visibility as VisibilityIcon,
+  VisibilityOff as VisibilityOffIcon,
+} from '@material-ui/icons';
+import {
+  faGoogle,
+  faFacebook,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useStyles from '../styles/style--LogInUpRpw';
 
