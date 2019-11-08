@@ -1,34 +1,38 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
+import useStyles from '../styles/style--LogInUpRpw';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(3, 2)
-  }
-}));
-
-export default function NotFound() {
-  const classes = useStyles();
+const NotFound = () => {
+  const classes = {
+    ...useStyles({
+      heightSection: '60vh',
+      widthSection: '100vw',
+      heightContainer: '90%',
+      widthContainer: '90vw',
+      heightSectionBottom: 'initial',
+      widthSectionBottom: '86%',
+    }),
+    h1: { color: 'red' },
+  };
 
   return (
-    <div>
-      <Paper className={classes.root}>
-        <Typography variant="h5" component="h3">
-          404: Página no encontrada
-        </Typography>
-        <Typography component="p">
-          El elemento al que se pretende acceder no existe.
-        </Typography>
-        <Link to="/">
-          <Button color="primary" className={classes.button}>
-            Volver a inicio
-          </Button>
-        </Link>
-      </Paper>
-    </div>
+    <main className={classes.main}>
+      <div className={classes.container}>
+        <h1 style={classes.h1}>Error 404</h1>
+        <div className={classes.sectionBottom}>
+          <div>
+            <Typography color='textSecondary' align='center'>
+              El elemento al que se pretende acceder no existe
+            </Typography>
+          </div>
+          <Link to='/'>
+            <h2>Volver al inicio</h2>
+          </Link>
+        </div>
+      </div>
+    </main>
   );
-}
+};
+
+export default NotFound;
