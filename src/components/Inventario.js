@@ -43,7 +43,4 @@ const mapDispatchToProps = {
   addToCart,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Inventario);
+export default connect(mapStateToProps, mapDispatchToProps)(Inventario);
