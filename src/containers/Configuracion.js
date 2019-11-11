@@ -18,7 +18,7 @@ import mainListItems from '../components/listItems';
 import CardConfiguracion from '../components/cardConfiguracion';
 import Theme from '../styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
-import { ReactComponent as Logo } from '../assets/Logo_Postic.svg';
+import Logo from '../assets/Logo_Postic.svg';
 import AddNewButton from '../components/AddNewButton';
 
 function Copyright() {
