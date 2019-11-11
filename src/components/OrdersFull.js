@@ -108,7 +108,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(OrdersFull);
+export default connect(mapStateToProps, null)(OrdersFull);

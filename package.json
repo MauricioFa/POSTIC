@@ -1,6 +1,6 @@
 {
   "name": "postic",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "App to Point Of Sale. Final student project Escuela JS 2019 Platzi.",
   "keywords": [
     "Point Of Sale App",
@@ -19,10 +19,8 @@
     "url": "https://github.com/MauricioFa/POSTIC/issues"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --mode development",
     "format": "prettier --write '{*.js,src/**/*.{js,jsx}}'",
     "linter": "eslint src/ --fix",
     "linterNoFix": "eslint src/"
@@ -41,7 +39,6 @@
     "react-dom": "16.8.6",
     "react-redux": "^7.1.1",
     "react-router-dom": "5.1.2",
-    "react-scripts": "3.2.0",
     "recharts": "1.7.1",
     "redux": "^4.0.4",
     "webpack": "4.41.0",
@@ -51,6 +48,8 @@
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
+    "@svgr/webpack": "^4.3.3",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "eslint": "^6.5.1",
@@ -61,11 +60,14 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
     "prettier": "^1.18.2",
     "sass": "^1.23.3",
-    "sass-loader": "^8.0.0"
+    "sass-loader": "^8.0.0",
+    "webpack-dev-server": "^3.9.0"
   },
   "browserslist": [
     ">0.2%",

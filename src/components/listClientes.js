@@ -121,7 +121,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(ListClientes);
+export default connect(mapStateToProps, null)(ListClientes);

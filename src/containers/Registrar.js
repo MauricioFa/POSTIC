@@ -19,7 +19,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import mainListItems from '../components/listItems';
 import Theme from '../styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
-import { ReactComponent as Logo } from '../assets/Logo_Postic.svg';
+import Logo from '../assets/Logo_Postic.svg';
 import Inventario from '../components/Inventario';
 import Carrito from '../components/Carrito';
 
@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+const Dashboard = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -199,4 +199,6 @@ export default function Dashboard() {
       </main>
     </div>
   );
-}
+};
+
+export default Dashboard;

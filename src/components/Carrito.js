@@ -84,7 +84,4 @@ const mapDispathToProps = {
   removeFromCart,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(Carrito);
+export default connect(mapStateToProps, mapDispathToProps)(Carrito);

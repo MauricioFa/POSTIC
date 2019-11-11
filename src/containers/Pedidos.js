@@ -21,7 +21,7 @@ import OrdersFull from '../components/OrdersFull';
 import Theme from '../styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
 import AddNewButton from '../components/AddNewButton';
-import { ReactComponent as Logo } from '../assets/Logo_Postic.svg';
+import Logo from '../assets/Logo_Postic.svg';
 
 function Copyright() {
   return (
