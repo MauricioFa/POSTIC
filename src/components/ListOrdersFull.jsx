@@ -1,13 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from '@material-ui/core';
 import Title from './Title';
 
 const useStyles = makeStyles({
@@ -20,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-const OrdersFull = ({ Pedidos }) => {
+const OrdersFull = ({ orderList }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -42,7 +44,7 @@ const OrdersFull = ({ Pedidos }) => {
           <Table stickyHeader aria-label='sticky table'>
             <TableHead>
               <TableRow>
-                {Pedidos.columns.map((column) => (
+                {orderList.columns.map((column) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
@@ -54,7 +56,7 @@ const OrdersFull = ({ Pedidos }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Pedidos.rows
+              {orderList.rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const indexkey = index + 1;
@@ -65,7 +67,7 @@ const OrdersFull = ({ Pedidos }) => {
                       tabIndex={-1}
                       key={indexkey}
                     >
-                      {Pedidos.columns.map((column) => {
+                      {orderList.columns.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
@@ -85,7 +87,7 @@ const OrdersFull = ({ Pedidos }) => {
           rowsPerPageOptions={[10, 25, 100]}
           component='div'
           labelRowsPerPage='Filas por página'
-          count={Pedidos.rows.length}
+          count={orderList.rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -104,7 +106,7 @@ const OrdersFull = ({ Pedidos }) => {
 
 const mapStateToProps = (state) => {
   return {
-    Pedidos: state.Pedidos,
+    orderList: state.orderList,
   };
 };
 

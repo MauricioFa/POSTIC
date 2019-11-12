@@ -172,7 +172,7 @@
     "react/jsx-no-bind": [2, { "allowArrowFunctions": true }],
     "react/jsx-no-undef": 2,
     "react/jsx-pascal-case": 2,
-    "react/jsx-props-no-spreading": 2,
+    "react/jsx-props-no-spreading": [1, { "custom": "ignore" }],
     "react/jsx-sort-prop-types": 0,
     "react/jsx-sort-props": 0,
     "react/jsx-uses-react": 2,

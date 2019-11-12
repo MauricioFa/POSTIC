@@ -1,27 +1,30 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ThemeProvider } from '@material-ui/styles';
-import mainListItems from '../components/listItems';
-import Theme from '../assets/styles/Theme';
-import SimpleMenu from '../components/Notifications_menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import MenuIcon from '@material-ui/icons/Menu';
+import {
+  CssBaseline,
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Container,
+  Grid,
+  Paper,
+  Link,
+} from '@material-ui/core';
+
+import AccountMenu from '../components/AccountMenu';
+import Inventory from '../components/Inventory';
 import Logo from '../assets/statics/Logo_Postic.svg';
-import Inventario from '../components/Inventario';
-import Carrito from '../components/Carrito';
+import MainItemsList from '../components/MainItemsList';
+import ShoppingCart from '../components/ShoppingCart';
+import Theme from '../assets/styles/Theme';
 
 function Copyright() {
   return (
@@ -117,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dashboard = () => {
+const RegisterSale = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -158,7 +161,7 @@ const Dashboard = () => {
             >
               POSTIC | Resumen
             </Typography>
-            <SimpleMenu />
+            <AccountMenu />
           </Toolbar>
         </AppBar>
       </ThemeProvider>
@@ -176,7 +179,7 @@ const Dashboard = () => {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{MainItemsList}</List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
@@ -185,12 +188,12 @@ const Dashboard = () => {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={8}>
               <Paper className={fixedHeightPaper}>
-                <Inventario />
+                <Inventory />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper}>
-                <Carrito />
+                <ShoppingCart />
               </Paper>
             </Grid>
           </Grid>
@@ -201,4 +204,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default RegisterSale;

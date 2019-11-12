@@ -12,13 +12,13 @@ import {
 } from 'recharts';
 import Title from './Title';
 
-const Chart = ({ listaGrafico }) => {
+const Chart = ({ demoChart }) => {
   return (
     <>
       <Title>Hoy</Title>
       <ResponsiveContainer>
         <AreaChart
-          data={listaGrafico}
+          data={demoChart}
           margin={{
             top: 16,
             right: 16,
@@ -57,7 +57,7 @@ const Chart = ({ listaGrafico }) => {
 
 const mapStateToProps = (state) => {
   return {
-    listaGrafico: state.listaGrafico,
+    demoChart: state.demoChart,
   };
 };
 

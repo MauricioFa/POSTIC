@@ -1,24 +1,28 @@
 import React, { forwardRef } from 'react';
+import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditIcon from '@material-ui/icons/Edit';
-import SearchIcon from '@material-ui/icons/Search';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
+import CheckIcon from '@material-ui/icons/Check';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import CheckIcon from '@material-ui/icons/Check';
-import { connect } from 'react-redux';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import LastPageIcon from '@material-ui/icons/LastPage';
 
-const ListProductos = ({ columns, data }) => {
+const CustomersList = ({ columns, data }) => {
   const [state, setState] = React.useState({
     columns,
     data,
   });
 
   const tableIcons = {
+    Arrow: forwardRef((props, ref) => (
+      <KeyboardArrowUpIcon {...props} ref={ref} />
+    )),
     Delete: forwardRef((props, ref) => (
       <DeleteOutlineIcon {...props} ref={ref} />
     )),
@@ -41,7 +45,7 @@ const ListProductos = ({ columns, data }) => {
 
   return (
     <MaterialTable
-      title='Productos'
+      title='Clientes'
       columns={state.columns}
       data={state.data}
       icons={tableIcons}
@@ -112,9 +116,9 @@ const ListProductos = ({ columns, data }) => {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.listaProductos.data,
-    columns: state.listaProductos.columns,
+    columns: state.customersList.columns,
+    data: state.customersList.data,
   };
 };
 
-export default connect(mapStateToProps, null)(ListProductos);
+export default connect(mapStateToProps, null)(CustomersList);
