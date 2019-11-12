@@ -10,16 +10,18 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ThemeProvider } from '@material-ui/styles';
 import mainListItems from '../components/listItems';
-import CardConfiguracion from '../components/cardConfiguracion';
-import Theme from '../styles/Theme';
+import OrdersFull from '../components/OrdersFull';
+import Theme from '../assets/styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
-import Logo from '../assets/Logo_Postic.svg';
 import AddNewButton from '../components/AddNewButton';
+import Logo from '../assets/statics/Logo_Postic.svg';
 
 function Copyright() {
   return (
@@ -115,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Configuracion() {
+export default function Pedidos() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -179,10 +181,13 @@ export default function Configuracion() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
-          <CardConfiguracion />
-        </Container>
-        <Container maxWidth='lg' className={classes.container}>
-          <CardConfiguracion />
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <OrdersFull />
+              </Paper>
+            </Grid>
+          </Grid>
         </Container>
         <Copyright />
         <AddNewButton />

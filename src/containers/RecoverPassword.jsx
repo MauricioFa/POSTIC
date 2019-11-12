@@ -7,7 +7,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { Person as PersonIcon } from '@material-ui/icons';
-import useStyles from '../styles/style--LogInUpRpw';
+import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const RecoverPassword = () => {
   const label = 'Correo electrónico',

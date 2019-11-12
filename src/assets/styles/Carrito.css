@@ -1,22 +1,22 @@
-.Checkout{
+.Checkout {
     grid-template-columns: 3fr 1fr;
     grid-gap: 2rem;
     display: grid ;
 }
 
-.Checkout-item{
+.Checkout-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.Checkout-item .fas{
+.Checkout-item .fas {
     margin: 0 0 0 10px;
     color:  rgba(0,0,0,.4);
     cursor: pointer;
 }
 
-.Checkout-element{
+.Checkout-element {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,6 +24,6 @@
     border-bottom: 1px solid #eee;
 }
 
-.Checkout-element h4{
+.Checkout-element h4 {
     margin: 0;
 }

@@ -10,7 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { ThemeProvider } from '@material-ui/styles';
 import Title from './Title';
-import Theme from '../styles/Theme';
+import Theme from '../assets/styles/Theme';
 
 function createData(id, date, name, enviarA, paymentMethod, amount) {
   return { id, date, name, enviarA, paymentMethod, amount };

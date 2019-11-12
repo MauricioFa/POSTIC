@@ -17,7 +17,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useStyles from '../styles/style--LogInUpRpw';
+import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const LogUp = () => {
   const label = 'Correo electrónico',
