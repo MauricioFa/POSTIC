@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditIcon from '@material-ui/icons/Edit';
@@ -10,19 +11,14 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import CheckIcon from '@material-ui/icons/Check';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { connect } from 'react-redux';
 
-const ListClientes = ({ columns, data }) => {
+const ProductsList = ({ columns, data }) => {
   const [state, setState] = React.useState({
     columns,
     data,
   });
 
   const tableIcons = {
-    Arrow: forwardRef((props, ref) => (
-      <KeyboardArrowUpIcon {...props} ref={ref} />
-    )),
     Delete: forwardRef((props, ref) => (
       <DeleteOutlineIcon {...props} ref={ref} />
     )),
@@ -45,7 +41,7 @@ const ListClientes = ({ columns, data }) => {
 
   return (
     <MaterialTable
-      title='Clientes'
+      title='Productos'
       columns={state.columns}
       data={state.data}
       icons={tableIcons}
@@ -116,9 +112,9 @@ const ListClientes = ({ columns, data }) => {
 
 const mapStateToProps = (state) => {
   return {
-    columns: state.Clientes.columns,
-    data: state.Clientes.data,
+    data: state.productsList.data,
+    columns: state.productsList.columns,
   };
 };
 
-export default connect(mapStateToProps, null)(ListClientes);
+export default connect(mapStateToProps, null)(ProductsList);

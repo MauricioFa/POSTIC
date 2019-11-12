@@ -1,14 +1,14 @@
-/* eslint-disable no-script-url */
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import { ThemeProvider } from '@material-ui/styles';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import Title from './Title';
 import Theme from '../assets/styles/Theme';
 
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+const Orders = () => {
   const classes = useStyles();
   return (
     <>
@@ -99,4 +99,6 @@ export default function Orders() {
       </ThemeProvider>
     </>
   );
-}
+};
+
+export default Orders;

@@ -1,11 +1,8 @@
 import React from 'react';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
+import { Menu, MenuItem, IconButton, Badge } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-export default function SimpleMenu() {
+const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -40,4 +37,6 @@ export default function SimpleMenu() {
       </Menu>
     </div>
   );
-}
+};
+
+export default AccountMenu;

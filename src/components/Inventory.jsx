@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import '../assets/styles/Inventario.css';
 import { addToCart } from '../actions/index-actions';
+import '../assets/styles/Inventory.css';
 
-const Inventario = (props) => {
+const Inventory = (props) => {
   const { products } = props;
 
-  const handleAddToCart = (product) => {
-    props.addToCart(product);
+  const handleAddToCart = (productToAdd) => {
+    props.addToCart(productToAdd);
   };
 
   return (
@@ -35,7 +35,7 @@ const Inventario = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.listaProductos.data,
+    products: state.productsList.data,
   };
 };
 
@@ -43,4 +43,4 @@ const mapDispatchToProps = {
   addToCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Inventario);
+export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

@@ -1,29 +1,32 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+import { ThemeProvider } from '@material-ui/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { ThemeProvider } from '@material-ui/styles';
-import mainListItems from '../components/listItems';
+import {
+  CssBaseline,
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Container,
+  Grid,
+  Paper,
+  Link,
+} from '@material-ui/core';
+
+import AccountMenu from '../components/AccountMenu';
+import AddNewButton from '../components/AddNewButton';
 import Chart from '../components/Chart';
 import Deposits from '../components/Deposits';
-import Orders from '../components/Orders';
-import Theme from '../assets/styles/Theme';
-import SimpleMenu from '../components/Notifications_menu';
+import ListRecentOrders from '../components/ListRecentOrders';
 import Logo from '../assets/statics/Logo_Postic.svg';
-import AddNewButton from '../components/AddNewButton';
+import MainItemsList from '../components/MainItemsList';
+import Theme from '../assets/styles/Theme';
 
 function Copyright() {
   return (
@@ -119,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+const Dashboard = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -160,7 +163,7 @@ export default function Dashboard() {
             >
               POSTIC | Resumen
             </Typography>
-            <SimpleMenu />
+            <AccountMenu />
           </Toolbar>
         </AppBar>
       </ThemeProvider>
@@ -178,14 +181,13 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{MainItemsList}</List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 <Chart />
@@ -198,7 +200,7 @@ export default function Dashboard() {
             </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                <ListRecentOrders />
               </Paper>
             </Grid>
           </Grid>
@@ -208,4 +210,6 @@ export default function Dashboard() {
       </main>
     </div>
   );
-}
+};
+
+export default Dashboard;

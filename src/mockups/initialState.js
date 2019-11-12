@@ -1,6 +1,7 @@
 const initialState = {
-  listaCarrito: [],
-  listaProductos: {
+  shoppingCartList: [],
+  checkOutTotal: 0,
+  productsList: {
     columns: [
       { title: 'Producto', field: 'name' },
       { title: 'SKU', field: 'sku' },
@@ -51,7 +52,7 @@ const initialState = {
       },
     ],
   },
-  listaGrafico: [
+  demoChart: [
     { time: '00:00', amount: 0 },
     { time: '03:00', amount: 1200 },
     { time: '06:00', amount: 600 },
@@ -62,7 +63,7 @@ const initialState = {
     { time: '21:00', amount: 2400 },
     { time: '24:00', amount: undefined },
   ],
-  Clientes: {
+  customersList: {
     columns: [
       { title: 'Nombres', field: 'name' },
       { title: 'Apellidos', field: 'surname' },
@@ -105,7 +106,7 @@ const initialState = {
       },
     ],
   },
-  Pedidos: {
+  orderList: {
     columns: [
       { id: 'order', label: '#Orden', minWidth: 170 },
       { id: 'date', label: 'Fecha', minWidth: 170, type: 'date' },

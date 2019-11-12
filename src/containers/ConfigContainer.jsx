@@ -1,25 +1,28 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import { ThemeProvider } from '@material-ui/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { ThemeProvider } from '@material-ui/styles';
-import mainListItems from '../components/listItems';
-import CardConfiguracion from '../components/cardConfiguracion';
-import Theme from '../assets/styles/Theme';
-import SimpleMenu from '../components/Notifications_menu';
-import Logo from '../assets/statics/Logo_Postic.svg';
+import {
+  CssBaseline,
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Container,
+  Link,
+} from '@material-ui/core';
+
+import AccountMenu from '../components/AccountMenu';
 import AddNewButton from '../components/AddNewButton';
+import ConfigCard from '../components/ConfigCard';
+import Logo from '../assets/statics/Logo_Postic.svg';
+import MainItemsList from '../components/MainItemsList';
+import Theme from '../assets/styles/Theme';
 
 function Copyright() {
   return (
@@ -41,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
   },
   toolbarIcon: {
     display: 'flex',
@@ -115,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Configuracion() {
+const ConfigContainer = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -155,7 +158,7 @@ export default function Configuracion() {
             >
               POSTIC | Historial
             </Typography>
-            <SimpleMenu />
+            <AccountMenu />
           </Toolbar>
         </AppBar>
       </ThemeProvider>
@@ -173,20 +176,22 @@ export default function Configuracion() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{MainItemsList}</List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
-          <CardConfiguracion />
+          <ConfigCard />
         </Container>
         <Container maxWidth='lg' className={classes.container}>
-          <CardConfiguracion />
+          <ConfigCard />
         </Container>
         <Copyright />
         <AddNewButton />
       </main>
     </div>
   );
-}
+};
+
+export default ConfigContainer;

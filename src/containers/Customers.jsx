@@ -1,27 +1,30 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import mainListItems from '../components/listItems';
-import Theme from '../assets/styles/Theme';
-import SimpleMenu from '../components/Notifications_menu';
-import Logo from '../assets/statics/Logo_Postic.svg';
-import ListProductos from '../components/listProductos';
+import {
+  CssBaseline,
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Container,
+  Grid,
+  Paper,
+  Link,
+} from '@material-ui/core';
+
+import AccountMenu from '../components/AccountMenu';
 import AddNewButton from '../components/AddNewButton';
+import CustomersList from '../components/CustomersList';
+import Logo from '../assets/statics/Logo_Postic.svg';
+import MainItemsList from '../components/MainItemsList';
+import Theme from '../assets/styles/Theme';
 
 function Copyright() {
   return (
@@ -37,7 +40,6 @@ function Copyright() {
 }
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -117,12 +119,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Productos() {
+const Customers = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -155,9 +159,9 @@ export default function Productos() {
               noWrap
               className={classes.title}
             >
-              POSTIC | Productos
+              POSTIC | Clientes
             </Typography>
-            <SimpleMenu />
+            <AccountMenu />
           </Toolbar>
         </AppBar>
       </ThemeProvider>
@@ -175,7 +179,7 @@ export default function Productos() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{MainItemsList}</List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
@@ -184,7 +188,7 @@ export default function Productos() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <ListProductos />
+                <CustomersList />
               </Paper>
             </Grid>
           </Grid>
@@ -194,4 +198,6 @@ export default function Productos() {
       </main>
     </div>
   );
-}
+};
+
+export default Customers;
