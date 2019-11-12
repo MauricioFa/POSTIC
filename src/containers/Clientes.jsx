@@ -17,16 +17,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ThemeProvider } from '@material-ui/styles';
 import mainListItems from '../components/listItems';
-import Theme from '../styles/Theme';
+import Theme from '../assets/styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
-import Logo from '../assets/Logo_Postic.svg';
-import Inventario from '../components/Inventario';
-import Carrito from '../components/Carrito';
+import Logo from '../assets/statics/Logo_Postic.svg';
+import ListClientes from '../components/listClientes';
+import AddNewButton from '../components/AddNewButton';
 
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
-      Copyright ©
+      Derechos Reservados ©
       <Link color='inherit' to='/#'>
         POSTIC
       </Link>
@@ -113,11 +113,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 640,
+    height: 240,
   },
 }));
 
-const Dashboard = () => {
+export default function Clientes() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -126,7 +126,6 @@ const Dashboard = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -156,7 +155,7 @@ const Dashboard = () => {
               noWrap
               className={classes.title}
             >
-              POSTIC | Resumen
+              POSTIC | Clientes
             </Typography>
             <SimpleMenu />
           </Toolbar>
@@ -183,22 +182,16 @@ const Dashboard = () => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={8}>
-              <Paper className={fixedHeightPaper}>
-                <Inventario />
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={4}>
-              <Paper className={fixedHeightPaper}>
-                <Carrito />
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <ListClientes />
               </Paper>
             </Grid>
           </Grid>
         </Container>
         <Copyright />
+        <AddNewButton />
       </main>
     </div>
   );
-};
-
-export default Dashboard;
+}

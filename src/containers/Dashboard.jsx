@@ -17,18 +17,20 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ThemeProvider } from '@material-ui/styles';
 import mainListItems from '../components/listItems';
-import OrdersFull from '../components/OrdersFull';
-import Theme from '../styles/Theme';
+import Chart from '../components/Chart';
+import Deposits from '../components/Deposits';
+import Orders from '../components/Orders';
+import Theme from '../assets/styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
+import Logo from '../assets/statics/Logo_Postic.svg';
 import AddNewButton from '../components/AddNewButton';
-import Logo from '../assets/Logo_Postic.svg';
 
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
-      Derechos Reservados ©
+      Copyright ©
       <Link color='inherit' to='/#'>
-        POSTIC
+        {''.concat(' POSTIC', ' ')}
       </Link>
       {new Date().getFullYear()}
       {'.'}
@@ -43,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
   },
   toolbarIcon: {
     display: 'flex',
@@ -113,11 +115,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 340,
   },
 }));
 
-export default function Pedidos() {
+export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -126,6 +128,7 @@ export default function Pedidos() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -155,7 +158,7 @@ export default function Pedidos() {
               noWrap
               className={classes.title}
             >
-              POSTIC | Historial
+              POSTIC | Resumen
             </Typography>
             <SimpleMenu />
           </Toolbar>
@@ -182,9 +185,20 @@ export default function Pedidos() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
+            {/* Chart */}
+            <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}>
+                <Chart />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <Deposits />
+              </Paper>
+            </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <OrdersFull />
+                <Orders />
               </Paper>
             </Grid>
           </Grid>

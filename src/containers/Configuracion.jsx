@@ -10,17 +10,15 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ThemeProvider } from '@material-ui/styles';
 import mainListItems from '../components/listItems';
-import Theme from '../styles/Theme';
+import CardConfiguracion from '../components/cardConfiguracion';
+import Theme from '../assets/styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
-import Logo from '../assets/Logo_Postic.svg';
-import ListClientes from '../components/listClientes';
+import Logo from '../assets/statics/Logo_Postic.svg';
 import AddNewButton from '../components/AddNewButton';
 
 function Copyright() {
@@ -43,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24,
+    paddingRight: 24, // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: 'flex',
@@ -117,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Clientes() {
+export default function Configuracion() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -155,7 +153,7 @@ export default function Clientes() {
               noWrap
               className={classes.title}
             >
-              POSTIC | Clientes
+              POSTIC | Historial
             </Typography>
             <SimpleMenu />
           </Toolbar>
@@ -181,13 +179,10 @@ export default function Clientes() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <ListClientes />
-              </Paper>
-            </Grid>
-          </Grid>
+          <CardConfiguracion />
+        </Container>
+        <Container maxWidth='lg' className={classes.container}>
+          <CardConfiguracion />
         </Container>
         <Copyright />
         <AddNewButton />

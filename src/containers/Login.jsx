@@ -11,7 +11,7 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
-import useStyles from '../styles/style--LogInUpRpw';
+import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const Login = () => {
   const label = 'Correo electrónico',

@@ -17,20 +17,18 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ThemeProvider } from '@material-ui/styles';
 import mainListItems from '../components/listItems';
-import Chart from '../components/Chart';
-import Deposits from '../components/Deposits';
-import Orders from '../components/Orders';
-import Theme from '../styles/Theme';
+import Theme from '../assets/styles/Theme';
 import SimpleMenu from '../components/Notifications_menu';
-import Logo from '../assets/Logo_Postic.svg';
+import Logo from '../assets/statics/Logo_Postic.svg';
+import ListProductos from '../components/listProductos';
 import AddNewButton from '../components/AddNewButton';
 
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
-      Copyright ©
+      Derechos Reservados ©
       <Link color='inherit' to='/#'>
-        {''.concat(' POSTIC', ' ')}
+        POSTIC
       </Link>
       {new Date().getFullYear()}
       {'.'}
@@ -115,11 +113,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 340,
+    height: 240,
   },
 }));
 
-export default function Dashboard() {
+export default function Productos() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -128,7 +126,6 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -158,7 +155,7 @@ export default function Dashboard() {
               noWrap
               className={classes.title}
             >
-              POSTIC | Resumen
+              POSTIC | Productos
             </Typography>
             <SimpleMenu />
           </Toolbar>
@@ -185,20 +182,9 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                <ListProductos />
               </Paper>
             </Grid>
           </Grid>

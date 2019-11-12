@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import '../styles/Inventario.css';
-import { addToCart } from '../actions';
+import '../assets/styles/Inventario.css';
+import { addToCart } from '../actions/index-actions';
 
 const Inventario = (props) => {
   const { products } = props;

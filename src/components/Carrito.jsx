@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
-import { removeFromCart } from '../actions';
-import '../styles/Carrito.css';
+import { removeFromCart } from '../actions/index-actions';
+import '../assets/styles/Carrito.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
