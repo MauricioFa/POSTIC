@@ -11,7 +11,7 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
-import useStyles from '../assets/styles/style--LogInUpRpw';
+import useMyStyles from '../assets/styles/style--LogInUpRpw';
 
 const Login = () => {
   const label = 'Correo electrónico',
@@ -19,12 +19,12 @@ const Login = () => {
     textPlaceholder = 'Clave',
     helperText = 'Mínimo 8 caracteres';
 
-  const classes = useStyles({
-    heightSection: '36em',
+  const classes = useMyStyles({
+    heightSection: '40em',
     widthSection: '100vw',
     heightContainer: '90%',
     widthContainer: '90vw',
-    heightForm: '54%',
+    heightForm: '62%',
     widthForm: '100%',
     heightSectionBottom: 'initial',
     widthSectionBottom: '86%',
@@ -116,7 +116,7 @@ const Login = () => {
 
         <section className={classes.sectionBottom}>
           <div>
-            <Link to='/recoverPassword'>
+            <Link to='/recoverpass'>
               <h3>¿Recuperar contraseña?</h3>
             </Link>
           </div>

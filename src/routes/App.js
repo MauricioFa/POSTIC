@@ -9,20 +9,23 @@ import RegisterSale from '../containers/RegisterSale';
 import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
+import Layout from '../components/Layout';
 
 const App = () => (
   <BrowserRouter>
-    <Switch>
-      <Route exact path='/' component={Dashboard} />
-      <Route exact path='/registersale' component={RegisterSale} />
-      <Route exact path='/ordersfull' component={OrdersFull} />
-      <Route exact path='/customers' component={Customers} />
-      <Route exact path='/products' component={Products} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/logUp' component={LogUp} />
-      <Route exact path='/recoverPassword' component={RecoverPassword} />
-      <Route component={NotFound} />
-    </Switch>
+    <Layout>
+      <Switch>
+        <Route exact path='/' component={Dashboard} />
+        <Route exact path='/registersale' component={RegisterSale} />
+        <Route exact path='/ordersfull' component={OrdersFull} />
+        <Route exact path='/customers' component={Customers} />
+        <Route exact path='/products' component={Products} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/logUp' component={LogUp} />
+        <Route exact path='/recoverpass' component={RecoverPassword} />
+        <Route component={NotFound} />
+      </Switch>
+    </Layout>
   </BrowserRouter>
 );
 

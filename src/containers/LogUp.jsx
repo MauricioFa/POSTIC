@@ -27,11 +27,11 @@ const LogUp = () => {
     helperText = 'Mínimo 8 caracteres';
 
   const classes = useStyles({
-    heightSection: '41em',
+    heightSection: '44em',
     widthSection: '100vw',
-    heightContainer: '94%',
+    heightContainer: '92%',
     widthContainer: '90vw',
-    heightForm: '62%',
+    heightForm: '68%',
     widthForm: '100%',
     heightSectionBottom: 'initial',
     widthSectionBottom: '86%',

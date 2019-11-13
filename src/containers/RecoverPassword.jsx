@@ -14,11 +14,11 @@ const RecoverPassword = () => {
     variant = 'outlined';
 
   const classes = useStyles({
-    heightSection: '32em',
+    heightSection: '38em',
     widthSection: '100vw',
-    heightContainer: '90%',
+    heightContainer: '86%',
     widthContainer: '90vw',
-    heightForm: '40%',
+    heightForm: '48%',
     widthForm: '100%',
     heightSectionBottom: 'initial',
     widthSectionBottom: '86%',

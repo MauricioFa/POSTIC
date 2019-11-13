@@ -10,7 +10,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const MainItemsList = (
   <div>
-    <Link to='/registrar'>
+    <Link to='/registersale'>
       <ListItem button color='secondary'>
         <ListItemIcon>
           <AddCircleOutlineIcon color='secondary' />
@@ -26,7 +26,7 @@ const MainItemsList = (
         <ListItemText primary='Informes' />
       </ListItem>
     </Link>
-    <Link to='/pedidos'>
+    <Link to='/ordersfull'>
       <ListItem button>
         <ListItemIcon>
           <ShoppingCartIcon color='primary' />
@@ -34,7 +34,7 @@ const MainItemsList = (
         <ListItemText primary='Pedidos' />
       </ListItem>
     </Link>
-    <Link to='/clientes'>
+    <Link to='/customers'>
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon color='primary' />
@@ -42,7 +42,7 @@ const MainItemsList = (
         <ListItemText primary='Clientes' />
       </ListItem>
     </Link>
-    <Link to='/productos'>
+    <Link to='/products'>
       <ListItem button>
         <ListItemIcon>
           <LocalOfferIcon color='primary' />
@@ -50,7 +50,7 @@ const MainItemsList = (
         <ListItemText primary='Productos' />
       </ListItem>
     </Link>
-    <Link to='/configuracion'>
+    <Link to='/config'>
       <ListItem button>
         <ListItemIcon>
           <SettingsIcon color='primary' />
