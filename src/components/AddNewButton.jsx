@@ -20,7 +20,7 @@ const AddNewButton = () => {
   const classes = useStyles();
   return (
     <>
-      <Link to='/registrar'>
+      <Link to='/registersale'>
         <Fab color='primary' aria-label='add' className={classes.fab}>
           <AddIcon />
         </Fab>
