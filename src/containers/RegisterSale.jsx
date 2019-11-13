@@ -20,24 +20,12 @@ import {
 } from '@material-ui/core';
 
 import AccountMenu from '../components/AccountMenu';
+import CopyrightLabel from '../components/CopyrightLabel';
 import Inventory from '../components/Inventory';
 import Logo from '../assets/statics/Logo_Postic.svg';
 import MainItemsList from '../components/MainItemsList';
 import ShoppingCart from '../components/ShoppingCart';
 import Theme from '../assets/styles/Theme';
-
-function Copyright() {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      Copyright ©
-      <Link color='inherit' to='/#'>
-        POSTIC
-      </Link>
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -198,7 +186,12 @@ const RegisterSale = () => {
             </Grid>
           </Grid>
         </Container>
-        <Copyright />
+        <CopyrightLabel
+          title='Copyright'
+          name='POSTIC'
+          date='2019'
+          linkTo='/#'
+        />
       </main>
     </div>
   );

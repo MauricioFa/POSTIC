@@ -22,24 +22,12 @@ import {
 import AccountMenu from '../components/AccountMenu';
 import AddNewButton from '../components/AddNewButton';
 import Chart from '../components/Chart';
+import CopyrightLabel from '../components/CopyrightLabel';
 import Deposits from '../components/Deposits';
 import ListRecentOrders from '../components/ListRecentOrders';
 import Logo from '../assets/statics/Logo_Postic.svg';
 import MainItemsList from '../components/MainItemsList';
 import Theme from '../assets/styles/Theme';
-
-function Copyright() {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      Copyright ©
-      <Link color='inherit' to='/#'>
-        {''.concat(' POSTIC', ' ')}
-      </Link>
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -205,7 +193,12 @@ const Dashboard = () => {
             </Grid>
           </Grid>
         </Container>
-        <Copyright />
+        <CopyrightLabel
+          title='Copyright'
+          name='POSTIC'
+          date='2019'
+          linkTo='/#'
+        />
         <AddNewButton />
       </main>
     </div>
