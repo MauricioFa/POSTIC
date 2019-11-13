@@ -21,23 +21,11 @@ import {
 
 import AccountMenu from '../components/AccountMenu';
 import AddNewButton from '../components/AddNewButton';
+import CopyrightLabel from '../components/CopyrightLabel';
 import Logo from '../assets/statics/Logo_Postic.svg';
 import MainItemsList from '../components/MainItemsList';
 import ProductsList from '../components/ProductsList';
 import Theme from '../assets/styles/Theme';
-
-function Copyright() {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      Derechos Reservados ©
-      <Link color='inherit' to='/#'>
-        POSTIC
-      </Link>
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -192,7 +180,12 @@ const Products = () => {
             </Grid>
           </Grid>
         </Container>
-        <Copyright />
+        <CopyrightLabel
+          title='Derechos Reservados'
+          name='POSTIC'
+          date='2019'
+          linkTo='/#'
+        />
         <AddNewButton />
       </main>
     </div>
