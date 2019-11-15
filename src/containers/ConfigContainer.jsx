@@ -31,12 +31,7 @@ const ConfigContainer = () => {
         <Container maxWidth='lg' className={classes.container}>
           <ConfigCard />
         </Container>
-        <CopyrightLabel
-          title='Derechos Reservados'
-          name='POSTIC'
-          date='2019'
-          linkTo='/#'
-        />
+        <CopyrightLabel title='Derechos Reservados' name='POSTIC' date='2019' linkTo='/#' />
         <AddNewButton />
       </main>
     </>

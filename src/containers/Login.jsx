@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from '@material-ui/core';
+import { connect } from 'react-redux';
+import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
 import {
   Person as PersonIcon,
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
+import { authenticatedToTrue } from '../actions/indexActions';
 import useMyStyles from '../assets/styles/style--LogInUpRpw';
 
-const Login = () => {
+const Login = (props) => {
   const label = 'Correo electrónico',
     variant = 'outlined',
     textPlaceholder = 'Clave',
@@ -45,15 +42,20 @@ const Login = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    props.authenticatedToTrue(true);
+  };
+
   return (
     <main className={classes.main}>
       <div className={classes.container}>
         <h1>Ingresa a la cuenta</h1>
-        <form action='' method='get' className={classes.form}>
+        <form method='get' className={classes.form} onSubmit={handleOnSubmit}>
           <TextField
             type='email'
             name='email'
-            autoComplete='email'
+            autoComplete='name@email.com'
             margin='normal'
             required={true}
             label={label}
@@ -83,6 +85,7 @@ const Login = () => {
             value={values.password}
             helperText={helperText}
             onChange={handleChange('password')}
+            autoComplete='current-password'
             InputProps={{
               classes: { input: classes.textSize },
               endAdornment: (
@@ -104,19 +107,14 @@ const Login = () => {
             }}
           />
 
-          <Button
-            type='submit'
-            color='primary'
-            variant='contained'
-            classes={{ label: classes.textSize }}
-          >
+          <Button type='submit' color='primary' variant='contained' classes={{ label: classes.textSize }}>
             INGRESAR
           </Button>
         </form>
 
         <section className={classes.sectionBottom}>
           <div>
-            <Link to='/recoverpass'>
+            <Link to='/newpassword'>
               <h3>¿Recuperar contraseña?</h3>
             </Link>
           </div>
@@ -130,4 +128,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = {
+  authenticatedToTrue,
+};
+
+export default connect(null, mapDispatchToProps)(Login);

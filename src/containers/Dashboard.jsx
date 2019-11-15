@@ -57,12 +57,7 @@ const Dashboard = () => {
             </Grid>
           </Grid>
         </Container>
-        <CopyrightLabel
-          title='Copyright'
-          name='POSTIC'
-          date='2019'
-          linkTo='/#'
-        />
+        <CopyrightLabel title='Copyright' name='POSTIC' date='2019' linkTo='/#' />
         <AddNewButton />
       </main>
     </>

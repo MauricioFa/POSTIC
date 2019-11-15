@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -80,7 +82,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = (props) => {
   const classes = useStyles();
+  const { isAuthenticated } = props;
   const [open, setOpen] = React.useState(false);
+
+  const history = useHistory();
+  React.useEffect(() => setOpen(false), [history.location.pathname]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -94,30 +100,20 @@ const Layout = (props) => {
     <div className={classes.root}>
       <CssBaseline />
       <ThemeProvider theme={Theme}>
-        <AppBar
-          position='absolute'
-          className={clsx(classes.appBar, open && classes.appBarShift)}
-        >
+        <AppBar position='absolute' className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge='start'
-              color='inherit'
-              aria-label='open drawer'
-              onClick={handleDrawerOpen}
-              className={clsx(
-                classes.menuButton,
-                open && classes.menuButtonHidden
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component='h1'
-              variant='h6'
-              color='inherit'
-              noWrap
-              className={classes.title}
-            >
+            {isAuthenticated && (
+              <IconButton
+                edge='start'
+                color='inherit'
+                aria-label='open drawer'
+                onClick={handleDrawerOpen}
+                className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+            <Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
               POSTIC | XpropsX
             </Typography>
             <AccountMenu />
@@ -125,7 +121,7 @@ const Layout = (props) => {
         </AppBar>
       </ThemeProvider>
 
-      {open && (
+      {isAuthenticated && open && (
         <Drawer
           variant='permanent'
           classes={{
@@ -150,4 +146,10 @@ const Layout = (props) => {
   );
 };
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps, null)(Layout);

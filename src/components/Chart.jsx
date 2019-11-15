@@ -1,15 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  XAxis,
-  YAxis,
-  Label,
-  ResponsiveContainer,
-  Tooltip,
-  CartesianGrid,
-  AreaChart,
-  Area,
-} from 'recharts';
+import { XAxis, YAxis, Label, ResponsiveContainer, Tooltip, CartesianGrid, AreaChart, Area } from 'recharts';
 import Title from './Title';
 
 const Chart = ({ demoChart }) => {

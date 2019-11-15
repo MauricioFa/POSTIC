@@ -1,4 +1,5 @@
 const initialState = {
+  isAuthenticated: false,
   shoppingCartList: [],
   checkOutTotal: 0,
   productsList: {
@@ -47,8 +48,7 @@ const initialState = {
         categoria: 'Aceites',
         unitValue: 15800,
         inventario: 100,
-        image:
-          'https://www.eurosupermercados.com/wp-content/uploads/2017/02/7701018064772.png',
+        image: 'https://www.eurosupermercados.com/wp-content/uploads/2017/02/7701018064772.png',
       },
     ],
   },

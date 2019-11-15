@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Typography, Grid } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { removeFromCart } from '../actions/index-actions';
+import { removeFromCart } from '../actions/indexActions';
 import '../assets/styles/ShoppingCart.css';
 
 const useStyles = makeStyles((theme) => ({
