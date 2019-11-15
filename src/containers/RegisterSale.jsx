@@ -50,12 +50,7 @@ const RegisterSale = () => {
             </Grid>
           </Grid>
         </Container>
-        <CopyrightLabel
-          title='Copyright'
-          name='POSTIC'
-          date='2019'
-          linkTo='/#'
-        />
+        <CopyrightLabel title='Copyright' name='POSTIC' date='2019' linkTo='/#' />
       </main>
     </>
   );

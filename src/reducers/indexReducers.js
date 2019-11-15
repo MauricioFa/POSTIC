@@ -1,4 +1,4 @@
-const reducer = (state, action) => {
+const reducers = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
       return {
@@ -7,19 +7,21 @@ const reducer = (state, action) => {
         checkOutTotal: state.checkOutTotal + action.payload.unitValue,
       };
     case 'REMOVE_FROM_CART': {
-      const elementRemoved = state.shoppingCartList.splice(
-        action.payload,
-        1
-      )[0];
+      const elementRemoved = state.shoppingCartList.splice(action.payload, 1);
       return {
         ...state,
         shoppingCartList: [...state.shoppingCartList],
-        checkOutTotal: state.checkOutTotal - elementRemoved.unitValue,
+        checkOutTotal: state.checkOutTotal - elementRemoved[0].unitValue,
       };
     }
+    case 'AUTHENTICATED_TO_TRUE':
+      return {
+        ...state,
+        isAuthenticated: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default reducer;
+export default reducers;

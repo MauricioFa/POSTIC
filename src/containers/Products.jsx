@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Products = () => {
   const classes = useStyles();
-
   return (
     <>
       <main className={classes.content}>
@@ -40,12 +39,7 @@ const Products = () => {
             </Grid>
           </Grid>
         </Container>
-        <CopyrightLabel
-          title='Derechos Reservados'
-          name='POSTIC'
-          date='2019'
-          linkTo='/#'
-        />
+        <CopyrightLabel title='Derechos Reservados' name='POSTIC' date='2019' linkTo='/#' />
         <AddNewButton />
       </main>
     </>

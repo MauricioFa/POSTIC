@@ -1,15 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
-} from '@material-ui/core';
+import { Paper, Table, TableBody, TableCell, TableHead, TablePagination, TableRow } from '@material-ui/core';
 import Title from './Title';
 
 const useStyles = makeStyles({
@@ -45,11 +37,7 @@ const OrdersFull = ({ orderList }) => {
             <TableHead>
               <TableRow>
                 {orderList.columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
+                  <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
                     {column.label}
                   </TableCell>
                 ))}
@@ -61,19 +49,12 @@ const OrdersFull = ({ orderList }) => {
                 .map((row, index) => {
                   const indexkey = index + 1;
                   return (
-                    <TableRow
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={indexkey}
-                    >
+                    <TableRow hover role='checkbox' tabIndex={-1} key={indexkey}>
                       {orderList.columns.map((column) => {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
                         );
                       })}

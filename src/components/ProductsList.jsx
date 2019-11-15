@@ -19,24 +19,16 @@ const ProductsList = ({ columns, data }) => {
   });
 
   const tableIcons = {
-    Delete: forwardRef((props, ref) => (
-      <DeleteOutlineIcon {...props} ref={ref} />
-    )),
+    Delete: forwardRef((props, ref) => <DeleteOutlineIcon {...props} ref={ref} />),
     Edit: forwardRef((props, ref) => <EditIcon {...props} ref={ref} />),
     Search: forwardRef((props, ref) => <SearchIcon {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <CheckIcon {...props} ref={ref} />),
     Add: forwardRef((props, ref) => <AddBoxIcon {...props} ref={ref} />),
     Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => (
-      <FirstPageIcon {...props} ref={ref} />
-    )),
+    FirstPage: forwardRef((props, ref) => <FirstPageIcon {...props} ref={ref} />),
     LastPage: forwardRef((props, ref) => <LastPageIcon {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => (
-      <ChevronLeftIcon {...props} ref={ref} />
-    )),
-    NextPage: forwardRef((props, ref) => (
-      <ChevronRightIcon {...props} ref={ref} />
-    )),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeftIcon {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRightIcon {...props} ref={ref} />),
   };
 
   return (
