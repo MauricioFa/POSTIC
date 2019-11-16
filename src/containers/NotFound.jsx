@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
-import useStyles from '../styles/style--LogInUpRpw';
+import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const NotFound = () => {
   const classes = {

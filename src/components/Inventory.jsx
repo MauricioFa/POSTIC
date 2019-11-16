@@ -1,25 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import '../styles/Inventario.css';
-import { addToCart } from '../actions';
+import { addToCart } from '../actions/indexActions';
+import '../assets/styles/Inventory.css';
 
-const Inventario = (props) => {
-  const { products } = props;
+const Inventory = (props) => {
+  const { productsList, addToCart } = props;
 
-  const handleAddToCart = (product) => {
-    props.addToCart(product);
+  const handleAddToCart = (productToAdd) => {
+    addToCart(productToAdd);
   };
 
   return (
     <div className='Products'>
       <div className='Products-items'>
-        {products.map((product) => (
+        {productsList.map((product) => (
           <div className='Products-item' key={product.sku}>
             <img src={product.image} alt={product.name} />
             <div className='Products-item-info'>
               <h2>
                 {product.name}
-                <span>{product.unitValue}</span>
+                <span>{product.sellingPrice}</span>
               </h2>
               <p>{product.description}</p>
             </div>
@@ -35,7 +35,7 @@ const Inventario = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.listaProductos.data,
+    productsList: state.products,
   };
 };
 
@@ -43,4 +43,4 @@ const mapDispatchToProps = {
   addToCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Inventario);
+export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

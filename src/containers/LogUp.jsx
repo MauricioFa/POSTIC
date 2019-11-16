@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from '@material-ui/core';
+import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
 import {
   Person as PersonIcon,
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
-import {
-  faGoogle,
-  faFacebook,
-  faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
+import { faGoogle, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useStyles from '../styles/style--LogInUpRpw';
+import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const LogUp = () => {
   const label = 'Correo electrónico',
@@ -27,11 +18,11 @@ const LogUp = () => {
     helperText = 'Mínimo 8 caracteres';
 
   const classes = useStyles({
-    heightSection: '41em',
+    heightSection: '44em',
     widthSection: '100vw',
-    heightContainer: '94%',
+    heightContainer: '92%',
     widthContainer: '90vw',
-    heightForm: '62%',
+    heightForm: '68%',
     widthForm: '100%',
     heightSectionBottom: 'initial',
     widthSectionBottom: '86%',
@@ -62,12 +53,12 @@ const LogUp = () => {
   return (
     <main className={classes.main}>
       <div className={classes.container}>
-        <h1>Ingresa a la cuenta</h1>
+        <h1>Crea tu cuenta</h1>
         <form action='' method='get' className={classes.form}>
           <TextField
             type='email'
             name='email'
-            autoComplete='email'
+            autoComplete='name@email.com'
             margin='normal'
             required={true}
             label={label}
@@ -97,6 +88,7 @@ const LogUp = () => {
             value={values.password}
             helperText={helperText}
             onChange={handleChange('password')}
+            autoComplete='new-password'
             InputProps={{
               classes: { input: classes.textSize },
               endAdornment: (
@@ -127,6 +119,7 @@ const LogUp = () => {
             value={values.passwordAnew}
             helperText={helperText}
             onChange={handleChange('passwordAnew')}
+            autoComplete='new-password'
             InputProps={{
               classes: { input: classes.textSize },
               endAdornment: (
@@ -148,12 +141,7 @@ const LogUp = () => {
             }}
           />
 
-          <Button
-            type='submit'
-            color='primary'
-            variant='contained'
-            classes={{ label: classes.textSize }}
-          >
+          <Button type='submit' color='primary' variant='contained' classes={{ label: classes.textSize }}>
             CREAR CUENTA
           </Button>
         </form>
@@ -173,7 +161,7 @@ const LogUp = () => {
               </Link>
             </span>
           </div>
-          <Link to='/login' className='linkToLogin-logUp'>
+          <Link to='/' className='linkToLogin-logUp'>
             <h3>Iniciar sesión</h3>
           </Link>
         </section>

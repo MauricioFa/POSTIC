@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { Typography } from '@material-ui/core';
 import Title from './Title';
 
 const useStyles = makeStyles({
@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits() {
+const Deposits = () => {
   const classes = useStyles();
   return (
     <>
@@ -28,4 +28,6 @@ export default function Deposits() {
       </div>
     </>
   );
-}
+};
+
+export default Deposits;
