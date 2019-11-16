@@ -53,7 +53,7 @@ const LogUp = () => {
   return (
     <main className={classes.main}>
       <div className={classes.container}>
-        <h1>Ingresa a la cuenta</h1>
+        <h1>Crea tu cuenta</h1>
         <form action='' method='get' className={classes.form}>
           <TextField
             type='email'

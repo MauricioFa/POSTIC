@@ -4,22 +4,22 @@ import { addToCart } from '../actions/indexActions';
 import '../assets/styles/Inventory.css';
 
 const Inventory = (props) => {
-  const { products } = props;
+  const { productsList, addToCart } = props;
 
   const handleAddToCart = (productToAdd) => {
-    props.addToCart(productToAdd);
+    addToCart(productToAdd);
   };
 
   return (
     <div className='Products'>
       <div className='Products-items'>
-        {products.map((product) => (
+        {productsList.map((product) => (
           <div className='Products-item' key={product.sku}>
             <img src={product.image} alt={product.name} />
             <div className='Products-item-info'>
               <h2>
                 {product.name}
-                <span>{product.unitValue}</span>
+                <span>{product.sellingPrice}</span>
               </h2>
               <p>{product.description}</p>
             </div>
@@ -35,7 +35,7 @@ const Inventory = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.productsList.data,
+    productsList: state.products,
   };
 };
 

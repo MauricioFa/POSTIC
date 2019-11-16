@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
 
 const ShoppingCart = (props) => {
   const classes = useStyles();
-  const { cart } = props;
+  const { cart, checkoutTotal, removeFromCart } = props;
 
   const handleCartItems = (elementIndex) => {
-    props.removeFromCart(elementIndex);
+    removeFromCart(elementIndex);
   };
 
   return (
@@ -57,7 +57,7 @@ const ShoppingCart = (props) => {
               <div key={indexkey} className='Checkout-item'>
                 <div className='Checkout-element'>
                   <h4>{item.name}</h4>
-                  <span>{item.unitValue}</span>
+                  <span>{item.sellingPrice}</span>
                 </div>
                 <DeleteIcon onClick={() => handleCartItems(index)} />
               </div>
@@ -65,7 +65,7 @@ const ShoppingCart = (props) => {
           })}
         </div>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>SUBTOTAL: $87,500</Paper>
+          <Paper className={classes.paper}>{`SUBTOTAL: ${checkoutTotal}`}</Paper>
         </Grid>
       </Grid>
     </Grid>
@@ -75,6 +75,7 @@ const ShoppingCart = (props) => {
 const mapStateToProps = (state) => {
   return {
     cart: state.shoppingCartList,
+    checkoutTotal: state.checkoutTotal,
   };
 };
 

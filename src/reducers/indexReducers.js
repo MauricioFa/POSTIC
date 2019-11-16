@@ -4,14 +4,23 @@ const reducers = (state, action) => {
       return {
         ...state,
         shoppingCartList: [...state.shoppingCartList, action.payload],
-        checkOutTotal: state.checkOutTotal + action.payload.unitValue,
+        checkoutTotal:
+          Math.floor(
+            (state.shoppingCartList.map((item) => item.sellingPrice).reduce((add, value) => add + value, 0) +
+              action.payload.sellingPrice) *
+              100
+          ) / 100,
       };
     case 'REMOVE_FROM_CART': {
-      const elementRemoved = state.shoppingCartList.splice(action.payload, 1);
+      state.shoppingCartList.splice(action.payload, 1);
       return {
         ...state,
         shoppingCartList: [...state.shoppingCartList],
-        checkOutTotal: state.checkOutTotal - elementRemoved[0].unitValue,
+        checkoutTotal:
+          Math.floor(
+            state.shoppingCartList.map((item) => item.sellingPrice).reduce((add, value) => add + value, 0) *
+              100
+          ) / 100,
       };
     }
     case 'AUTHENTICATED_TO_TRUE':

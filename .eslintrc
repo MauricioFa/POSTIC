@@ -151,7 +151,7 @@
     "object-curly-spacing": [2, "always"],
     "one-var": 0,
     "operator-assignment": 0,
-    "operator-linebreak": [1, "before"],
+    "operator-linebreak": [1, "after"],
     "padded-blocks": 0,
     "prefer-const": 2,
     "quote-props": 0,
