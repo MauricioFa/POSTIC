@@ -13,10 +13,22 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LastPageIcon from '@material-ui/icons/LastPage';
 
-const CustomersList = ({ columns, data }) => {
+const columns = [
+  { title: 'Nombres', field: 'name' },
+  { title: 'Apellidos', field: 'surname' },
+  { title: 'Teléfono', field: 'phone' },
+  { title: 'Email', field: 'email' },
+  {
+    title: 'Autoriza promociones por email',
+    field: 'authorizeEmail',
+    lookup: { 1: 'Sí', 2: 'No' },
+  },
+];
+
+const CustomersList = ({ customerList }) => {
   const [state, setState] = React.useState({
     columns,
-    data,
+    customerList,
   });
 
   const tableIcons = {
@@ -37,7 +49,7 @@ const CustomersList = ({ columns, data }) => {
     <MaterialTable
       title='Clientes'
       columns={state.columns}
-      data={state.data}
+      data={state.customerList}
       icons={tableIcons}
       localization={{
         pagination: {
@@ -76,7 +88,7 @@ const CustomersList = ({ columns, data }) => {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              const data = [...state.data];
+              const data = [...state.customerList];
               data.push(newData);
               setState({ ...state, data });
             }, 600);
@@ -85,7 +97,7 @@ const CustomersList = ({ columns, data }) => {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              const data = [...state.data];
+              const data = [...state.customerList];
               data[data.indexOf(oldData)] = newData;
               setState({ ...state, data });
             }, 600);
@@ -94,7 +106,7 @@ const CustomersList = ({ columns, data }) => {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              const data = [...state.data];
+              const data = [...state.customerList];
               data.splice(data.indexOf(oldData), 1);
               setState({ ...state, data });
             }, 600);
@@ -106,8 +118,7 @@ const CustomersList = ({ columns, data }) => {
 
 const mapStateToProps = (state) => {
   return {
-    columns: state.customersList.columns,
-    data: state.customersList.data,
+    customerList: state.customersList,
   };
 };
 

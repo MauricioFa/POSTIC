@@ -6,7 +6,7 @@ import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import App from './routes/App';
 import reducers from './reducers/indexReducers';
-import initialState from './mockups/initialState';
+import initialState from './mocks/initialState';
 
 const store = createStore(reducers, initialState);
 const history = createBrowserHistory();

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
+import { Button, IconButton, InputAdornment, TextField, Card, CardMedia } from '@material-ui/core';
 import {
   Person as PersonIcon,
   Visibility as VisibilityIcon,
@@ -9,6 +9,7 @@ import {
 } from '@material-ui/icons';
 import { authenticatedToTrue } from '../actions/indexActions';
 import useMyStyles from '../assets/styles/style--LogInUpRpw';
+import imageAuxMediaQuery from '../assets/statics/office-1081807_640.jpg';
 
 const Login = (props) => {
   const label = 'Correo electrónico',
@@ -124,6 +125,16 @@ const Login = (props) => {
           </Link>
         </section>
       </div>
+
+      <Card className={classes.card}>
+        <CardMedia
+          className={classes.cardMedia}
+          component='img'
+          alt='imageAuxLogin'
+          image={imageAuxMediaQuery}
+          title='imageAuxLogin'
+        />
+      </Card>
     </main>
   );
 };

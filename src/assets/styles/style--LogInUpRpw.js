@@ -37,16 +37,16 @@ const useMyStyles = makeStyles((theme) => ({
     width: props.widthContainer,
 
     [theme.breakpoints.up('599')]: {
-      width: '84%',
+      width: '70%',
       fontSize: '1.4em',
     },
 
     [theme.breakpoints.up('767')]: {
-      width: '66%',
+      width: '54%',
     },
 
     [theme.breakpoints.up('899')]: {
-      width: '56%',
+      width: '42%',
     },
   }),
 
@@ -98,6 +98,16 @@ const useMyStyles = makeStyles((theme) => ({
       margin: '0.4em 0 0 0',
     },
   }),
+
+  card: {
+    display: 'none',
+
+    [theme.breakpoints.up('899')]: {
+      display: 'inline-block',
+      width: '42%',
+      marginLeft: '6%',
+    },
+  },
 }));
 
 export default useMyStyles;

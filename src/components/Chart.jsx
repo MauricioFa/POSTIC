@@ -3,7 +3,19 @@ import { connect } from 'react-redux';
 import { XAxis, YAxis, Label, ResponsiveContainer, Tooltip, CartesianGrid, AreaChart, Area } from 'recharts';
 import Title from './Title';
 
-const Chart = ({ demoChart }) => {
+const Chart = () => {
+  const demoChart = [
+    { time: '00:00', amount: 0 },
+    { time: '03:00', amount: 1200 },
+    { time: '06:00', amount: 600 },
+    { time: '09:00', amount: 800 },
+    { time: '12:00', amount: 1500 },
+    { time: '15:00', amount: 2000 },
+    { time: '18:00', amount: 2400 },
+    { time: '21:00', amount: 2400 },
+    { time: '24:00', amount: undefined },
+  ];
+
   return (
     <>
       <Title>Hoy</Title>

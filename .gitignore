@@ -81,9 +81,5 @@ dist
 **/*.css.map
 
 # Statics files
-*.png
-*.gif
-*.jpg
-*.jpeg
 *.mp4
 *.avi
