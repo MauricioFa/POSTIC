@@ -1,13 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { Paper, Table, TableBody, TableCell, TableHead, TablePagination, TableRow } from '@material-ui/core';
 import Title from './Title';
 
 const useStyles = makeStyles({
@@ -20,17 +14,24 @@ const useStyles = makeStyles({
   },
 });
 
-const OrdersFull = ({ Pedidos }) => {
+const columns = [
+  { idLabel: 'orderNumber', label: '#Orden', minWidth: 170 },
+  { idLabel: 'date', label: 'Fecha', minWidth: 170, type: 'date' },
+  { idLabel: 'customer', label: 'Cliente', minWidth: 170 },
+  { idLabel: 'checkoutTotal', label: 'Valor Factura', minWidth: 170, type: 'currency' },
+];
+
+const OrdersFull = ({ ordersList }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [ordersPerPage, setOrdersPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    setOrdersPerPage(+event.target.value);
     setPage(0);
   };
 
@@ -42,36 +43,26 @@ const OrdersFull = ({ Pedidos }) => {
           <Table stickyHeader aria-label='sticky table'>
             <TableHead>
               <TableRow>
-                {Pedidos.columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
+                {columns.map((column) => (
+                  <TableCell key={column.idLabel} align={column.align} style={{ minWidth: column.minWidth }}>
                     {column.label}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {Pedidos.rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
+              {ordersList
+                .slice(page * ordersPerPage, page * ordersPerPage + ordersPerPage)
+                .map((order, index) => {
                   const indexkey = index + 1;
                   return (
-                    <TableRow
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={indexkey}
-                    >
-                      {Pedidos.columns.map((column) => {
-                        const value = row[column.id];
+                    <TableRow hover role='checkbox' tabIndex={-1} key={indexkey}>
+                      {columns.map((column) => {
+                        const value =
+                          column.idLabel === 'customer' ? order[column.idLabel].name : order[column.idLabel];
                         return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
+                          <TableCell key={column.idLabel} align={column.align}>
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
                           </TableCell>
                         );
                       })}
@@ -82,11 +73,11 @@ const OrdersFull = ({ Pedidos }) => {
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[5, 10, 20]}
           component='div'
           labelRowsPerPage='Filas por página'
-          count={Pedidos.rows.length}
-          rowsPerPage={rowsPerPage}
+          count={ordersList.length}
+          rowsPerPage={ordersPerPage}
           page={page}
           backIconButtonProps={{
             'aria-label': 'previous page',
@@ -104,7 +95,7 @@ const OrdersFull = ({ Pedidos }) => {
 
 const mapStateToProps = (state) => {
   return {
-    Pedidos: state.Pedidos,
+    ordersList: state.ordersList,
   };
 };
 

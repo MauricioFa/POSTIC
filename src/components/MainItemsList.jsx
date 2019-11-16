@@ -1,18 +1,16 @@
 import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { Link, useHistory } from 'react-router-dom';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { Link } from 'react-router-dom';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import PeopleIcon from '@material-ui/icons/People';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-const mainListItems = (
+const MainItemsList = (
   <div>
-    <Link to='/registrar'>
+    <Link to='/registersale'>
       <ListItem button color='secondary'>
         <ListItemIcon>
           <AddCircleOutlineIcon color='secondary' />
@@ -28,7 +26,7 @@ const mainListItems = (
         <ListItemText primary='Informes' />
       </ListItem>
     </Link>
-    <Link to='/pedidos'>
+    <Link to='/ordersfull'>
       <ListItem button>
         <ListItemIcon>
           <ShoppingCartIcon color='primary' />
@@ -36,7 +34,7 @@ const mainListItems = (
         <ListItemText primary='Pedidos' />
       </ListItem>
     </Link>
-    <Link to='/clientes'>
+    <Link to='/customers'>
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon color='primary' />
@@ -44,7 +42,7 @@ const mainListItems = (
         <ListItemText primary='Clientes' />
       </ListItem>
     </Link>
-    <Link to='/productos'>
+    <Link to='/products'>
       <ListItem button>
         <ListItemIcon>
           <LocalOfferIcon color='primary' />
@@ -52,7 +50,7 @@ const mainListItems = (
         <ListItemText primary='Productos' />
       </ListItem>
     </Link>
-    <Link to='/configuracion'>
+    <Link to='/config'>
       <ListItem button>
         <ListItemIcon>
           <SettingsIcon color='primary' />
@@ -63,4 +61,4 @@ const mainListItems = (
   </div>
 );
 
-export default mainListItems;
+export default MainItemsList;

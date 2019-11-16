@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { Paper, Typography, Grid } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Paper from '@material-ui/core/Paper';
-import { removeFromCart } from '../actions';
-import '../styles/Carrito.css';
+import { removeFromCart } from '../actions/indexActions';
+import '../assets/styles/ShoppingCart.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Carrito = (props) => {
+const ShoppingCart = (props) => {
   const classes = useStyles();
-  const { cart } = props;
+  const { cart, checkoutTotal, removeFromCart } = props;
 
   const handleCartItems = (elementIndex) => {
-    props.removeFromCart(elementIndex);
+    removeFromCart(elementIndex);
   };
 
   return (
@@ -59,7 +57,7 @@ const Carrito = (props) => {
               <div key={indexkey} className='Checkout-item'>
                 <div className='Checkout-element'>
                   <h4>{item.name}</h4>
-                  <span>{item.unitValue}</span>
+                  <span>{item.sellingPrice}</span>
                 </div>
                 <DeleteIcon onClick={() => handleCartItems(index)} />
               </div>
@@ -67,7 +65,7 @@ const Carrito = (props) => {
           })}
         </div>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>SUBTOTAL: $87,500</Paper>
+          <Paper className={classes.paper}>{`SUBTOTAL: ${checkoutTotal}`}</Paper>
         </Grid>
       </Grid>
     </Grid>
@@ -76,7 +74,8 @@ const Carrito = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.listaCarrito,
+    cart: state.shoppingCartList,
+    checkoutTotal: state.checkoutTotal,
   };
 };
 
@@ -84,4 +83,4 @@ const mapDispathToProps = {
   removeFromCart,
 };
 
-export default connect(mapStateToProps, mapDispathToProps)(Carrito);
+export default connect(mapStateToProps, mapDispathToProps)(ShoppingCart);

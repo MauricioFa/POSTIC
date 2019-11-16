@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from '@material-ui/core';
+import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { Person as PersonIcon } from '@material-ui/icons';
-import useStyles from '../styles/style--LogInUpRpw';
+import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const RecoverPassword = () => {
   const label = 'Correo electrónico',
     variant = 'outlined';
 
   const classes = useStyles({
-    heightSection: '32em',
+    heightSection: '38em',
     widthSection: '100vw',
-    heightContainer: '90%',
+    heightContainer: '86%',
     widthContainer: '90vw',
-    heightForm: '40%',
+    heightForm: '48%',
     widthForm: '100%',
     heightSectionBottom: 'initial',
     widthSectionBottom: '86%',
@@ -40,7 +35,7 @@ const RecoverPassword = () => {
           <TextField
             type='email'
             name='email'
-            autoComplete='email'
+            autoComplete='name@email.com'
             margin='normal'
             required={true}
             label={label}
@@ -61,19 +56,14 @@ const RecoverPassword = () => {
             }}
           />
 
-          <Button
-            type='submit'
-            color='primary'
-            variant='contained'
-            classes={{ label: classes.textSize }}
-          >
+          <Button type='submit' color='primary' variant='contained' classes={{ label: classes.textSize }}>
             RESTABLECER
           </Button>
         </form>
 
         <section className={classes.sectionBottom}>
           <div>
-            <Link to='/login'>
+            <Link to='/'>
               <h2>Volver a inicio de sesión</h2>
             </Link>
           </div>

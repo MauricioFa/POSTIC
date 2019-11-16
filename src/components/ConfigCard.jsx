@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Switch from '@material-ui/core/Switch';
+import { Paper, Typography, Switch } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CardConfiguracion() {
+const ConfigCard = () => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     checkedA: true,
@@ -38,4 +36,6 @@ export default function CardConfiguracion() {
       </Paper>
     </div>
   );
-}
+};
+
+export default ConfigCard;

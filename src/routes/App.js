@@ -1,31 +1,40 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Dashboard from '../containers/Dashboard';
-import Pedidos from '../containers/Pedidos';
-import Clientes from '../containers/Clientes';
-import Productos from '../containers/Productos';
-import Configuracion from '../containers/Configuracion';
+import OrdersFull from '../containers/OrdersFull';
+import Customers from '../containers/Customers';
+import Products from '../containers/Products';
 import NotFound from '../containers/NotFound';
-import Registrar from '../containers/Registrar';
+import RegisterSale from '../containers/RegisterSale';
 import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
+import Layout from '../components/Layout';
 
-const App = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path='/' component={Dashboard} />
-      <Route exact path='/registrar' component={Registrar} />
-      <Route exact path='/pedidos' component={Pedidos} />
-      <Route exact path='/clientes' component={Clientes} />
-      <Route exact path='/productos' component={Productos} />
-      <Route exact path='/configuracion' component={Configuracion} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/logUp' component={LogUp} />
-      <Route exact path='/recoverPassword' component={RecoverPassword} />
-      <Route component={NotFound} />
-    </Switch>
-  </BrowserRouter>
-);
+const App = ({ isAuthenticated }) => {
+  return (
+    <BrowserRouter>
+      <Layout>
+        <Switch>
+          {isAuthenticated && <Route exact path='/registersale' component={RegisterSale} />}
+          {isAuthenticated && <Route exact path='/ordersfull' component={OrdersFull} />}
+          {isAuthenticated && <Route exact path='/customers' component={Customers} />}
+          {isAuthenticated && <Route exact path='/products' component={Products} />}
+          {!isAuthenticated && <Route exact path='/logUp' component={LogUp} />}
+          <Route exact path='/' component={isAuthenticated ? Dashboard : Login} />
+          <Route exact path='/newpassword' component={RecoverPassword} />
+          <Route component={NotFound} />
+        </Switch>
+      </Layout>
+    </BrowserRouter>
+  );
+};
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps, null)(App);
