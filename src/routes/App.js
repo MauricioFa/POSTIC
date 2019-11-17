@@ -11,6 +11,10 @@ import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
 import Layout from '../components/Layout';
+import * as firebase from 'firebase';
+import firebaseConfig from '../firebase_config/fbconfig';
+
+firebase.initializeApp(firebaseConfig);
 
 const App = ({ isAuthenticated }) => {
   return (
@@ -22,6 +26,7 @@ const App = ({ isAuthenticated }) => {
           {isAuthenticated && <Route exact path='/customers' component={Customers} />}
           {isAuthenticated && <Route exact path='/products' component={Products} />}
           {!isAuthenticated && <Route exact path='/logUp' component={LogUp} />}
+          {isAuthenticated && <Route exact path='/logUp' component={Dashboard} />}
           <Route exact path='/' component={isAuthenticated ? Dashboard : Login} />
           <Route exact path='/newpassword' component={RecoverPassword} />
           <Route component={NotFound} />
@@ -37,4 +42,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(App);
+export default connect(
+  mapStateToProps,
+  null
+)(App);

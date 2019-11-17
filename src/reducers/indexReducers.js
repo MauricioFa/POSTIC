@@ -28,6 +28,11 @@ const reducers = (state, action) => {
         ...state,
         isAuthenticated: action.payload,
       };
+    case 'USER_NAME':
+      return {
+        ...state,
+        setuserName: action.payload,
+      };
     default:
       return state;
   }
