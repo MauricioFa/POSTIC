@@ -46,6 +46,9 @@ const ShoppingCart = (props) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={12}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>{`SUBTOTAL: ${checkoutTotal}`}</Paper>
+        </Grid>
         <Typography variant='h6' className={classes.title}>
           Artículos a facturar
         </Typography>
@@ -57,6 +60,7 @@ const ShoppingCart = (props) => {
               <div key={indexkey} className='Checkout-item'>
                 <div className='Checkout-element'>
                   <h4>{item.name}</h4>
+                  <span>x3</span>
                   <span>{item.sellingPrice}</span>
                 </div>
                 <DeleteIcon onClick={() => handleCartItems(index)} />
@@ -64,9 +68,6 @@ const ShoppingCart = (props) => {
             );
           })}
         </div>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>{`SUBTOTAL: ${checkoutTotal}`}</Paper>
-        </Grid>
       </Grid>
     </Grid>
   );

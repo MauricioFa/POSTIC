@@ -73,7 +73,7 @@ const OrdersFull = ({ ordersList }) => {
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 20]}
+          rowsPerPageOptions={[10, 20, 40]}
           component='div'
           labelRowsPerPage='Filas por página'
           count={ordersList.length}

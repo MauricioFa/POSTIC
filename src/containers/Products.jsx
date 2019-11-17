@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Paper } from '@material-ui/core';
 import AddNewButton from '../components/AddNewButton';
 import CopyrightLabel from '../components/CopyrightLabel';
-import ProductsList from '../components/ProductsList';
+import Inventory from '../components/Inventory';
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -34,7 +34,7 @@ const Products = () => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <ProductsList />
+                <Inventory />
               </Paper>
             </Grid>
           </Grid>
