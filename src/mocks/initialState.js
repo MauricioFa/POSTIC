@@ -1,7 +1,8 @@
 const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   shoppingCartList: [],
-  checkoutTotal: 0,
+  checkoutTotalCart: 0.0,
+  checkoutTotalBuy: 0.0,
   productsByCategory: '',
   categories: [
     {

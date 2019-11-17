@@ -8,9 +8,14 @@ const removeFromCart = (payload) => ({
   payload,
 });
 
+const calcCheckoutTotalCart = (payload) => ({
+  type: 'CALC_CHECKOUT_TOTAL_CART',
+  payload,
+});
+
 const authenticatedToTrue = (payload) => ({
   type: 'AUTHENTICATED_TO_TRUE',
   payload,
 });
 
-export { addToCart, removeFromCart, authenticatedToTrue };
+export { addToCart, removeFromCart, calcCheckoutTotalCart, authenticatedToTrue };
