@@ -1,46 +1,124 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { connect } from 'react-redux';
-import { addToCart } from '../actions/indexActions';
-import '../assets/styles/Inventory.css';
+import MaterialTable from 'material-table';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
+import SearchIcon from '@material-ui/icons/Search';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import ClearIcon from '@material-ui/icons/Clear';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import CheckIcon from '@material-ui/icons/Check';
 
-const Inventory = (props) => {
-  const { productsList, addToCart } = props;
+const columns = [
+  { title: 'SKU', field: 'sku' },
+  { title: 'Producto', field: 'name' },
+  { title: 'Descripción', field: 'description' },
+  { title: 'Categoría', field: 'categories' },
+  { title: 'Valor compra unit.', field: 'buyingPrice', type: 'currency' },
+  { title: 'Valor venda unit.', field: 'sellingPrice', type: 'currency' },
+  { title: 'Inventario', field: 'inStock', type: 'numeric' },
+];
 
-  const handleAddToCart = (productToAdd) => {
-    addToCart(productToAdd);
+const ProductsList = ({ products }) => {
+  const [state, setState] = React.useState({
+    columns,
+    productsList: products.map((item) => ({
+      ...item,
+      categories: item.categories[0],
+    })),
+  });
+
+  const tableIcons = {
+    Delete: forwardRef((props, ref) => <DeleteOutlineIcon {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <EditIcon {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <SearchIcon {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <CheckIcon {...props} ref={ref} />),
+    Add: forwardRef((props, ref) => <AddBoxIcon {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPageIcon {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPageIcon {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeftIcon {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRightIcon {...props} ref={ref} />),
   };
 
   return (
-    <div className='Products'>
-      <div className='Products-items'>
-        {productsList.map((product) => (
-          <div className='Products-item' key={product.sku}>
-            <img src={product.image} alt={product.name} />
-            <div className='Products-item-info'>
-              <h2>
-                {product.name}
-                <span>{product.sellingPrice}</span>
-              </h2>
-              <p>{product.description}</p>
-            </div>
-            <button type='button' onClick={() => handleAddToCart(product)}>
-              Comprar
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
+    <MaterialTable
+      title='Productos'
+      columns={state.columns}
+      data={state.productsList}
+      icons={tableIcons}
+      localization={{
+        pagination: {
+          labelDisplayedRows: '{from}-{to} de {count}',
+          labelRowsSelect: 'filas',
+          nextTooltip: 'Siguiente',
+          previousTooltip: 'Anterior',
+          firstTooltip: 'Primera Página',
+          lastTooltip: 'Última página',
+        },
+        toolbar: {
+          nRowsSelected: '{0} fila(s) seleccionada(s)',
+          searchTooltip: 'Buscar',
+          searchPlaceholder: 'Buscar',
+        },
+        header: {
+          actions: 'Acciones',
+        },
+        body: {
+          addTooltip: 'Añadir',
+          deleteTooltip: 'Eliminar',
+          editTooltip: 'Editar',
+          emptyDataSourceMessage: 'No se encontraron producto',
+          filterRow: {
+            filterTooltip: 'Filtrar',
+          },
+          editRow: {
+            deleteText: '¿Estás seguro de eliminar este producto?',
+            cancelTooltip: 'Cancelar',
+            saveTooltip: 'Confirmar',
+          },
+        },
+      }}
+      editable={{
+        onRowAdd: (newData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              const data = [...state.productsList];
+              data.push(newData);
+              setState({ ...state, data });
+            }, 600);
+          }),
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              const data = [...state.productsList];
+              data[data.indexOf(oldData)] = newData;
+              setState({ ...state, data });
+            }, 600);
+          }),
+        onRowDelete: (oldData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              const data = [...state.productsList];
+              data.splice(data.indexOf(oldData), 1);
+              setState({ ...state, data });
+            }, 600);
+          }),
+      }}
+    />
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    productsList: state.products,
+    products: state.products,
   };
 };
 
-const mapDispatchToProps = {
-  addToCart,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Inventory);
+export default connect(mapStateToProps, null)(ProductsList);

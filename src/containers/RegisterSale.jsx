@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Paper } from '@material-ui/core';
 import CopyrightLabel from '../components/CopyrightLabel';
-import Inventory from '../components/Inventory';
+import ProductsListToCart from '../components/ProductsListToCart';
 import ShoppingCart from '../components/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +40,7 @@ const RegisterSale = () => {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={8}>
               <Paper className={fixedHeightPaper}>
-                <Inventory />
+                <ProductsListToCart />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={4}>
