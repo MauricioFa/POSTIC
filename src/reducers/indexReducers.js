@@ -23,6 +23,26 @@ const reducers = (state, action) => {
             : 0.0,
       };
 
+    case 'ADD_TO_INVENTORY':
+      return {
+        ...state,
+        products: [...state.products, { ...action.payload }],
+      };
+
+    case 'REMOVE_FROM_INVENTORY':
+      return {
+        ...state,
+        products: state.products.filter((item) => item.sku !== action.payload),
+      };
+
+    case 'UPDATE_TO_INVENTORY':
+      return {
+        ...state,
+        products: state.products.map((item) =>
+          item.sku === action.payload.sku ? { ...action.payload } : item
+        ),
+      };
+
     case 'AUTHENTICATED_TO_TRUE':
       return {
         ...state,

@@ -24,7 +24,7 @@ const auxAddToCart = (cart, productToCart) => {
       },
     ];
   }
-  console.log(newCart);
+
   return newCart;
 };
 
