@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addToCart } from '../actions/indexActions';
+import { addToCart, updateProductsList } from '../actions/indexActions';
+import useProduct from '../hooks/useProduct';
 import '../assets/styles/Inventory.css';
+
+const API_URL = 'https://postic.now.sh/api/products';
 
 const Inventory = (props) => {
   const { productsList, addToCart } = props;
@@ -9,6 +12,9 @@ const Inventory = (props) => {
   const handleAddToCart = (productToAdd) => {
     addToCart(productToAdd);
   };
+
+  const productsDB = useProduct(API_URL, productsList);
+  props.updateProductsList(productsDB);
 
   return (
     <div className='Products'>
@@ -41,6 +47,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addToCart,
+  updateProductsList,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

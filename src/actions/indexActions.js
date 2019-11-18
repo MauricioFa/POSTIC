@@ -13,4 +13,9 @@ const authenticatedToTrue = (payload) => ({
   payload,
 });
 
-export { addToCart, removeFromCart, authenticatedToTrue };
+const updateProductsList = (payload) => ({
+  type: 'UPDATE_PRODUCTS_LIST',
+  payload,
+});
+
+export { addToCart, removeFromCart, authenticatedToTrue, updateProductsList };

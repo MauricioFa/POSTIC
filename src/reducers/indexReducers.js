@@ -23,6 +23,11 @@ const reducers = (state, action) => {
           ) / 100,
       };
     }
+    case 'UPDATE_PRODUCTS_LIST':
+      return {
+        ...state,
+        products: action.payload,
+      };
     case 'AUTHENTICATED_TO_TRUE':
       return {
         ...state,
