@@ -1,55 +1,62 @@
 import React, { forwardRef } from 'react';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditIcon from '@material-ui/icons/Edit';
-import SearchIcon from '@material-ui/icons/Search';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import ClearIcon from '@material-ui/icons/Clear';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
+import CheckIcon from '@material-ui/icons/Check';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import SearchIcon from '@material-ui/icons/Search';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import { addToInventory, removeFromInventory, updateToInventory } from '../actions/indexActions';
 
-const columns = [
-  { title: 'SKU', field: 'sku' },
-  { title: 'Producto', field: 'name' },
-  { title: 'Descripción', field: 'description' },
-  { title: 'Categoría', field: 'categories' },
-  { title: 'Valor compra unit.', field: 'buyingPrice', type: 'currency' },
-  { title: 'Valor venda unit.', field: 'sellingPrice', type: 'currency' },
-  { title: 'Inventario', field: 'inStock', type: 'numeric' },
-];
+const ProductsList = (props) => {
+  const { products, addToInventory, updateToInventory, removeFromInventory } = props;
 
-const ProductsList = ({ products }) => {
-  const [state, setState] = React.useState({
-    columns,
-    productsList: products.map((item) => ({
-      ...item,
-      categories: item.categories[0],
-    })),
-  });
+  const productsList = products.map((item) => ({
+    ...item,
+    categories: item.categories[0],
+  }));
+
+  const columns = [
+    { title: 'SKU', field: 'sku' },
+    { title: 'Producto', field: 'name' },
+    { title: 'Descripción', field: 'description', emptyValue: 'Sin descripción' },
+    { title: 'Categoría', field: 'categories', emptyValue: 'Sin categoría' },
+    { title: 'Valor compra und', field: 'buyingPrice', type: 'numeric' },
+    { title: 'Valor venda und', field: 'sellingPrice', type: 'numeric' },
+    { title: 'Inventario', field: 'inStock', type: 'numeric' },
+  ];
 
   const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBoxIcon {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <CheckIcon {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
     Delete: forwardRef((props, ref) => <DeleteOutlineIcon {...props} ref={ref} />),
     Edit: forwardRef((props, ref) => <EditIcon {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <SearchIcon {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <CheckIcon {...props} ref={ref} />),
-    Add: forwardRef((props, ref) => <AddBoxIcon {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
     FirstPage: forwardRef((props, ref) => <FirstPageIcon {...props} ref={ref} />),
     LastPage: forwardRef((props, ref) => <LastPageIcon {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => <ChevronLeftIcon {...props} ref={ref} />),
     NextPage: forwardRef((props, ref) => <ChevronRightIcon {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeftIcon {...props} ref={ref} />),
+    ResetSearch: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <SearchIcon {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowUpwardIcon {...props} ref={ref} />),
   };
 
   return (
     <MaterialTable
       title='Productos'
-      columns={state.columns}
-      data={state.productsList}
+      columns={columns}
+      data={productsList}
       icons={tableIcons}
+      options={{
+        pageSize: 10,
+        pageSizeOptions: [10, 20, 40],
+      }}
       localization={{
         pagination: {
           labelDisplayedRows: '{from}-{to} de {count}',
@@ -71,7 +78,7 @@ const ProductsList = ({ products }) => {
           addTooltip: 'Añadir',
           deleteTooltip: 'Eliminar',
           editTooltip: 'Editar',
-          emptyDataSourceMessage: 'No se encontraron producto',
+          emptyDataSourceMessage: 'No se encontró producto',
           filterRow: {
             filterTooltip: 'Filtrar',
           },
@@ -84,31 +91,40 @@ const ProductsList = ({ products }) => {
       }}
       editable={{
         onRowAdd: (newData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.productsList];
-              data.push(newData);
-              setState({ ...state, data });
-            }, 600);
+          new Promise((resolve, reject) => {
+            if (newData.sku === undefined || newData.name === undefined) {
+              reject(alert('Debe agregar un SKU y nombre de Producto validos'));
+            } else if (newData.buyingPrice === undefined || newData.sellingPrice === undefined) {
+              reject(alert('Debe agregar Precios de compra y venta validos'));
+            } else {
+              resolve(
+                addToInventory({
+                  ...newData,
+                  categories: [newData.categories],
+                  buyingPrice: Number(newData.buyingPrice),
+                  sellingPrice: Number(newData.sellingPrice),
+                  inStock: newData.inStock ? Number(newData.inStock) : 0,
+                })
+              );
+            }
           }),
-        onRowUpdate: (newData, oldData) =>
+        onRowUpdate: (updateData) =>
           new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.productsList];
-              data[data.indexOf(oldData)] = newData;
-              setState({ ...state, data });
-            }, 600);
+            const ary = products.filter((item) => item.sku === updateData.sku)[0].categories;
+            ary[0] = updateData.categories;
+            resolve(
+              updateToInventory({
+                ...updateData,
+                categories: ary,
+                buyingPrice: Number(updateData.buyingPrice),
+                sellingPrice: Number(updateData.sellingPrice),
+                inStock: Number(updateData.inStock),
+              })
+            );
           }),
-        onRowDelete: (oldData) =>
+        onRowDelete: (deleteData) =>
           new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.productsList];
-              data.splice(data.indexOf(oldData), 1);
-              setState({ ...state, data });
-            }, 600);
+            resolve(removeFromInventory(deleteData.sku));
           }),
       }}
     />
@@ -121,4 +137,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ProductsList);
+const mapDispatchToProps = {
+  addToInventory,
+  removeFromInventory,
+  updateToInventory,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
