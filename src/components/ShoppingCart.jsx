@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   title: {
-    margin: theme.spacing(4, 0, 2),
+    margin: theme.spacing(2, 0, 2),
   },
   container: {
     display: 'grid',
@@ -51,13 +51,13 @@ const ShoppingCart = (props) => {
     <Grid container spacing={3}>
       <Grid item xs={12} md={12}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>{`TOTAL: ${checkoutTotalCart}`}</Paper>
+          <Paper className={classes.paper}>{`FACTURAR: $ ${checkoutTotalCart}`}</Paper>
         </Grid>
         <Typography variant='h6' className={classes.title}>
           Artículos a facturar
         </Typography>
         <div className='Checkout-content'>
-          {cart.length > 0 ? <h3>Lista de Pedidos:</h3> : <h2>Sin Pedidos</h2>}
+          {cart.length > 0 ? ' ' : <h2>Sin Pedidos</h2>}
           {cart.map((item) => {
             return (
               <div key={item.sku} className='Checkout-item'>

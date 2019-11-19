@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from '../actions/indexActions';
-import '../assets/styles/Inventory.css';
+import '../assets/styles/ProductsListToCart.css';
 
-const Inventory = (props) => {
+const ProductsListToCart = (props) => {
   const { productsList, addToCart } = props;
 
   const handleAddToCart = (productToAdd) => {
@@ -43,4 +43,4 @@ const mapDispatchToProps = {
   addToCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Inventory);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsListToCart);
