@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ConfigCard = () => {
+const ConfigCard = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     checkedA: true,
@@ -23,7 +23,7 @@ const ConfigCard = () => {
     <div>
       <Paper className={classes.root}>
         <Typography variant='h5' component='h3'>
-          Opción 1
+          {props.title}
         </Typography>
         <Typography component='p'>Ingresar texto para configurar</Typography>
         <Switch

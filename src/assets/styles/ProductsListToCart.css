@@ -29,22 +29,28 @@
 
 .Products img {
     width: 100%;
-      height: 200px;
-      border-radius: 5px 5px 0 0;
-      object-fit: contain;
+    height: 200px;
+    border-radius: 5px 5px 0 0;
+    object-fit: contain;
 }
 
 .Products button {
     width: 100%;
-      padding: 10px;
-      border-radius: 0px 0px 5px 5px;
-      border: 0px;
-      outline: 0;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 300;
+    padding: 10px;
+    border-radius: 0px 0px 5px 5px;
+    border: 0px;
+    outline: 0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
 }
 
 button:hover {
     background-color: rgba(39,44,49,.06);
+}
+
+@media (max-width: 767px) {
+    .Products img {
+        display: none;
+    }
 }
