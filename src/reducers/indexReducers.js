@@ -39,7 +39,29 @@ const reducers = (state, action) => {
       return {
         ...state,
         products: state.products.map((item) =>
-          item.sku === action.payload.sku ? { ...action.payload } : item
+          item.sku === action.payload.oldData.sku ? { ...action.payload.updateData } : item
+        ),
+      };
+
+    case 'ADD_TO_CUSTOMERS_LIST':
+      return {
+        ...state,
+        customersList: [...state.customersList, { ...action.payload }],
+      };
+
+    case 'REMOVE_FROM_CUSTOMERS_LIST':
+      return {
+        ...state,
+        customersList: state.customersList.filter(
+          (item) => item.id !== action.payload.id && item.idType !== action.payload.idType
+        ),
+      };
+
+    case 'UPDATE_TO_CUSTOMERS_LIST':
+      return {
+        ...state,
+        customersList: state.customersList.map((item) =>
+          item.id === action.payload.oldData.id ? { ...action.payload.updateData } : item
         ),
       };
 

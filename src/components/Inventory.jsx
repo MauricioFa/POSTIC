@@ -1,21 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import CheckIcon from '@material-ui/icons/Check';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ClearIcon from '@material-ui/icons/Clear';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditIcon from '@material-ui/icons/Edit';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import SearchIcon from '@material-ui/icons/Search';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import tableIcons from './utils/tableIconsByMaterialTable';
 import { addToInventory, removeFromInventory, updateToInventory } from '../actions/indexActions';
 
 const ProductsList = (props) => {
-  const { products, addToInventory, updateToInventory, removeFromInventory } = props;
+  const { products } = props;
 
   const productsList = products.map((item) => ({
     ...item,
@@ -29,23 +19,8 @@ const ProductsList = (props) => {
     { title: 'Categoría', field: 'categories', emptyValue: 'Sin categoría' },
     { title: 'Valor compra und', field: 'buyingPrice', type: 'numeric' },
     { title: 'Valor venda und', field: 'sellingPrice', type: 'numeric' },
-    { title: 'Inventario', field: 'inStock', type: 'numeric' },
+    { title: 'Inventario', field: 'inStock', type: 'numeric', emptyValue: '0' },
   ];
-
-  const tableIcons = {
-    Add: forwardRef((props, ref) => <AddBoxIcon {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <CheckIcon {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutlineIcon {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <EditIcon {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPageIcon {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPageIcon {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRightIcon {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => <ChevronLeftIcon {...props} ref={ref} />),
-    ResetSearch: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <SearchIcon {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowUpwardIcon {...props} ref={ref} />),
-  };
 
   return (
     <MaterialTable
@@ -98,7 +73,7 @@ const ProductsList = (props) => {
               reject(alert('Debe agregar Precios de compra y venta validos'));
             } else {
               resolve(
-                addToInventory({
+                props.addToInventory({
                   ...newData,
                   categories: [newData.categories],
                   buyingPrice: Number(newData.buyingPrice),
@@ -108,23 +83,26 @@ const ProductsList = (props) => {
               );
             }
           }),
-        onRowUpdate: (updateData) =>
+        onRowUpdate: (updateData, oldData) =>
           new Promise((resolve) => {
             const ary = products.filter((item) => item.sku === updateData.sku)[0].categories;
             ary[0] = updateData.categories;
             resolve(
-              updateToInventory({
-                ...updateData,
-                categories: ary,
-                buyingPrice: Number(updateData.buyingPrice),
-                sellingPrice: Number(updateData.sellingPrice),
-                inStock: Number(updateData.inStock),
+              props.updateToInventory({
+                updateData: {
+                  ...updateData,
+                  categories: ary,
+                  buyingPrice: Number(updateData.buyingPrice),
+                  sellingPrice: Number(updateData.sellingPrice),
+                  inStock: Number(updateData.inStock),
+                },
+                oldData,
               })
             );
           }),
         onRowDelete: (deleteData) =>
           new Promise((resolve) => {
-            resolve(removeFromInventory(deleteData.sku));
+            resolve(props.removeFromInventory(deleteData.sku));
           }),
       }}
     />

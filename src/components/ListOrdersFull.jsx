@@ -1,95 +1,69 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Table, TableBody, TableCell, TableHead, TablePagination, TableRow } from '@material-ui/core';
-import Title from './Title';
+import MaterialTable from 'material-table';
+import tableIcons from './utils/tableIconsByMaterialTable';
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-  tableWrapper: {
-    maxHeight: 640,
-    overflow: 'auto',
-  },
-});
+const OrdersFull = (props) => {
+  const { ordersList } = props;
+  const ordersListForShowing = ordersList.map((order) => ({
+    orderNumber: order.orderNumber,
+    date: order.date,
+    checkoutTotal: order.checkoutTotal,
+    id: order.customer.id,
+    fullName: `${order.customer.name} ${order.customer.surname}`,
+  }));
 
-const columns = [
-  { idLabel: 'orderNumber', label: '#Orden', minWidth: 170 },
-  { idLabel: 'date', label: 'Fecha', minWidth: 170, type: 'date' },
-  { idLabel: 'customer', label: 'Cliente', minWidth: 170 },
-  { idLabel: 'checkoutTotal', label: 'Valor Factura', minWidth: 170, type: 'currency' },
-];
-
-const OrdersFull = ({ ordersList }) => {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [ordersPerPage, setOrdersPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setOrdersPerPage(+event.target.value);
-    setPage(0);
-  };
+  const columns = [
+    { title: '# Orden', field: 'orderNumber' },
+    { title: 'Fecha', field: 'date' },
+    { title: 'ID Cliente', field: 'id' },
+    { title: 'Nombre Cliente', field: 'fullName' },
+    { title: 'Valor Factura', field: 'checkoutTotal', type: 'currency' },
+  ];
 
   return (
-    <>
-      <Title>Relación de Pedidos</Title>
-      <Paper className={classes.root}>
-        <div className={classes.tableWrapper}>
-          <Table stickyHeader aria-label='sticky table'>
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell key={column.idLabel} align={column.align} style={{ minWidth: column.minWidth }}>
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {ordersList
-                .slice(page * ordersPerPage, page * ordersPerPage + ordersPerPage)
-                .map((order, index) => {
-                  const indexkey = index + 1;
-                  return (
-                    <TableRow hover role='checkbox' tabIndex={-1} key={indexkey}>
-                      {columns.map((column) => {
-                        const value =
-                          column.idLabel === 'customer' ? order[column.idLabel].name : order[column.idLabel];
-                        return (
-                          <TableCell key={column.idLabel} align={column.align}>
-                            {column.format && typeof value === 'number' ? column.format(value) : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </div>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 40]}
-          component='div'
-          labelRowsPerPage='Filas por página'
-          count={ordersList.length}
-          rowsPerPage={ordersPerPage}
-          page={page}
-          backIconButtonProps={{
-            'aria-label': 'previous page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'next page',
-          }}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </>
+    <MaterialTable
+      title='Pedidos'
+      columns={columns}
+      data={ordersListForShowing}
+      icons={tableIcons}
+      options={{
+        pageSize: 10,
+        pageSizeOptions: [10, 20, 40],
+      }}
+      localization={{
+        pagination: {
+          labelDisplayedRows: '{from}-{to} de {count}',
+          labelRowsSelect: 'filas',
+          nextTooltip: 'Siguiente',
+          previousTooltip: 'Anterior',
+          firstTooltip: 'Primera Página',
+          lastTooltip: 'Última página',
+        },
+        toolbar: {
+          nRowsSelected: '{0} fila(s) seleccionada(s)',
+          searchTooltip: 'Buscar',
+          searchPlaceholder: 'Buscar',
+        },
+        header: {
+          actions: 'Acciones',
+        },
+        body: {
+          addTooltip: 'Añadir',
+          deleteTooltip: 'Eliminar',
+          editTooltip: 'Editar',
+          emptyDataSourceMessage: 'No se encontró producto',
+          filterRow: {
+            filterTooltip: 'Filtrar',
+          },
+          editRow: {
+            deleteText: '¿Estás seguro de eliminar este producto?',
+            cancelTooltip: 'Cancelar',
+            saveTooltip: 'Confirmar',
+          },
+        },
+      }}
+    />
   );
 };
 

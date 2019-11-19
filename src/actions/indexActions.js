@@ -28,6 +28,21 @@ const updateToInventory = (payload) => ({
   payload,
 });
 
+const addToCustomersList = (payload) => ({
+  type: 'ADD_TO_CUSTOMERS_LIST',
+  payload,
+});
+
+const removeFromCustomersList = (payload) => ({
+  type: 'REMOVE_FROM_CUSTOMERS_LIST',
+  payload,
+});
+
+const updateToCustomersList = (payload) => ({
+  type: 'UPDATE_TO_CUSTOMERS_LIST',
+  payload,
+});
+
 const authenticatedToTrue = (payload) => ({
   type: 'AUTHENTICATED_TO_TRUE',
   payload,
@@ -40,5 +55,8 @@ export {
   addToInventory,
   removeFromInventory,
   updateToInventory,
+  addToCustomersList,
+  removeFromCustomersList,
+  updateToCustomersList,
   authenticatedToTrue,
 };
