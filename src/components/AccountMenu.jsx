@@ -7,7 +7,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Typography from '@material-ui/core/Typography';
 import * as firebase from 'firebase';
-import { authenticatedToTrue } from '../actions/indexActions';
+import { authenticatedToTrue, setuserName } from '../actions/indexActions';
 
 const AccountMenu = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -30,6 +30,7 @@ const AccountMenu = (props) => {
       .signOut()
       .then(() => {
         props.authenticatedToTrue(false);
+        props.setuserName('Anónimo')
         history.push('/');
       })
       .catch((event) => {
@@ -64,6 +65,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   authenticatedToTrue,
+  setuserName
 };
 
 export default connect(
