@@ -160,19 +160,20 @@ const initialState = {
   ],
   customersList: [
     {
+      idType: 'CC',
       id: '59480261',
       name: 'Paulo',
       surname: 'Veinteañero',
       phone: '3175235663',
       email: 'paulo2019@hotmail.com',
-      authorizeEmail: 1,
+      authorizeEmail: 'yes',
     },
   ],
   ordersList: [
     {
       orderNumber: '1',
       date: '16 Oct, 2019',
-      customer: { id: '59480261', name: 'Paulo', surname: 'Veinteañero' },
+      customer: { idType: 'CC', id: '59480261', name: 'Paulo', surname: 'Veinteañero' },
       checkoutTotal: 30800.0,
       soldProducts: [
         {
