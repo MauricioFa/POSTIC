@@ -1,6 +1,6 @@
 const initialState = {
   isAuthenticated: false,
-  userName: 'Usuario',
+  userName: 'Anónimo',
   shoppingCartList: [],
   checkoutTotal: 0,
   productsByCategory: '',

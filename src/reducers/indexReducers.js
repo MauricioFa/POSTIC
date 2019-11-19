@@ -31,7 +31,7 @@ const reducers = (state, action) => {
     case 'USER_NAME':
       return {
         ...state,
-        setuserName: action.payload,
+        userName: action.payload,
       };
     default:
       return state;

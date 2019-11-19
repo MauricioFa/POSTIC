@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import * as firebase from 'firebase';
 import { authenticatedToTrue } from '../actions/indexActions';
 
-const AccountMenu = (props, { userName }) => {
+const AccountMenu = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -39,11 +39,11 @@ const AccountMenu = (props, { userName }) => {
 
   return (
     <div>
-      <Avatar alt='Avatar' onClick={handleClick}>
+      {props.isAuthenticated && <Avatar alt='Avatar' onClick={handleClick}>
         <AccountCircleTwoToneIcon />
-      </Avatar>
+      </Avatar>}
       <Menu id='simple-menu' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={handleClose}>{userName}</MenuItem>
+        <MenuItem onClick={handleClose}>{props.userName}</MenuItem>
         <MenuItem onClick={(event) => handleSignOut(event)}>
           <ListItemIcon>
             <ExitToAppIcon fontSize='small' />
@@ -58,6 +58,7 @@ const AccountMenu = (props, { userName }) => {
 const mapStateToProps = (state) => {
   return {
     userName: state.userName,
+    isAuthenticated: state.isAuthenticated,
   };
 };
 
