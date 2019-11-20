@@ -26,10 +26,10 @@ const ConfigContainer = () => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth='lg' className={classes.container}>
-          <ConfigCard />
+          <ConfigCard title='Opción 1' />
         </Container>
         <Container maxWidth='lg' className={classes.container}>
-          <ConfigCard />
+          <ConfigCard title='Opción 2' />
         </Container>
         <CopyrightLabel title='Derechos Reservados' name='POSTIC' date='2019' linkTo='/#' />
         <AddNewButton />
