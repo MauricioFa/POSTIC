@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   files = getManifest();
 } else {
   files = {
-    'main.css': 'assets/app.css',
+    'main.css': 'assets/main.css',
     'main.js': 'assets/app.js',
     'vendors.js': 'assets/vendors.js',
   };
