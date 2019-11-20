@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 16,
   },
   menuButtonHidden: {
     display: 'none',
@@ -80,17 +80,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const routesForHeader = [
+  { route: '/registersale', value: 'Vender' },
+  { route: '/ordersfull', value: 'Pedidos' },
+  { route: '/customers', value: 'Clientes' },
+  { route: '/products', value: 'Productos' },
+  { route: '/config', value: 'Configuración Cuenta' },
+  { route: '/logUp', value: 'Crear cuenta' },
+  { route: '/', value: 'Dashboard' },
+  { route: '/newpassword', value: 'Nueva clave' },
+];
+
 const Layout = (props) => {
   const classes = useStyles();
   const { isAuthenticated } = props;
   const [open, setOpen] = React.useState(false);
 
   const history = useHistory();
-  React.useEffect(() => setOpen(false), [history.location.pathname]);
+  React.useEffect(() => {
+    setOpen(false);
+  }, [history.location.pathname]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
+  let titleHeader = routesForHeader.filter((item) => item.route === history.location.pathname)[0].value;
+  titleHeader = !isAuthenticated && titleHeader === 'Dashboard' ? 'Ingresar' : titleHeader;
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -114,7 +130,7 @@ const Layout = (props) => {
               </IconButton>
             )}
             <Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
-              POSTIC | XpropsX
+              POSTIC | {titleHeader}
             </Typography>
             <AccountMenu />
           </Toolbar>

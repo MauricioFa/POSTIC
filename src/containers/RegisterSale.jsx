@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Paper } from '@material-ui/core';
 import CopyrightLabel from '../components/CopyrightLabel';
-import Inventory from '../components/Inventory';
+import ProductsListToCart from '../components/ProductsListToCart';
 import ShoppingCart from '../components/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
   },
   paper: {
     padding: theme.spacing(2),
@@ -23,29 +23,33 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     flexDirection: 'column',
   },
-  fixedHeight: {
-    height: 640,
+  fixedHeightCart: {
+    height: '24em',
+  },
+  fixedHeightProducts: {
+    height: '24em',
   },
 }));
 
 const RegisterSale = () => {
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedHeightPaperCart = clsx(classes.paper, classes.fixedHeightCart);
+  const fixedHeightPaperProducts = clsx(classes.paper, classes.fixedHeightProducts);
 
   return (
     <>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth='lg' className={classes.container}>
+        <Container className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={8}>
-              <Paper className={fixedHeightPaper}>
-                <Inventory />
+            <Grid item xs={12} md={4} lg={4}>
+              <Paper className={fixedHeightPaperCart}>
+                <ShoppingCart />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={4}>
-              <Paper className={fixedHeightPaper}>
-                <ShoppingCart />
+            <Grid item xs={12} md={8} lg={8}>
+              <Paper className={fixedHeightPaperProducts}>
+                <ProductsListToCart />
               </Paper>
             </Grid>
           </Grid>

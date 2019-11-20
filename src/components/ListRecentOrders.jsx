@@ -27,7 +27,7 @@ const Orders = (props) => {
               <TableCell>#Orden</TableCell>
               <TableCell>Fecha</TableCell>
               <TableCell>Cliente</TableCell>
-              <TableCell align='right'>Valor</TableCell>
+              <TableCell align='right'>Valor Factura</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -36,7 +36,7 @@ const Orders = (props) => {
                 <TableCell>{order.orderNumber}</TableCell>
                 <TableCell>{order.date}</TableCell>
                 <TableCell>{`${order.customer.name} ${order.customer.surname}`}</TableCell>
-                <TableCell align='right'>{order.checkoutTotal}</TableCell>
+                <TableCell align='right'>$ {order.checkoutTotal}</TableCell>
               </TableRow>
             ))}
           </TableBody>
