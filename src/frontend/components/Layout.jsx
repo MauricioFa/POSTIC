@@ -81,32 +81,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const routesForHeader = [
-  { route: '/registersale', value: 'Vender' },
-  { route: '/ordersfull', value: 'Pedidos' },
-  { route: '/customers', value: 'Clientes' },
-  { route: '/products', value: 'Productos' },
-  { route: '/config', value: 'Configuración Cuenta' },
-  { route: '/logUp', value: 'Crear cuenta' },
-  { route: '/', value: 'Dashboard' },
-  { route: '/newpassword', value: 'Nueva clave' },
+  { route: '/registersale', title: 'Vender' },
+  { route: '/ordersfull', title: 'Pedidos' },
+  { route: '/customers', title: 'Clientes' },
+  { route: '/products', title: 'Productos' },
+  { route: '/config', title: 'Configuración Cuenta' },
+  { route: '/logUp', title: 'Crear cuenta' },
+  { route: '/', title: 'Dashboard' },
+  { route: '/newpassword', title: 'Nueva clave' },
 ];
 
 const Layout = (props) => {
   const classes = useStyles();
   const { isAuthenticated } = props;
   const [open, setOpen] = React.useState(false);
+  const [titleHeader, setTitleHeader] = React.useState('Loading');
 
   const history = useHistory();
   React.useEffect(() => {
     setOpen(false);
+    let title = routesForHeader.filter((item) => item.route === history.location.pathname);
+    title = title[0].title ? title[0].title : 'Loading';
+    title = !isAuthenticated && title === 'Dashboard' ? 'Ingresar' : title;
+    setTitleHeader(title);
   }, [history.location.pathname]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
-  let titleHeader = routesForHeader.filter((item) => item.route === history.location.pathname)[0].value;
-  titleHeader = !isAuthenticated && titleHeader === 'Dashboard' ? 'Ingresar' : titleHeader;
 
   const handleDrawerClose = () => {
     setOpen(false);

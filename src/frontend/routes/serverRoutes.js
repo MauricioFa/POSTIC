@@ -1,4 +1,3 @@
-import Dashboard from '../containers/Dashboard';
 import OrdersFull from '../containers/OrdersFull';
 import Customers from '../containers/Customers';
 import Products from '../containers/Products';
@@ -13,11 +12,6 @@ const serverRoutes = [
   {
     path: '/',
     component: Login,
-    exact: true,
-  },
-  {
-    path: '/',
-    component: Dashboard,
     exact: true,
   },
   {
