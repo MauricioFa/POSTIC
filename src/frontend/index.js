@@ -7,6 +7,8 @@ import { createBrowserHistory } from 'history';
 import reducers from './reducers/indexReducers';
 import App from './routes/App';
 
+/* Intentar insertar funcion main aqui */
+
 if (typeof window !== 'undefined') {
   let composeEnhancers;
   if (process.env.NODE_ENV === 'production') composeEnhancers = compose;
