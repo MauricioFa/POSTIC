@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
   };
 }
 
-const render = (html, preloadedState) => {
+const render = (html, css, preloadedState) => {
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -24,6 +24,7 @@ const render = (html, preloadedState) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link rel="stylesheet" href="${files['main.css']}" type="text/css" />
+        <style id="jss-server-side">${css}</style>
         <title>POSTIC</title>
       </head>
       <body>
