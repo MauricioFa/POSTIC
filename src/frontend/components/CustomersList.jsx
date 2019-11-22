@@ -32,10 +32,7 @@ const CustomersList = (props) => {
       columns={columns}
       data={customers}
       icons={tableIcons}
-      options={{
-        pageSize: 10,
-        pageSizeOptions: [10, 20, 40],
-      }}
+      options={props.optionsPages}
       localization={{
         pagination: {
           labelDisplayedRows: '{from}-{to} de {count}',

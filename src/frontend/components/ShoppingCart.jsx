@@ -1,7 +1,8 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Grid } from '@material-ui/core';
+import { Paper, Typography, Grid, Button, FormControl, Select, InputLabel } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeFromCart, calcCheckoutTotalCart } from '../actions/indexActions';
 import '../assets/styles/ShoppingCart.css';
@@ -29,29 +30,69 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     marginBottom: theme.spacing(1),
     background: '#009688',
+    '& Button': {
+      color: 'white',
+      fontSize: '1.2em',
+      fontWeight: 'bold',
+    },
   },
   divider: {
     margin: theme.spacing(2, 0),
+  },
+  formControl: {
+    marginTop: theme.spacing(1),
+    width: '100%',
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(1),
   },
 }));
 
 const ShoppingCart = (props) => {
   const classes = useStyles();
-  const { cart, checkoutTotalCart, removeFromCart, calcCheckoutTotalCart } = props;
+  const { cart, checkoutTotalCart, customersList } = props;
 
-  React.useEffect(() => {
-    calcCheckoutTotalCart();
+  useEffect(() => {
+    props.calcCheckoutTotalCart();
   }, [cart]);
 
   const handleCartItems = (elementId) => {
-    removeFromCart(elementId);
+    props.removeFromCart(elementId);
+  };
+
+  const [selectIdCustomer, setSelectIdCustomer] = useState('');
+  const handleChangeSelectIdCustomer = (event) => {
+    event.preventDefault();
+    setSelectIdCustomer(event.target.value);
   };
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={12}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>{`FACTURAR: $ ${checkoutTotalCart}`}</Paper>
+          <Paper className={classes.paper}>
+            <Button onClick={() => console.info('Clic Button on papel')}>
+              {`FACTURAR: $ ${checkoutTotalCart}`}
+            </Button>
+          </Paper>
+          <FormControl variant='outlined' className={classes.formControl}>
+            <InputLabel htmlFor='selectCustomerForBill'>Identificación del Cliente</InputLabel>
+            <Select
+              native
+              value={selectIdCustomer}
+              onChange={handleChangeSelectIdCustomer}
+              inputProps={{
+                name: 'selectCustomerForBill',
+              }}
+            >
+              <option value='' />
+              {customersList.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.id}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
         <Typography variant='h6' className={classes.title}>
           Artículos a facturar
@@ -80,6 +121,7 @@ const mapStateToProps = (state) => {
   return {
     cart: state.shoppingCartList,
     checkoutTotalCart: state.checkoutTotalCart,
+    customersList: state.customersList,
   };
 };
 
