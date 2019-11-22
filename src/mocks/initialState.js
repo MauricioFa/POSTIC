@@ -37,7 +37,7 @@ const initialState = {
     },
   ],
   products: [
-    {
+    /* {
       sku: '1',
       name: 'El pollo volador',
       categories: ['pizza', 'bbq', 'chicken'],
@@ -156,7 +156,7 @@ const initialState = {
       sellingPrice: 18.2,
       description: 'Mushroom pizza doble diámetro',
       image: 'https://live.staticflickr.com/8242/8487666183_75e2e25206_t.jpg',
-    },
+    }, */
   ],
   customersList: [
     {
