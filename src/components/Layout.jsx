@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import AccountMenu from './AccountMenu';
-import Logo from '../assets/statics/Logo_Postic.svg';
+// import Logo from '../assets/statics/logopostic.svg';
 import MainItemsList from './MainItemsList';
 import Theme from '../assets/styles/Theme';
 
@@ -131,7 +131,7 @@ const Layout = (props) => {
         >
           <div className={classes.toolbarIcon}>
             <IconButton onClick={handleDrawerClose}>
-              <Logo height='42' fill='#009999' />
+              {/* <Logo height='42' fill='#009999' /> */}
               <ChevronLeftIcon />
             </IconButton>
           </div>
@@ -152,4 +152,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Layout);
+export default connect(
+  mapStateToProps,
+  null
+)(Layout);

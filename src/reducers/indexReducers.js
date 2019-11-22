@@ -33,6 +33,11 @@ const reducers = (state, action) => {
         ...state,
         isAuthenticated: action.payload,
       };
+    case 'USER_NAME':
+      return {
+        ...state,
+        userName: action.payload,
+      };
     default:
       return state;
   }

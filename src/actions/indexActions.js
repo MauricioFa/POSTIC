@@ -18,4 +18,10 @@ const updateProductsList = (payload) => ({
   payload,
 });
 
-export { addToCart, removeFromCart, authenticatedToTrue, updateProductsList };
+const setuserName = (payload) => ({
+  type: 'USER_NAME',
+  payload,
+});
+
+export { addToCart, removeFromCart, authenticatedToTrue, setuserName, updateProductsList };
+
