@@ -1,5 +1,5 @@
 # Assets for production
-/src/server/public/
+/src/ssr/public/
 
 # Dir node modules
 /node_modules/
