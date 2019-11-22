@@ -180,8 +180,8 @@ const initialState = {
   ],
   ordersList: [
     {
-      orderNumber: '1',
-      date: '16 Oct, 2019',
+      orderNumber: 126,
+      date: '2019-11-20T3-53-36.496',
       customer: { idType: 'CC', id: '59480261', name: 'Paulo', surname: 'Veinteañero' },
       checkoutTotal: 30800.0,
       soldProducts: [

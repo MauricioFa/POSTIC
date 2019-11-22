@@ -1,10 +1,15 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import SelectReact from 'react-select';
+import { Paper, Typography, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Grid, Button, FormControl, Select, InputLabel } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { removeFromCart, calcCheckoutTotalCart } from '../actions/indexActions';
+import {
+  removeFromCart,
+  calcCheckoutTotalCart,
+  addToOrdersList,
+  cleanCartBillDo,
+} from '../actions/indexActions';
 import '../assets/styles/ShoppingCart.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,18 +44,14 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(2, 0),
   },
-  formControl: {
-    marginTop: theme.spacing(1),
-    width: '100%',
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(1),
+  selectCustomer: {
+    color: '#0000EE',
   },
 }));
 
 const ShoppingCart = (props) => {
   const classes = useStyles();
-  const { cart, checkoutTotalCart, customersList } = props;
+  const { cart, checkoutTotalCart, customersList, ordersList } = props;
 
   useEffect(() => {
     props.calcCheckoutTotalCart();
@@ -60,10 +61,37 @@ const ShoppingCart = (props) => {
     props.removeFromCart(elementId);
   };
 
-  const [selectIdCustomer, setSelectIdCustomer] = useState('');
-  const handleChangeSelectIdCustomer = (event) => {
-    event.preventDefault();
-    setSelectIdCustomer(event.target.value);
+  const [selectCustomerById, setSelectCustomerById] = useState('');
+  const handleChangeSelectCustomerById = (customerToPay) => {
+    setSelectCustomerById(customerToPay);
+  };
+
+  const generateInvoice = () => {
+    if (selectCustomerById) {
+      if (cart.length > 0) {
+        const { idType, id, name, surname } = selectCustomerById.value;
+        let orderNumber = ordersList.slice(-1);
+        orderNumber = orderNumber.length > 0 ? orderNumber[0].orderNumber + 1 : 1;
+        let today = new Date();
+        // eslint-disable-next-line prettier/prettier
+        today = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${today.getHours()}-${today.getMinutes()}-${today.getSeconds()}.${today.getMilliseconds()}`;
+        const newOrderDo = {
+          orderNumber,
+          date: today,
+          customer: { idType, id, name, surname },
+          checkoutTotal: checkoutTotalCart,
+          soldProducts: cart,
+        };
+        console.info('Objeto creado: ', newOrderDo);
+        props.addToOrdersList(newOrderDo);
+        setSelectCustomerById('');
+        props.cleanCartBillDo();
+      } else {
+        alert('Agregue al menos un producto a la Factura');
+      }
+    } else {
+      alert('Seleccione un cliente valido\nsi no existe, deberá crearlo');
+    }
   };
 
   return (
@@ -71,32 +99,26 @@ const ShoppingCart = (props) => {
       <Grid item xs={12} md={12}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Button onClick={() => console.info('Clic Button on papel')}>
-              {`FACTURAR: $ ${checkoutTotalCart}`}
-            </Button>
+            <Button onClick={generateInvoice}>{`Facturar: $ ${checkoutTotalCart}`}</Button>
           </Paper>
-          <FormControl variant='outlined' className={classes.formControl}>
-            <InputLabel htmlFor='selectCustomerForBill'>Identificación del Cliente</InputLabel>
-            <Select
-              native
-              value={selectIdCustomer}
-              onChange={handleChangeSelectIdCustomer}
-              inputProps={{
-                name: 'selectCustomerForBill',
-              }}
-            >
-              <option value='' />
-              {customersList.map((client) => (
-                <option key={client.id} value={client.id}>
-                  {client.id}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
+
+          <SelectReact
+            className={classes.selectCustomer}
+            name='selectCustomerByIdShopping'
+            value={selectCustomerById}
+            onChange={handleChangeSelectCustomerById}
+            placeholder='Identificación del Cliente'
+            options={customersList.map((option) => ({
+              value: option,
+              label: `${option.idType} ${option.id}`,
+            }))}
+          />
         </Grid>
+
         <Typography variant='h6' className={classes.title}>
           Artículos a facturar
         </Typography>
+
         <div className='Checkout-content'>
           {cart.length > 0 ? ' ' : <h2>Sin Pedidos</h2>}
           {cart.map((item) => {
@@ -122,12 +144,15 @@ const mapStateToProps = (state) => {
     cart: state.shoppingCartList,
     checkoutTotalCart: state.checkoutTotalCart,
     customersList: state.customersList,
+    ordersList: state.ordersList,
   };
 };
 
 const mapDispathToProps = {
   removeFromCart,
   calcCheckoutTotalCart,
+  addToOrdersList,
+  cleanCartBillDo,
 };
 
 export default connect(mapStateToProps, mapDispathToProps)(ShoppingCart);
