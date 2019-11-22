@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as firebase from 'firebase';
 import Dashboard from '../containers/Dashboard';
 import OrdersFull from '../containers/OrdersFull';
 import Customers from '../containers/Customers';
@@ -11,7 +12,6 @@ import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
 import Layout from '../components/Layout';
-import * as firebase from 'firebase';
 import firebaseConfig from '../firebase_config/fbconfig';
 
 firebase.initializeApp(firebaseConfig);
@@ -42,7 +42,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(App);
+export default connect(mapStateToProps, null)(App);
