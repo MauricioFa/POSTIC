@@ -43,6 +43,16 @@ const updateToCustomersList = (payload) => ({
   payload,
 });
 
+const addToOrdersList = (payload) => ({
+  type: 'ADD_TO_ORDERS_LIST',
+  payload,
+});
+
+const cleanCartBillDo = (payload) => ({
+  type: 'CLEAN_CART_BILL_DO',
+  payload,
+});
+
 const authenticatedToTrue = (payload) => ({
   type: 'AUTHENTICATED_TO_TRUE',
   payload,
@@ -58,5 +68,7 @@ export {
   addToCustomersList,
   removeFromCustomersList,
   updateToCustomersList,
+  cleanCartBillDo,
+  addToOrdersList,
   authenticatedToTrue,
 };

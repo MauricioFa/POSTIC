@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid, Paper } from '@material-ui/core';
+import { Container, Grid, Paper, Button } from '@material-ui/core';
 import CopyrightLabel from '../components/CopyrightLabel';
 import ProductsListToCart from '../components/ProductsListToCart';
 import ShoppingCart from '../components/ShoppingCart';
+import CustomersList from '../components/CustomersList';
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -24,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeightCart: {
-    height: '24em',
+    height: '30em',
   },
   fixedHeightProducts: {
-    height: '24em',
+    height: '30em',
   },
 }));
 
@@ -35,13 +36,22 @@ const RegisterSale = () => {
   const classes = useStyles();
   const fixedHeightPaperCart = clsx(classes.paper, classes.fixedHeightCart);
   const fixedHeightPaperProducts = clsx(classes.paper, classes.fixedHeightProducts);
+  const [easyCrudCustomer, setEasyCrudCustomer] = useState(false);
 
   return (
     <>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container className={classes.container}>
+          <Button variant='contained' onClick={() => setEasyCrudCustomer(!easyCrudCustomer)}>
+            Editar clientes
+          </Button>
           <Grid container spacing={3}>
+            {easyCrudCustomer && (
+              <Grid item xs={12}>
+                <CustomersList optionsPages={{ pageSize: 1, pageSizeOptions: [1] }} />
+              </Grid>
+            )}
             <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaperCart}>
                 <ShoppingCart />

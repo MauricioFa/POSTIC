@@ -32,10 +32,7 @@ const CustomersList = (props) => {
       columns={columns}
       data={customers}
       icons={tableIcons}
-      options={{
-        pageSize: 10,
-        pageSizeOptions: [10, 20, 40],
-      }}
+      options={props.optionsPages}
       localization={{
         pagination: {
           labelDisplayedRows: '{from}-{to} de {count}',
@@ -57,12 +54,12 @@ const CustomersList = (props) => {
           addTooltip: 'Añadir',
           deleteTooltip: 'Eliminar',
           editTooltip: 'Editar',
-          emptyDataSourceMessage: 'No se encontraron producto',
+          emptyDataSourceMessage: 'Ninguna coincidencia',
           filterRow: {
             filterTooltip: 'Filtrar',
           },
           editRow: {
-            deleteText: '¿Estás seguro de eliminar este producto?',
+            deleteText: '¿Estás seguro de eliminar este CLIENTE?',
             cancelTooltip: 'Cancelar',
             saveTooltip: 'Confirmar',
           },
