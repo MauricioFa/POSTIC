@@ -11,6 +11,10 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import CheckIcon from '@material-ui/icons/Check';
+import { updateProductsList } from '../actions/indexActions';
+import useProduct from '../hooks/useProduct';
+
+const axios = require('axios');
 
 const columns = [
   { title: 'Producto', field: 'name' },
@@ -20,14 +24,14 @@ const columns = [
   { title: 'Valor unitario', field: 'sellingPrice', type: 'currency' },
 ];
 
-const ProductsList = ({ products }) => {
-  const [state, setState] = React.useState({
-    columns,
-    productsList: products.map((item) => ({
-      ...item,
-      categories: item.categories[0],
-    })),
-  });
+const API_URL = 'https://postic.now.sh/api/products';
+
+const ProductsList = (props) => {
+
+  const { products } = props;
+  const productsDB = useProduct(API_URL, products);
+  props.updateProductsList(productsDB);
+
 
   const tableIcons = {
     Delete: forwardRef((props, ref) => <DeleteOutlineIcon {...props} ref={ref} />),
@@ -45,8 +49,8 @@ const ProductsList = ({ products }) => {
   return (
     <MaterialTable
       title='Productos'
-      columns={state.columns}
-      data={state.productsList}
+      columns={columns}
+      data={products}
       icons={tableIcons}
       localization={{
         pagination: {
@@ -85,9 +89,7 @@ const ProductsList = ({ products }) => {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              const data = [...state.productsList];
-              data.push(newData);
-              setState({ ...state, data });
+              axios.post(API_URL, newData);
             }, 600);
           }),
         onRowUpdate: (newData, oldData) =>
@@ -103,9 +105,10 @@ const ProductsList = ({ products }) => {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-              const data = [...state.productsList];
+              axios.delete(`${API_URL}/${oldData._id}`);
+              /* const data = [...state.productsList];
               data.splice(data.indexOf(oldData), 1);
-              setState({ ...state, data });
+              setState({ ...state, data }); */
             }, 600);
           }),
       }}
@@ -119,4 +122,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ProductsList);
+const mapDispatchToProps = {
+  updateProductsList,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
