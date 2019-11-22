@@ -168,11 +168,20 @@ const initialState = {
       email: 'paulo2019@hotmail.com',
       authorizeEmail: 'yes',
     },
+    {
+      idType: 'CC',
+      id: '1020259784',
+      name: 'Laura',
+      surname: 'Pereira',
+      phone: '3115698412',
+      email: '',
+      authorizeEmail: '',
+    },
   ],
   ordersList: [
     {
-      orderNumber: '1',
-      date: '16 Oct, 2019',
+      orderNumber: 126,
+      date: '2019-11-20T3-53-36.496',
       customer: { idType: 'CC', id: '59480261', name: 'Paulo', surname: 'Veinteañero' },
       checkoutTotal: 30800.0,
       soldProducts: [
