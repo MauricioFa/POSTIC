@@ -65,13 +65,11 @@ const reducers = (state, action) => {
         ),
       };
 
-    case 'ADD_TO_ORDERS_LIST': {
-      console.info('Agregando orden', action.payload);
+    case 'ADD_TO_ORDERS_LIST':
       return {
         ...state,
         ordersList: [...state.ordersList, action.payload],
       };
-    }
 
     case 'CLEAN_CART_BILL_DO':
       return {

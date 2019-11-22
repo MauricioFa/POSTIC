@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import SelectReact from 'react-select';
+import { useHistory } from 'react-router-dom';
 import { Paper, Typography, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 const ShoppingCart = (props) => {
   const classes = useStyles();
   const { cart, checkoutTotalCart, customersList, ordersList } = props;
+  const history = useHistory();
 
   useEffect(() => {
     props.calcCheckoutTotalCart();
@@ -82,10 +84,12 @@ const ShoppingCart = (props) => {
           checkoutTotal: checkoutTotalCart,
           soldProducts: cart,
         };
-        console.info('Objeto creado: ', newOrderDo);
+
         props.addToOrdersList(newOrderDo);
         setSelectCustomerById('');
         props.cleanCartBillDo();
+        sessionStorage.setItem('currentOrderNumber', newOrderDo.orderNumber.toString());
+        history.push('/createInvoice');
       } else {
         alert('Agregue al menos un producto a la Factura');
       }
