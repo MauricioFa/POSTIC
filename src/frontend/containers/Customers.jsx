@@ -35,7 +35,7 @@ const Customers = () => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <CustomersList />
+                <CustomersList optionsPages={{ pageSize: 10, pageSizeOptions: [10, 20, 40] }} />
               </Paper>
             </Grid>
           </Grid>

@@ -168,6 +168,15 @@ const initialState = {
       email: 'paulo2019@hotmail.com',
       authorizeEmail: 'yes',
     },
+    {
+      idType: 'CC',
+      id: '1020259784',
+      name: 'Laura',
+      surname: 'Pereira',
+      phone: '3115698412',
+      email: '',
+      authorizeEmail: '',
+    },
   ],
   ordersList: [
     {
