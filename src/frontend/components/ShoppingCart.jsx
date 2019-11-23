@@ -88,8 +88,8 @@ const ShoppingCart = (props) => {
         props.addToOrdersList(newOrderDo);
         setSelectCustomerById('');
         props.cleanCartBillDo();
-        sessionStorage.setItem('currentOrderNumber', newOrderDo.orderNumber.toString());
-        history.push('/createInvoice');
+        sessionStorage.setItem('selectedOrderNumber', newOrderDo.orderNumber.toString());
+        history.push('/invoicepdf');
       } else {
         alert('Agregue al menos un producto a la Factura');
       }
