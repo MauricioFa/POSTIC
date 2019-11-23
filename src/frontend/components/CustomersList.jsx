@@ -26,6 +26,7 @@ const CustomersList = (props) => {
     },
   ];
 
+
   return (
     <MaterialTable
       title='Clientes'
@@ -98,3 +99,4 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomersList);
+

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as firebase from 'firebase';
 import Dashboard from '../containers/Dashboard';
 import OrdersFull from '../containers/OrdersFull';
 import Customers from '../containers/Customers';
@@ -13,6 +14,10 @@ import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
 import Layout from '../components/Layout';
+import firebaseConfig from '../firebase_config/fbconfig';
+
+firebase.initializeApp(firebaseConfig);
+
 
 const App = ({ isAuthenticated }) => {
   return (
@@ -26,6 +31,8 @@ const App = ({ isAuthenticated }) => {
           {isAuthenticated && <Route exact path='/products' component={Products} />}
           {isAuthenticated && <Route exact path='/config' component={ConfigContainer} />}
           {!isAuthenticated && <Route exact path='/logUp' component={LogUp} />}
+          {isAuthenticated && <Route exact path='/logUp' component={Dashboard} />}
+
           <Route exact path='/' component={isAuthenticated ? Dashboard : Login} />
           <Route exact path='/newpassword' component={RecoverPassword} />
           <Route component={NotFound} />

@@ -2,11 +2,7 @@
   "name": "postic",
   "version": "2.0.0",
   "description": "App to Point Of Sale. Final student project Escuela JS 2019 Platzi.",
-  "keywords": [
-    "Point Of Sale App",
-    "ReactJS",
-    "Create React APP"
-  ],
+  "keywords": [],
   "main": "src/index.js",
   "author": "Caraballo Luis, Fajardo Mauricio, Nemogá Jorge",
   "license": "MIT",
@@ -34,6 +30,8 @@
     "@material-ui/core": "4.5.1",
     "@material-ui/icons": "4.4.3",
     "@material-ui/styles": "^4.6.0",
+    "axios": "^0.19.0",
+    "firebase": "7.4.0",
     "@progress/kendo-drawing": "^1.6.0",
     "@progress/kendo-react-pdf": "^3.7.0",
     "asset-require-hook": "^1.2.0",

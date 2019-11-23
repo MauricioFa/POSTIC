@@ -84,3 +84,6 @@ src/ssr/public/**
 # Statics files
 *.mp4
 *.avi
+
+#Firebase configuration
+fbconfig.js

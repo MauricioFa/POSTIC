@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const routesForHeader = [
   { route: '/registersale', title: 'Vender' },
   { route: '/createInvoice', title: 'Factura a PDF' },
@@ -97,7 +98,6 @@ const Layout = (props) => {
   const { isAuthenticated } = props;
   const [open, setOpen] = React.useState(false);
   const [titleHeader, setTitleHeader] = React.useState('Loading');
-
   const history = useHistory();
   React.useEffect(() => {
     setOpen(false);
@@ -106,6 +106,7 @@ const Layout = (props) => {
     title = !isAuthenticated && title === 'Dashboard' ? 'Ingresar' : title;
     setTitleHeader(title);
   }, [history.location.pathname]);
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -172,3 +173,4 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, null)(Layout);
+

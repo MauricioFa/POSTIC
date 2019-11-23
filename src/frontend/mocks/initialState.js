@@ -1,5 +1,6 @@
 const initialState = {
   isAuthenticated: false,
+  userName: 'Anónimo',
   shoppingCartList: [],
   checkoutTotalCart: 0.0,
   checkoutTotalBuy: 0.0,
