@@ -8,6 +8,8 @@ import Customers from '../containers/Customers';
 import Products from '../containers/Products';
 import NotFound from '../containers/NotFound';
 import RegisterSale from '../containers/RegisterSale';
+import CreateInvoiceToPdf from '../containers/CreateInvoiceToPdf';
+import ConfigContainer from '../containers/ConfigContainer';
 import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
@@ -16,17 +18,21 @@ import firebaseConfig from '../firebase_config/fbconfig';
 
 firebase.initializeApp(firebaseConfig);
 
+
 const App = ({ isAuthenticated }) => {
   return (
     <BrowserRouter>
       <Layout>
         <Switch>
           {isAuthenticated && <Route exact path='/registersale' component={RegisterSale} />}
+          {isAuthenticated && <Route exact path='/createinvoice' component={CreateInvoiceToPdf} />}
           {isAuthenticated && <Route exact path='/ordersfull' component={OrdersFull} />}
           {isAuthenticated && <Route exact path='/customers' component={Customers} />}
           {isAuthenticated && <Route exact path='/products' component={Products} />}
+          {isAuthenticated && <Route exact path='/config' component={ConfigContainer} />}
           {!isAuthenticated && <Route exact path='/logUp' component={LogUp} />}
           {isAuthenticated && <Route exact path='/logUp' component={Dashboard} />}
+
           <Route exact path='/' component={isAuthenticated ? Dashboard : Login} />
           <Route exact path='/newpassword' component={RecoverPassword} />
           <Route component={NotFound} />

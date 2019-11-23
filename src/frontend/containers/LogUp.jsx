@@ -20,6 +20,7 @@ const LogUp = (props) => {
     // textPlaceholderPasswordAnew = 'Repetir Clave',
     helperText = 'Mínimo 6 caracteres';
 
+
   const classes = useStyles({
     heightSection: '44em',
     widthSection: '100vw',
@@ -46,6 +47,7 @@ const LogUp = (props) => {
   // const handleChange = (prop) => (event) => {
   //   setValues({ ...values, [prop]: event.target.value });
   // };
+
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();
@@ -212,6 +214,7 @@ const LogUp = (props) => {
           <h2>O Regístrate con</h2>
           <div>
             <span>
+
               <Button onClick={(event) => handleGoogleLogin(event)}>
                 <FontAwesomeIcon icon={faGoogle} size='3x' />
               </Button>
@@ -235,6 +238,7 @@ const LogUp = (props) => {
   );
 };
 
+
 const mapDispatchToProps = {
   authenticatedToTrue,
   setuserName,
@@ -244,3 +248,4 @@ export default connect(
   null,
   mapDispatchToProps
 )(LogUp);
+

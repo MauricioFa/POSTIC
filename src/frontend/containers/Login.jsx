@@ -7,10 +7,12 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
+
 import { authenticatedToTrue, setuserName } from '../actions/indexActions';
 import useMyStyles from '../assets/styles/style--LogInUpRpw';
 import imageAuxMediaQuery from '../assets/statics/office-1081807_640.jpg';
 import * as firebase from 'firebase';
+
 
 const Login = (props) => {
   const label = 'Correo electrónico',
@@ -32,13 +34,13 @@ const Login = (props) => {
     email: '',
     password: '',
     showPassword: false,
+
     error: '',
   });
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setErrors] = useState('');
-
   const handleClickShowPassword = (event) => {
     event.preventDefault();
     setValues({ ...values, showPassword: !values.showPassword });
@@ -90,6 +92,7 @@ const Login = (props) => {
             variant={variant}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+
             InputProps={{
               classes: {
                 input: classes.textSize,
@@ -176,3 +179,4 @@ export default connect(
   null,
   mapDispatchToProps
 )(Login);
+

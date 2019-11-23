@@ -1,56 +1,39 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import SearchIcon from '@material-ui/icons/Search';
-import ClearIcon from '@material-ui/icons/Clear';
-import CheckIcon from '@material-ui/icons/Check';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditIcon from '@material-ui/icons/Edit';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import LastPageIcon from '@material-ui/icons/LastPage';
+import tableIcons from './utils/tableIconsByMaterialTable';
+import { addToCustomersList, removeFromCustomersList, updateToCustomersList } from '../actions/indexActions';
 
-const columns = [
-  { title: 'Nombres', field: 'name' },
-  { title: 'Apellidos', field: 'surname' },
-  { title: 'Teléfono', field: 'phone' },
-  { title: 'Email', field: 'email' },
-  {
-    title: 'Autoriza promociones por email',
-    field: 'authorizeEmail',
-    lookup: { 1: 'Sí', 2: 'No' },
-  },
-];
+const CustomersList = (props) => {
+  const { customers } = props;
 
-const CustomersList = ({ customerList }) => {
-  const [state, setState] = React.useState({
-    columns,
-    customerList,
-  });
+  const columns = [
+    {
+      title: 'Tipo Identificación',
+      field: 'idType',
+      lookup: { null: 'undefined', RC: 'RC', TI: 'TI', CC: 'CC', Other: 'Otro' },
+    },
+    { title: 'Número Identificación', field: 'id' },
+    { title: 'Nombres', field: 'name' },
+    { title: 'Apellidos', field: 'surname' },
+    { title: 'Teléfono', field: 'phone', emptyValue: '' },
+    { title: 'Email', field: 'email', emptyValue: '' },
+    {
+      title: 'Promociones por email',
+      field: 'authorizeEmail',
+      lookup: { no: 'No', yes: 'Sí' },
+      emptyValue: '',
+    },
+  ];
 
-  const tableIcons = {
-    Arrow: forwardRef((props, ref) => <KeyboardArrowUpIcon {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutlineIcon {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <EditIcon {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <SearchIcon {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <CheckIcon {...props} ref={ref} />),
-    Add: forwardRef((props, ref) => <AddBoxIcon {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <ClearIcon {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPageIcon {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPageIcon {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => <ChevronLeftIcon {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRightIcon {...props} ref={ref} />),
-  };
 
   return (
     <MaterialTable
       title='Clientes'
-      columns={state.columns}
-      data={state.customerList}
+      columns={columns}
+      data={customers}
       icons={tableIcons}
+      options={props.optionsPages}
       localization={{
         pagination: {
           labelDisplayedRows: '{from}-{to} de {count}',
@@ -72,12 +55,12 @@ const CustomersList = ({ customerList }) => {
           addTooltip: 'Añadir',
           deleteTooltip: 'Eliminar',
           editTooltip: 'Editar',
-          emptyDataSourceMessage: 'No se encontraron producto',
+          emptyDataSourceMessage: 'Ninguna coincidencia',
           filterRow: {
             filterTooltip: 'Filtrar',
           },
           editRow: {
-            deleteText: '¿Estás seguro de eliminar este producto?',
+            deleteText: '¿Estás seguro de eliminar este CLIENTE?',
             cancelTooltip: 'Cancelar',
             saveTooltip: 'Confirmar',
           },
@@ -85,32 +68,19 @@ const CustomersList = ({ customerList }) => {
       }}
       editable={{
         onRowAdd: (newData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.customerList];
-              data.push(newData);
-              setState({ ...state, data });
-            }, 600);
+          new Promise((resolve, reject) => {
+            if (newData.idType === undefined || newData.id === undefined) {
+              reject(alert('Debe agregar un ID y tipo de ID validos'));
+            } else if (newData.name === undefined || newData.surname === undefined) {
+              reject(alert('Debe agregar un Nombre y un Apellido valido'));
+            } else {
+              resolve(props.addToCustomersList(newData));
+            }
           }),
-        onRowUpdate: (newData, oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.customerList];
-              data[data.indexOf(oldData)] = newData;
-              setState({ ...state, data });
-            }, 600);
-          }),
-        onRowDelete: (oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.customerList];
-              data.splice(data.indexOf(oldData), 1);
-              setState({ ...state, data });
-            }, 600);
-          }),
+        onRowUpdate: (updateData, oldData) =>
+          new Promise((resolve) => resolve(props.updateToCustomersList({ oldData, updateData }))),
+        onRowDelete: (deleteData) =>
+          new Promise((resolve) => resolve(props.removeFromCustomersList(deleteData))),
       }}
     />
   );
@@ -118,8 +88,15 @@ const CustomersList = ({ customerList }) => {
 
 const mapStateToProps = (state) => {
   return {
-    customerList: state.customersList,
+    customers: state.customersList,
   };
 };
 
-export default connect(mapStateToProps, null)(CustomersList);
+const mapDispatchToProps = {
+  addToCustomersList,
+  removeFromCustomersList,
+  updateToCustomersList,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomersList);
+

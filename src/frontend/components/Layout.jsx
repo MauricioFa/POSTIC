@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import AccountMenu from './AccountMenu';
-// import Logo from '../assets/statics/logopostic.svg';
+import Logo from '../assets/statics/Logo_Postic.svg';
 import MainItemsList from './MainItemsList';
 import Theme from '../assets/styles/Theme';
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 16,
   },
   menuButtonHidden: {
     display: 'none',
@@ -80,13 +80,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const routesForHeader = [
+  { route: '/registersale', title: 'Vender' },
+  { route: '/createInvoice', title: 'Factura a PDF' },
+  { route: '/ordersfull', title: 'Pedidos' },
+  { route: '/customers', title: 'Clientes' },
+  { route: '/products', title: 'Productos' },
+  { route: '/config', title: 'Configuración Cuenta' },
+  { route: '/logUp', title: 'Crear cuenta' },
+  { route: '/', title: 'Dashboard' },
+  { route: '/newpassword', title: 'Nueva clave' },
+];
+
 const Layout = (props) => {
   const classes = useStyles();
   const { isAuthenticated } = props;
   const [open, setOpen] = React.useState(false);
-
+  const [titleHeader, setTitleHeader] = React.useState('Loading');
   const history = useHistory();
-  React.useEffect(() => setOpen(false), [history.location.pathname]);
+  React.useEffect(() => {
+    setOpen(false);
+    let title = routesForHeader.filter((item) => item.route === history.location.pathname);
+    title = title[0].title ? title[0].title : 'Loading';
+    title = !isAuthenticated && title === 'Dashboard' ? 'Ingresar' : title;
+    setTitleHeader(title);
+  }, [history.location.pathname]);
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -114,7 +134,7 @@ const Layout = (props) => {
               </IconButton>
             )}
             <Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
-              POSTIC | XpropsX
+              POSTIC | {titleHeader}
             </Typography>
             <AccountMenu />
           </Toolbar>
@@ -131,7 +151,7 @@ const Layout = (props) => {
         >
           <div className={classes.toolbarIcon}>
             <IconButton onClick={handleDrawerClose}>
-              {/* <Logo height='42' fill='#009999' /> */}
+              <Logo height='42' fill='#009999' />
               <ChevronLeftIcon />
             </IconButton>
           </div>
@@ -152,7 +172,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(Layout);
+export default connect(mapStateToProps, null)(Layout);
+

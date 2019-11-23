@@ -16,11 +16,13 @@ const AccountMenu = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
+
   const history = useHistory();
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
 
   const handleSignOut = (event) => {
     setAnchorEl(null);
@@ -56,6 +58,7 @@ const AccountMenu = (props) => {
   );
 };
 
+
 const mapStateToProps = (state) => {
   return {
     userName: state.userName,
@@ -72,3 +75,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AccountMenu);
+

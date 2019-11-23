@@ -6,6 +6,7 @@ import { Person as PersonIcon } from '@material-ui/icons';
 import useStyles from '../assets/styles/style--LogInUpRpw';
 import * as firebase from 'firebase';
 
+
 const RecoverPassword = () => {
   const label = 'Correo electrónico',
     variant = 'outlined';

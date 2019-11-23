@@ -73,7 +73,8 @@ typings/
 yarn-error.log
 
 # Build
-dist
+dist/
+src/ssr/public/**
 
 # SASS cache
 **/.sass-cache
