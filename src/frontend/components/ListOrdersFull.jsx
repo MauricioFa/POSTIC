@@ -63,6 +63,9 @@ const OrdersFull = (props) => {
           },
         },
       }}
+      editable={{
+        onRowDelete: (printData) => new Promise((resolve) => resolve(console.info(printData))),
+      }}
     />
   );
 };

@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
 const routesForHeader = [
   { route: '/registersale', title: 'Vender' },
-  { route: '/createInvoice', title: 'Factura a PDF' },
+  { route: '/invoicepdf', title: 'Factura a PDF' },
   { route: '/ordersfull', title: 'Pedidos' },
   { route: '/customers', title: 'Clientes' },
   { route: '/products', title: 'Productos' },
