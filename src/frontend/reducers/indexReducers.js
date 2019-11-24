@@ -77,6 +77,12 @@ const reducers = (state, action) => {
         shoppingCartList: [],
       };
 
+    case 'SET_ORDER_NUMBER_TO_PRINT':
+      return {
+        ...state,
+        orderNumberToPrint: action.payload,
+      };
+
     case 'AUTHENTICATED_TO_TRUE':
       return {
         ...state,
