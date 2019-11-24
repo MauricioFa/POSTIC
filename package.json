@@ -54,6 +54,7 @@
     "react-router-config": "^5.1.1",
     "react-router-dom": "5.1.2",
     "react-select": "^3.0.8",
+    "react-to-print": "^2.5.0",
     "recharts": "1.7.1",
     "redux": "^4.0.4",
     "webpack": "4.41.0",
