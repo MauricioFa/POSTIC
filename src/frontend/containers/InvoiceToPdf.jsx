@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ReactToPrint from 'react-to-print';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Grid, Paper } from '@material-ui/core';
+import { Container, Grid, Paper, Button } from '@material-ui/core';
 import AddNewButton from '../components/AddNewButton';
 import CopyrightLabel from '../components/CopyrightLabel';
 
@@ -112,7 +112,11 @@ const InvoiceToPdf = (props) => {
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <ReactToPrint
-                trigger={() => <input type='button' value='I M P R I M I R' />}
+                trigger={() => (
+                  <Button variant='outlined' color='secondary' type='button'>
+                    I M P R I M I R
+                  </Button>
+                )}
                 content={() => componentRef}
               />
               <MyInvoice ref={(el) => setComponentRef(el)} selectedOrder={selectedOrder} />
