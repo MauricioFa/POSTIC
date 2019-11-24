@@ -1,10 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
 import MaterialTable from 'material-table';
 import tableIcons from './utils/tableIconsByMaterialTable';
 
+// const KEY_ORDER_NUMBER = 'selectedOrderNumber';
+let historyPush = false;
+
 const OrdersFull = (props) => {
   const { ordersList } = props;
+  // const history = useHistory();
+  // const [historyPush, setHistoryPush] = React.useState(false);
+
+  // const existSelectedOrder = () => {
+  //   setHistoryPush(true);
+  // };
+
+  // React.useEffect(() => {
+  //   if (historyPush) {
+  //     history.push('/invoicepdf');
+  //   }
+  // }, []);
+
   const ordersListForShowing = ordersList.map((order) => ({
     orderNumber: order.orderNumber,
     date: order.date,
@@ -64,7 +81,13 @@ const OrdersFull = (props) => {
         },
       }}
       editable={{
-        onRowDelete: (printData) => new Promise((resolve) => resolve(console.info(printData))),
+        onRowDelete: (printData) =>
+          new Promise((resolve) => {
+            // sessionStorage.setItem(KEY_ORDER_NUMBER, printData.orderNumber.toString());
+            historyPush = true;
+            console.log(historyPush);
+            resolve();
+          }),
       }}
     />
   );
