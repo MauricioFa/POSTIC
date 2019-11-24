@@ -7,11 +7,11 @@ import Customers from '../containers/Customers';
 import Products from '../containers/Products';
 import NotFound from '../containers/NotFound';
 import RegisterSale from '../containers/RegisterSale';
-import CreateInvoiceToPdf from '../containers/CreateInvoiceToPdf';
 import ConfigContainer from '../containers/ConfigContainer';
 import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
+import InvoiceToPdf from '../containers/InvoiceToPdf';
 import Layout from '../components/Layout';
 
 const App = ({ isAuthenticated }) => {
@@ -20,11 +20,11 @@ const App = ({ isAuthenticated }) => {
       <Layout>
         <Switch>
           {isAuthenticated && <Route exact path='/registersale' component={RegisterSale} />}
-          {isAuthenticated && <Route exact path='/createinvoice' component={CreateInvoiceToPdf} />}
           {isAuthenticated && <Route exact path='/ordersfull' component={OrdersFull} />}
           {isAuthenticated && <Route exact path='/customers' component={Customers} />}
           {isAuthenticated && <Route exact path='/products' component={Products} />}
           {isAuthenticated && <Route exact path='/config' component={ConfigContainer} />}
+          {isAuthenticated && <Route exact path='/invoicepdf' component={InvoiceToPdf} />}
           {!isAuthenticated && <Route exact path='/logUp' component={LogUp} />}
           <Route exact path='/' component={isAuthenticated ? Dashboard : Login} />
           <Route exact path='/newpassword' component={RecoverPassword} />

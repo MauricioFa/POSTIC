@@ -10,6 +10,7 @@ import {
   calcCheckoutTotalCart,
   addToOrdersList,
   cleanCartBillDo,
+  orderNumToPrintByBill,
 } from '../actions/indexActions';
 import '../assets/styles/ShoppingCart.css';
 
@@ -38,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
     background: '#009688',
     '& Button': {
       color: 'white',
-      fontSize: '1.2em',
-      fontWeight: 'bold',
+      fontSize: '1.4em',
+      width: '100%',
+      textTransform: 'capitalize',
     },
   },
   divider: {
@@ -51,24 +53,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShoppingCart = (props) => {
-  const classes = useStyles();
   const { cart, checkoutTotalCart, customersList, ordersList } = props;
   const history = useHistory();
-
-  useEffect(() => {
-    props.calcCheckoutTotalCart();
-  }, [cart]);
+  const classes = useStyles();
+  const [selectCustomerById, setSelectCustomerById] = useState('');
+  const [optionsIDs, setOptionsIDs] = useState([]);
 
   const handleCartItems = (elementId) => {
     props.removeFromCart(elementId);
   };
 
-  const [selectCustomerById, setSelectCustomerById] = useState('');
+  useEffect(() => {
+    props.calcCheckoutTotalCart();
+  }, [cart]);
+
+  useEffect(() => {
+    const newOptions = customersList.map((option) => ({
+      value: option,
+      label: `${option.idType} ${option.id}`,
+    }));
+    setOptionsIDs(newOptions);
+  }, [customersList]);
+
   const handleChangeSelectCustomerById = (customerToPay) => {
     setSelectCustomerById(customerToPay);
   };
 
-  const generateInvoice = () => {
+  const onClickGenInvoice = () => {
     if (selectCustomerById) {
       if (cart.length > 0) {
         const { idType, id, name, surname } = selectCustomerById.value;
@@ -88,8 +99,8 @@ const ShoppingCart = (props) => {
         props.addToOrdersList(newOrderDo);
         setSelectCustomerById('');
         props.cleanCartBillDo();
-        sessionStorage.setItem('currentOrderNumber', newOrderDo.orderNumber.toString());
-        history.push('/createInvoice');
+        props.orderNumToPrintByBill(newOrderDo.orderNumber);
+        history.push('/invoicepdf');
       } else {
         alert('Agregue al menos un producto a la Factura');
       }
@@ -103,19 +114,15 @@ const ShoppingCart = (props) => {
       <Grid item xs={12} md={12}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Button onClick={generateInvoice}>{`Facturar: $ ${checkoutTotalCart}`}</Button>
+            <Button onClick={onClickGenInvoice}>{`Facturar: $ ${checkoutTotalCart}`}</Button>
           </Paper>
-
           <SelectReact
             className={classes.selectCustomer}
             name='selectCustomerByIdShopping'
             value={selectCustomerById}
             onChange={handleChangeSelectCustomerById}
             placeholder='Identificación del Cliente'
-            options={customersList.map((option) => ({
-              value: option,
-              label: `${option.idType} ${option.id}`,
-            }))}
+            options={optionsIDs}
           />
         </Grid>
 
@@ -157,6 +164,7 @@ const mapDispathToProps = {
   calcCheckoutTotalCart,
   addToOrdersList,
   cleanCartBillDo,
+  orderNumToPrintByBill,
 };
 
 export default connect(mapStateToProps, mapDispathToProps)(ShoppingCart);
