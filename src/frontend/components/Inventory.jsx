@@ -1,4 +1,5 @@
-
+import React from 'react';
+import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import tableIcons from './utils/tableIconsByMaterialTable';
 import { addToInventory, removeFromInventory, updateToInventory } from '../actions/indexActions';
@@ -115,11 +116,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-
   addToInventory,
   removeFromInventory,
   updateToInventory,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
-

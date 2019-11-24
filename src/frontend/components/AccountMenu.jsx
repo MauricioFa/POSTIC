@@ -16,13 +16,11 @@ const AccountMenu = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
-
   const history = useHistory();
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-
 
   const handleSignOut = (event) => {
     setAnchorEl(null);
@@ -32,7 +30,7 @@ const AccountMenu = (props) => {
       .signOut()
       .then(() => {
         props.authenticatedToTrue(false);
-        props.setuserName('Anónimo')
+        props.setuserName('Anónimo');
         history.push('/');
       })
       .catch((event) => {
@@ -42,9 +40,11 @@ const AccountMenu = (props) => {
 
   return (
     <div>
-      {props.isAuthenticated && <Avatar alt='Avatar' onClick={handleClick}>
-        <AccountCircleTwoToneIcon />
-      </Avatar>}
+      {props.isAuthenticated && (
+        <Avatar alt='Avatar' onClick={handleClick}>
+          <AccountCircleTwoToneIcon />
+        </Avatar>
+      )}
       <Menu id='simple-menu' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handleClose}>{props.userName}</MenuItem>
         <MenuItem onClick={(event) => handleSignOut(event)}>
@@ -58,7 +58,6 @@ const AccountMenu = (props) => {
   );
 };
 
-
 const mapStateToProps = (state) => {
   return {
     userName: state.userName,
@@ -68,11 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   authenticatedToTrue,
-  setuserName
+  setuserName,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AccountMenu);
-
+export default connect(mapStateToProps, mapDispatchToProps)(AccountMenu);

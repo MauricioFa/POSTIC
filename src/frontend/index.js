@@ -24,4 +24,3 @@ if (typeof window !== 'undefined') {
     document.getElementById('root')
   );
 }
-

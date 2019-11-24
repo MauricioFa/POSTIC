@@ -18,7 +18,6 @@ import firebaseConfig from '../firebase_config/fbconfig';
 
 firebase.initializeApp(firebaseConfig);
 
-
 const App = ({ isAuthenticated }) => {
   return (
     <BrowserRouter>

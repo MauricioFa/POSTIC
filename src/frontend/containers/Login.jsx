@@ -7,12 +7,10 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
-
+import * as firebase from 'firebase';
 import { authenticatedToTrue, setuserName } from '../actions/indexActions';
 import useMyStyles from '../assets/styles/style--LogInUpRpw';
 import imageAuxMediaQuery from '../assets/statics/office-1081807_640.jpg';
-import * as firebase from 'firebase';
-
 
 const Login = (props) => {
   const label = 'Correo electrónico',
@@ -92,7 +90,6 @@ const Login = (props) => {
             variant={variant}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-
             InputProps={{
               classes: {
                 input: classes.textSize,
@@ -175,8 +172,4 @@ const mapDispatchToProps = {
   setuserName,
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Login);
-
+export default connect(null, mapDispatchToProps)(Login);

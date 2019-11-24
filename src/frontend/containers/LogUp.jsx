@@ -9,9 +9,9 @@ import {
 } from '@material-ui/icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as firebase from 'firebase';
 import useStyles from '../assets/styles/style--LogInUpRpw';
 import { authenticatedToTrue, setuserName } from '../actions/indexActions';
-import * as firebase from 'firebase';
 
 const LogUp = (props) => {
   const label = 'Correo electrónico',
@@ -19,7 +19,6 @@ const LogUp = (props) => {
     textPlaceholder = 'Clave',
     // textPlaceholderPasswordAnew = 'Repetir Clave',
     helperText = 'Mínimo 6 caracteres';
-
 
   const classes = useStyles({
     heightSection: '44em',
@@ -47,8 +46,6 @@ const LogUp = (props) => {
   // const handleChange = (prop) => (event) => {
   //   setValues({ ...values, [prop]: event.target.value });
   // };
-
-
   const handleClickShowPassword = (event) => {
     event.preventDefault();
     setValues({ ...values, showPassword: !values.showPassword });
@@ -214,7 +211,6 @@ const LogUp = (props) => {
           <h2>O Regístrate con</h2>
           <div>
             <span>
-
               <Button onClick={(event) => handleGoogleLogin(event)}>
                 <FontAwesomeIcon icon={faGoogle} size='3x' />
               </Button>
@@ -238,14 +234,9 @@ const LogUp = (props) => {
   );
 };
 
-
 const mapDispatchToProps = {
   authenticatedToTrue,
   setuserName,
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(LogUp);
-
+export default connect(null, mapDispatchToProps)(LogUp);

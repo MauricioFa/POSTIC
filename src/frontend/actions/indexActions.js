@@ -8,7 +8,6 @@ const removeFromCart = (payload) => ({
   payload,
 });
 
-
 const updateProductsList = (payload) => ({
   type: 'UPDATE_PRODUCTS_LIST',
   payload,

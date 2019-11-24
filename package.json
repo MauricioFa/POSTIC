@@ -18,8 +18,8 @@
     "build": "webpack-cli --config webpack.config.js --colors",
     "start:prod": "node src/ssr/index.js",
     "start:dev": "nodemon src/ssr/index.js --exact babel-node",
-    "lint": "eslint src/",
-    "lint:fix": "eslint --fix src/",
+    "lint": "eslint src/frontend",
+    "lint:fix": "eslint --fix src/frontend",
     "format": "prettier --write '{*.js,src/**/*.{js,jsx}}'"
   },
   "dependencies": {

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { Person as PersonIcon } from '@material-ui/icons';
-import useStyles from '../assets/styles/style--LogInUpRpw';
 import * as firebase from 'firebase';
-
+import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const RecoverPassword = () => {
   const label = 'Correo electrónico',
