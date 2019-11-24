@@ -10,7 +10,7 @@ import {
   calcCheckoutTotalCart,
   addToOrdersList,
   cleanCartBillDo,
-  setOrderNumberToPrint,
+  orderNumToPrintByBill,
 } from '../actions/indexActions';
 import '../assets/styles/ShoppingCart.css';
 
@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
       fontSize: '1.2em',
       fontWeight: 'bold',
+      width: '100%',
     },
   },
   divider: {
@@ -56,12 +57,7 @@ const ShoppingCart = (props) => {
   const history = useHistory();
   const classes = useStyles();
   const [selectCustomerById, setSelectCustomerById] = useState('');
-  const [optionsIDs, setOptionsIDs] = useState(
-    customersList.map((option) => ({
-      value: option,
-      label: `${option.idType} ${option.id}`,
-    }))
-  );
+  const [optionsIDs, setOptionsIDs] = useState([]);
 
   const handleCartItems = (elementId) => {
     props.removeFromCart(elementId);
@@ -103,7 +99,7 @@ const ShoppingCart = (props) => {
         props.addToOrdersList(newOrderDo);
         setSelectCustomerById('');
         props.cleanCartBillDo();
-        props.setOrderNumberToPrint(newOrderDo.orderNumber);
+        props.orderNumToPrintByBill(newOrderDo.orderNumber);
         history.push('/invoicepdf');
       } else {
         alert('Agregue al menos un producto a la Factura');
@@ -120,7 +116,6 @@ const ShoppingCart = (props) => {
           <Paper className={classes.paper}>
             <Button onClick={onClickGenInvoice}>{`Facturar: $ ${checkoutTotalCart}`}</Button>
           </Paper>
-
           <SelectReact
             className={classes.selectCustomer}
             name='selectCustomerByIdShopping'
@@ -169,7 +164,7 @@ const mapDispathToProps = {
   calcCheckoutTotalCart,
   addToOrdersList,
   cleanCartBillDo,
-  setOrderNumberToPrint,
+  orderNumToPrintByBill,
 };
 
 export default connect(mapStateToProps, mapDispathToProps)(ShoppingCart);

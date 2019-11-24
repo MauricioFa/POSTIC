@@ -77,7 +77,13 @@ const reducers = (state, action) => {
         shoppingCartList: [],
       };
 
-    case 'SET_ORDER_NUMBER_TO_PRINT':
+    case 'ORDER_NUM_TO_PRINT_BY_BILL':
+      return {
+        ...state,
+        orderNumberToPrint: action.payload,
+      };
+
+    case 'ORDER_NUM_TO_PRINT_BY_ORDERS':
       return {
         ...state,
         orderNumberToPrint: action.payload,

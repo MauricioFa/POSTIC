@@ -53,8 +53,13 @@ const cleanCartBillDo = (payload) => ({
   payload,
 });
 
-const setOrderNumberToPrint = (payload) => ({
-  type: 'SET_ORDER_NUMBER_TO_PRINT',
+const orderNumToPrintByBill = (payload) => ({
+  type: 'ORDER_NUM_TO_PRINT_BY_BILL',
+  payload,
+});
+
+const orderNumToPrintByOrders = (payload) => ({
+  type: 'ORDER_NUM_TO_PRINT_BY_ORDERS',
   payload,
 });
 
@@ -75,6 +80,7 @@ export {
   updateToCustomersList,
   cleanCartBillDo,
   addToOrdersList,
+  orderNumToPrintByBill,
+  orderNumToPrintByOrders,
   authenticatedToTrue,
-  setOrderNumberToPrint,
 };
