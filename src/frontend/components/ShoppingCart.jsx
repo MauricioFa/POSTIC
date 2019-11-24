@@ -10,6 +10,7 @@ import {
   calcCheckoutTotalCart,
   addToOrdersList,
   cleanCartBillDo,
+  setOrderNumberToPrint,
 } from '../actions/indexActions';
 import '../assets/styles/ShoppingCart.css';
 
@@ -51,24 +52,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShoppingCart = (props) => {
-  const classes = useStyles();
   const { cart, checkoutTotalCart, customersList, ordersList } = props;
   const history = useHistory();
-
-  useEffect(() => {
-    props.calcCheckoutTotalCart();
-  }, [cart]);
+  const classes = useStyles();
+  const [selectCustomerById, setSelectCustomerById] = useState('');
+  const [optionsIDs, setOptionsIDs] = useState(
+    customersList.map((option) => ({
+      value: option,
+      label: `${option.idType} ${option.id}`,
+    }))
+  );
 
   const handleCartItems = (elementId) => {
     props.removeFromCart(elementId);
   };
 
-  const [selectCustomerById, setSelectCustomerById] = useState('');
+  useEffect(() => {
+    props.calcCheckoutTotalCart();
+  }, [cart]);
+
+  useEffect(() => {
+    const newOptions = customersList.map((option) => ({
+      value: option,
+      label: `${option.idType} ${option.id}`,
+    }));
+    setOptionsIDs(newOptions);
+  }, [customersList]);
+
   const handleChangeSelectCustomerById = (customerToPay) => {
     setSelectCustomerById(customerToPay);
   };
 
-  const generateInvoice = () => {
+  const onClickGenInvoice = () => {
     if (selectCustomerById) {
       if (cart.length > 0) {
         const { idType, id, name, surname } = selectCustomerById.value;
@@ -88,7 +103,7 @@ const ShoppingCart = (props) => {
         props.addToOrdersList(newOrderDo);
         setSelectCustomerById('');
         props.cleanCartBillDo();
-        sessionStorage.setItem('selectedOrderNumber', newOrderDo.orderNumber.toString());
+        props.setOrderNumberToPrint(newOrderDo.orderNumber);
         history.push('/invoicepdf');
       } else {
         alert('Agregue al menos un producto a la Factura');
@@ -103,7 +118,7 @@ const ShoppingCart = (props) => {
       <Grid item xs={12} md={12}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Button onClick={generateInvoice}>{`Facturar: $ ${checkoutTotalCart}`}</Button>
+            <Button onClick={onClickGenInvoice}>{`Facturar: $ ${checkoutTotalCart}`}</Button>
           </Paper>
 
           <SelectReact
@@ -112,10 +127,7 @@ const ShoppingCart = (props) => {
             value={selectCustomerById}
             onChange={handleChangeSelectCustomerById}
             placeholder='Identificación del Cliente'
-            options={customersList.map((option) => ({
-              value: option,
-              label: `${option.idType} ${option.id}`,
-            }))}
+            options={optionsIDs}
           />
         </Grid>
 
@@ -157,6 +169,7 @@ const mapDispathToProps = {
   calcCheckoutTotalCart,
   addToOrdersList,
   cleanCartBillDo,
+  setOrderNumberToPrint,
 };
 
 export default connect(mapStateToProps, mapDispathToProps)(ShoppingCart);
