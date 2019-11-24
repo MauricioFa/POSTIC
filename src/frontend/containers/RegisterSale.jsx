@@ -44,7 +44,7 @@ const RegisterSale = () => {
         <div className={classes.appBarSpacer} />
         <Container className={classes.container}>
           <Button variant='contained' onClick={() => setEasyCrudCustomer(!easyCrudCustomer)}>
-            Editar clientes
+            Nuevo cliente
           </Button>
           <Grid container spacing={3}>
             {easyCrudCustomer && (

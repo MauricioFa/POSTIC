@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ReactToPrint from 'react-to-print';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Paper, Button } from '@material-ui/core';
+import LocalPrintshopTwoToneIcon from '@material-ui/icons/LocalPrintshopTwoTone';
 import AddNewButton from '../components/AddNewButton';
 import CopyrightLabel from '../components/CopyrightLabel';
 
@@ -115,6 +116,9 @@ const InvoiceToPdf = (props) => {
                 trigger={() => (
                   <Button variant='outlined' color='secondary' type='button'>
                     I M P R I M I R
+                    <span style={{ padding: '0 6px' }}>
+                      <LocalPrintshopTwoToneIcon fontSize='large' color='secondary' />
+                    </span>
                   </Button>
                 )}
                 content={() => componentRef}
