@@ -3,8 +3,10 @@ import MaterialTable from 'material-table';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import { orderNumToPrintByOrders } from '../actions/indexActions';
+import LocalPrintshopTwoToneIcon from '@material-ui/icons/LocalPrintshopTwoTone';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import tableIcons from './utils/tableIconsByMaterialTable';
+import { orderNumToPrintByOrders } from '../actions/indexActions';
 
 const OrdersFull = (props) => {
   const { ordersList, orderNumberToPrint } = props;
@@ -23,6 +25,12 @@ const OrdersFull = (props) => {
     id: order.customer.id,
     fullName: `${order.customer.name} ${order.customer.surname}`,
   }));
+  const tableIconsFix = {
+    ...tableIcons,
+    Delete: React.forwardRef((props, ref) => (
+      <LocalPrintshopTwoToneIcon {...props} ref={ref} color='primary' />
+    )),
+  };
 
   React.useEffect(() => {
     props.orderNumToPrintByOrders(0);
@@ -35,15 +43,24 @@ const OrdersFull = (props) => {
   return (
     <>
       {orderNumberToPrint !== 0 && (
-        <Button variant='contained' color='primary' onClick={onClickGenInvoice}>
-          {`Imprimir la order: ${orderNumberToPrint}`}
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={onClickGenInvoice}
+          style={{ padding: '6px 0 2px' }}
+        >
+          <div>{`Orden # ${orderNumberToPrint} `}</div>
+          <ArrowForwardIcon />
+          <div>
+            <LocalPrintshopTwoToneIcon fontSize='large' />
+          </div>
         </Button>
       )}
       <MaterialTable
         title='Pedidos'
         columns={columns}
         data={ordersListForShowing}
-        icons={tableIcons}
+        icons={tableIconsFix}
         options={{
           pageSize: 10,
           pageSizeOptions: [10, 20, 40],
@@ -69,12 +86,12 @@ const OrdersFull = (props) => {
             addTooltip: 'Añadir',
             deleteTooltip: 'Eliminar',
             editTooltip: 'Editar',
-            emptyDataSourceMessage: 'No se encontró producto',
+            emptyDataSourceMessage: 'No se encontró pedido relacionado',
             filterRow: {
               filterTooltip: 'Filtrar',
             },
             editRow: {
-              deleteText: '¿Estás seguro de eliminar este producto?',
+              deleteText: '¿Deseas imprimir este documento?',
               cancelTooltip: 'Cancelar',
               saveTooltip: 'Confirmar',
             },

@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
     background: '#009688',
     '& Button': {
       color: 'white',
-      fontSize: '1.2em',
-      fontWeight: 'bold',
+      fontSize: '1.4em',
       width: '100%',
+      textTransform: 'capitalize',
     },
   },
   divider: {
