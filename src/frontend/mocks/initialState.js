@@ -1,5 +1,6 @@
 const initialState = {
   isAuthenticated: false,
+  orderNumberToPrint: 0,
   shoppingCartList: [],
   checkoutTotalCart: 0.0,
   checkoutTotalBuy: 0.0,
