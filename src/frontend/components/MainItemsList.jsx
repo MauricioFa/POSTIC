@@ -23,7 +23,7 @@ const MainItemsList = (
         <ListItemIcon>
           <DashboardIcon color='primary' />
         </ListItemIcon>
-        <ListItemText primary='Informes' />
+        <ListItemText primary='Resumen' />
       </ListItem>
     </Link>
     <Link to='/ordersfull'>

@@ -92,7 +92,7 @@ const routesForHeader = [
   { route: '/products', title: 'Productos' },
   { route: '/config', title: 'Configuración Cuenta' },
   { route: '/logUp', title: 'Crear cuenta' },
-  { route: '/', title: 'Dashboard' },
+  { route: '/', title: 'Resumen' },
   { route: '/newpassword', title: 'Nueva clave' },
 ];
 
@@ -107,9 +107,9 @@ const Layout = (props) => {
     setOpen(false);
     let title = routesForHeader.filter((item) => item.route === history.location.pathname);
     title = title[0] ? title[0].title : 'Not Found';
-    title = !isAuthenticated && title === 'Dashboard' ? 'Ingresar' : title;
+    title = !isAuthenticated && title === 'Resumen' ? 'Ingresar' : title;
     setTitleHeader(title);
-  }, [history.location.pathname]);
+  }, [history.location.pathname, isAuthenticated]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
