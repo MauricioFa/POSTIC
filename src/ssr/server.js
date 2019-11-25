@@ -40,5 +40,5 @@ app.get('*', main);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
-  console.log(`server runding on ${PORT}`);
+  console.log(`server running on ${PORT}`);
 });

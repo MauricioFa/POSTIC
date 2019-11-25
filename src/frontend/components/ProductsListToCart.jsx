@@ -7,7 +7,12 @@ const ProductsListToCart = (props) => {
   const { productsList, addToCart } = props;
 
   const handleAddToCart = (productToAdd) => {
-    addToCart(productToAdd);
+    if (productToAdd.inStock > 0) {
+      const newProductsList = productsList.map((item) =>
+        productToAdd.sku === item.sku ? { ...item, inStock: item.inStock - 1 } : item
+      );
+      addToCart({ productToAdd, newProductsList });
+    }
   };
 
   return (

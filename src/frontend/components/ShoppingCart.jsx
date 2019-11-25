@@ -53,15 +53,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShoppingCart = (props) => {
-  const { cart, checkoutTotalCart, customersList, ordersList } = props;
+  const { cart, checkoutTotalCart, customersList, ordersList, productsList } = props;
   const history = useHistory();
   const classes = useStyles();
   const [selectCustomerById, setSelectCustomerById] = useState('');
   const [optionsIDs, setOptionsIDs] = useState([]);
-
-  const handleCartItems = (elementId) => {
-    props.removeFromCart(elementId);
-  };
 
   useEffect(() => {
     props.calcCheckoutTotalCart();
@@ -77,6 +73,13 @@ const ShoppingCart = (props) => {
 
   const handleChangeSelectCustomerById = (customerToPay) => {
     setSelectCustomerById(customerToPay);
+  };
+
+  const handleCartItems = (productToRemove) => {
+    const newProductsList = productsList.map((item) =>
+      productToRemove.sku === item.sku ? { ...item, inStock: item.inStock + productToRemove.amount } : item
+    );
+    props.removeFromCart({ productToRemove, newProductsList });
   };
 
   const onClickGenInvoice = () => {
@@ -140,7 +143,7 @@ const ShoppingCart = (props) => {
                   <span>{item.amount}</span>
                   <span>{item.checkoutPartial}</span>
                 </div>
-                <DeleteIcon onClick={() => handleCartItems(item.sku)} />
+                <DeleteIcon onClick={() => handleCartItems(item)} />
               </div>
             );
           })}
@@ -156,6 +159,7 @@ const mapStateToProps = (state) => {
     checkoutTotalCart: state.checkoutTotalCart,
     customersList: state.customersList,
     ordersList: state.ordersList,
+    productsList: state.products,
   };
 };
 
