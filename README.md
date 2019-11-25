@@ -63,8 +63,8 @@ _noAdmin_: la funcionalidad por el momento es absoluta. Al ser un MVP de plantil
    - _V 100% **noSearch**_
    - _A 100% **noSearch**_
 4. El sistema valida la existencia del producto en el inventario.
-   - **_V 0%_**
-   - **_A 0%_**
+   - **_V 100%_**
+   - **_A 100%_**
 5. Calcular el costo total de la venta.
    - _V 100%_
    - _A 100%_
