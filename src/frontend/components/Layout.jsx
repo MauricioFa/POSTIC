@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -57,6 +57,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    '& a': {
+      textDecoration: 'none',
+      color: '#FFFFFF',
+    },
   },
   drawerPaper: {
     position: 'relative',
@@ -82,13 +86,13 @@ const useStyles = makeStyles((theme) => ({
 
 const routesForHeader = [
   { route: '/registersale', title: 'Vender' },
-  { route: '/createInvoice', title: 'Factura a PDF' },
+  { route: '/invoicepdf', title: 'Factura a PDF' },
   { route: '/ordersfull', title: 'Pedidos' },
   { route: '/customers', title: 'Clientes' },
   { route: '/products', title: 'Productos' },
   { route: '/config', title: 'Configuración Cuenta' },
   { route: '/logUp', title: 'Crear cuenta' },
-  { route: '/', title: 'Dashboard' },
+  { route: '/', title: 'Resumen' },
   { route: '/newpassword', title: 'Nueva clave' },
 ];
 
@@ -102,10 +106,10 @@ const Layout = (props) => {
   React.useEffect(() => {
     setOpen(false);
     let title = routesForHeader.filter((item) => item.route === history.location.pathname);
-    title = title[0].title ? title[0].title : 'Loading';
-    title = !isAuthenticated && title === 'Dashboard' ? 'Ingresar' : title;
+    title = title[0] ? title[0].title : 'Not Found';
+    title = !isAuthenticated && title === 'Resumen' ? 'Ingresar' : title;
     setTitleHeader(title);
-  }, [history.location.pathname]);
+  }, [history.location.pathname, isAuthenticated]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -133,7 +137,7 @@ const Layout = (props) => {
               </IconButton>
             )}
             <Typography component='h1' variant='h6' color='inherit' noWrap className={classes.title}>
-              POSTIC | {titleHeader}
+              <Link to='/'>POSTIC | {titleHeader}</Link>
             </Typography>
             <AccountMenu />
           </Toolbar>

@@ -7,6 +7,7 @@ import ConfigContainer from '../containers/ConfigContainer';
 import Login from '../containers/Login';
 import LogUp from '../containers/LogUp';
 import RecoverPassword from '../containers/RecoverPassword';
+import InvoiceToPdf from '../containers/InvoiceToPdf';
 
 const serverRoutes = [
   {
@@ -17,6 +18,11 @@ const serverRoutes = [
   {
     path: '/ordersfull',
     component: OrdersFull,
+    exact: true,
+  },
+  {
+    path: '/invoicepdf',
+    component: InvoiceToPdf,
     exact: true,
   },
   {
