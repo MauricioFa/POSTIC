@@ -7,15 +7,15 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
-import { authenticatedToTrue } from '../actions/indexActions';
+import * as firebase from 'firebase';
+import { authenticatedToTrue, setuserName } from '../actions/indexActions';
 import useMyStyles from '../assets/styles/style--LogInUpRpw';
 import imageAuxMediaQuery from '../assets/statics/office-1081807_640.jpg';
 
 const Login = (props) => {
   const label = 'Correo electrónico',
     variant = 'outlined',
-    textPlaceholder = 'Clave',
-    helperText = 'Mínimo 8 caracteres';
+    textPlaceholder = 'Clave';
 
   const classes = useMyStyles({
     heightSection: '40em',
@@ -32,12 +32,12 @@ const Login = (props) => {
     email: '',
     password: '',
     showPassword: false,
+    error: '',
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setErrors] = useState('');
   const handleClickShowPassword = (event) => {
     event.preventDefault();
     setValues({ ...values, showPassword: !values.showPassword });
@@ -45,14 +45,40 @@ const Login = (props) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    props.authenticatedToTrue(true);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((res) => {
+        if (res.user) {
+          props.authenticatedToTrue(true);
+          if (res.user.displayName != null) {
+            props.setuserName(res.user.displayName);
+          }
+        }
+      })
+      .catch((event) => {
+        switch (event.code) {
+          case 'auth/wrong-password':
+            setErrors('Contraseña incorrecta');
+            break;
+          case 'auth/user-not-found':
+            setErrors('Dirección de correo no encontrada');
+            break;
+          case 'auth/too-many-requests':
+            setErrors('Demasiados intentos errados. Por favor, ingresa más tarde');
+            break;
+          default:
+            setErrors(event.message);
+            break;
+        }
+      });
   };
 
   return (
     <main className={classes.main}>
       <div className={classes.container}>
         <h1>Ingresa a la cuenta</h1>
-        <form method='get' className={classes.form} onSubmit={handleOnSubmit}>
+        <form className={classes.form} onSubmit={(event) => handleOnSubmit(event)}>
           <TextField
             type='email'
             name='email'
@@ -61,7 +87,8 @@ const Login = (props) => {
             required={true}
             label={label}
             variant={variant}
-            onChange={handleChange}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             InputProps={{
               classes: {
                 input: classes.textSize,
@@ -83,9 +110,8 @@ const Login = (props) => {
             variant={variant}
             type={values.showPassword ? 'text' : 'password'}
             label={textPlaceholder}
-            value={values.password}
-            helperText={helperText}
-            onChange={handleChange('password')}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             autoComplete='current-password'
             InputProps={{
               classes: { input: classes.textSize },
@@ -111,6 +137,7 @@ const Login = (props) => {
           <Button type='submit' color='primary' variant='contained' classes={{ label: classes.textSize }}>
             INGRESAR
           </Button>
+          <span>{error}</span>
         </form>
 
         <section className={classes.sectionBottom}>
@@ -141,6 +168,7 @@ const Login = (props) => {
 
 const mapDispatchToProps = {
   authenticatedToTrue,
+  setuserName,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

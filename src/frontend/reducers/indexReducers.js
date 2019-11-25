@@ -18,6 +18,18 @@ const reducers = (state, action) => {
         products: action.payload.newProductsList,
       };
 
+    case 'UPDATE_PRODUCTS_LIST':
+      return {
+        ...state,
+        products: action.payload,
+      };
+
+    case 'USER_NAME':
+      return {
+        ...state,
+        userName: action.payload,
+      };
+
     case 'CALC_CHECKOUT_TOTAL_CART':
       return {
         ...state,
