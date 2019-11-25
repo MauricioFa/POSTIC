@@ -80,7 +80,12 @@ const ProductsListToCart = (props) => {
   const { productsList, addToCart } = props;
 
   const handleAddToCart = (productToAdd) => {
-    addToCart(productToAdd);
+    if (productToAdd.inStock > 0) {
+      const newProductsList = productsList.map((item) =>
+        productToAdd.sku === item.sku ? { ...item, inStock: item.inStock - 1 } : item
+      );
+      addToCart({ productToAdd, newProductsList });
+    }
   };
 
   return (
@@ -105,7 +110,7 @@ const ProductsListToCart = (props) => {
               className={classes.button}
               onClick={() => handleAddToCart(product)}
             >
-              <span>Agregar</span> <span>[{product.inStock}]</span>
+              <span>{product.inStock ? 'Agregar' : 'Agotado'}</span> <span>[{product.inStock}]</span>
             </Button>
           </div>
         ))}
