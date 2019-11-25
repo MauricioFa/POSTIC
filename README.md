@@ -33,7 +33,7 @@ La descripción al avance en el proyecto se resumirá de la siguiente manera:
 
 - Pantalla de Sign in / Sign up / Logout , agregar opción de registro y login con redes sociales.
   - _V 100%_
-  - **_A 10% fake_**
+  - **_A 20% fake_**
 - Pantalla de generación de facturas.
   - _V 100% extra_
   - _A 100% extra_
@@ -41,7 +41,7 @@ La descripción al avance en el proyecto se resumirá de la siguiente manera:
   - _V 100% **noAdmin**_
   - _A 100% **noAdmin**_
 - Pantalla de Reportes, administración y gestión de gastos.
-  - **_V 20%_**
+  - **_V 10%_**
   - **_A 0%_**
 
 _fake_: permite el ingreso a la app con solamente disponer de un texto para el _e-mail_ y contraseña que supere las comprobaciones mínimas de html5 para estos campos.
@@ -63,8 +63,8 @@ _noAdmin_: la funcionalidad por el momento es absoluta. Al ser un MVP de plantil
    - _V 100% **noSearch**_
    - _A 100% **noSearch**_
 4. El sistema valida la existencia del producto en el inventario.
-   - **_V 0%_**
-   - **_A 0%_**
+   - _V 100%_
+   - _A 100%_
 5. Calcular el costo total de la venta.
    - _V 100%_
    - _A 100%_

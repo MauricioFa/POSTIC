@@ -5,13 +5,17 @@ const reducers = (state, action) => {
     case 'ADD_TO_CART':
       return {
         ...state,
-        shoppingCartList: auxAddToCart(state.shoppingCartList, action.payload),
+        shoppingCartList: auxAddToCart(state.shoppingCartList, action.payload.productToAdd),
+        products: action.payload.newProductsList,
       };
 
     case 'REMOVE_FROM_CART':
       return {
         ...state,
-        shoppingCartList: state.shoppingCartList.filter((item) => item.sku !== action.payload),
+        shoppingCartList: state.shoppingCartList.filter(
+          (item) => item.sku !== action.payload.productToRemove.sku
+        ),
+        products: action.payload.newProductsList,
       };
 
     case 'CALC_CHECKOUT_TOTAL_CART':
