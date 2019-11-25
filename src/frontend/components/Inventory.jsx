@@ -4,6 +4,17 @@ import MaterialTable from 'material-table';
 import tableIcons from './utils/tableIconsByMaterialTable';
 import { addToInventory, removeFromInventory, updateToInventory } from '../actions/indexActions';
 
+const columns = [
+  { title: 'SKU', field: 'sku' },
+  { title: 'Producto', field: 'name' },
+  { title: 'Descripción', field: 'description', emptyValue: 'Sin descripción' },
+  { title: 'Categoría', field: 'categories', emptyValue: 'Sin categoría' },
+  { title: 'Valor compra und', field: 'buyingPrice', type: 'numeric' },
+  { title: 'Valor venda und', field: 'sellingPrice', type: 'numeric' },
+  { title: 'Inventario', field: 'inStock', type: 'numeric' },
+  { title: 'Alerta límite', field: 'limitInStock', type: 'numeric' },
+];
+
 const ProductsList = (props) => {
   const { products } = props;
 
@@ -11,16 +22,6 @@ const ProductsList = (props) => {
     ...item,
     categories: item.categories[0],
   }));
-
-  const columns = [
-    { title: 'SKU', field: 'sku' },
-    { title: 'Producto', field: 'name' },
-    { title: 'Descripción', field: 'description', emptyValue: 'Sin descripción' },
-    { title: 'Categoría', field: 'categories', emptyValue: 'Sin categoría' },
-    { title: 'Valor compra und', field: 'buyingPrice', type: 'numeric' },
-    { title: 'Valor venda und', field: 'sellingPrice', type: 'numeric' },
-    { title: 'Inventario', field: 'inStock', type: 'numeric', emptyValue: '0' },
-  ];
 
   return (
     <MaterialTable
@@ -78,27 +79,35 @@ const ProductsList = (props) => {
                   categories: [newData.categories],
                   buyingPrice: Number(newData.buyingPrice),
                   sellingPrice: Number(newData.sellingPrice),
-                  inStock: newData.inStock ? Number(newData.inStock) : 0,
+                  inStock: Number(newData.inStock),
+                  limitInStock: Number(newData.limitInStock),
                 })
               );
             }
           }),
         onRowUpdate: (updateData, oldData) =>
-          new Promise((resolve) => {
-            const ary = products.filter((item) => item.sku === updateData.sku)[0].categories;
-            ary[0] = updateData.categories;
-            resolve(
-              props.updateToInventory({
-                updateData: {
-                  ...updateData,
-                  categories: ary,
-                  buyingPrice: Number(updateData.buyingPrice),
-                  sellingPrice: Number(updateData.sellingPrice),
-                  inStock: Number(updateData.inStock),
-                },
-                oldData,
-              })
-            );
+          new Promise((resolve, reject) => {
+            if (updateData.sku === '' || updateData.name === '') {
+              reject(alert('Debe agregar un SKU y nombre de Producto validos'));
+            } else if (updateData.buyingPrice === '' || updateData.sellingPrice === '') {
+              reject(alert('Debe agregar Precios de compra y venta validos'));
+            } else {
+              const ary = products.filter((item) => item.sku === updateData.sku)[0].categories;
+              ary[0] = updateData.categories;
+              resolve(
+                props.updateToInventory({
+                  updateData: {
+                    ...updateData,
+                    categories: ary,
+                    buyingPrice: Number(updateData.buyingPrice),
+                    sellingPrice: Number(updateData.sellingPrice),
+                    inStock: Number(updateData.inStock),
+                    limitInStock: Number(updateData.limitInStock),
+                  },
+                  oldData,
+                })
+              );
+            }
           }),
         onRowDelete: (deleteData) =>
           new Promise((resolve) => {

@@ -12,7 +12,6 @@ import {
   cleanCartBillDo,
   orderNumToPrintByBill,
 } from '../actions/indexActions';
-import '../assets/styles/ShoppingCart.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   title: {
-    margin: theme.spacing(2, 0, 2),
+    margin: theme.spacing(1, 0, 1),
   },
   container: {
     display: 'grid',
@@ -49,6 +48,28 @@ const useStyles = makeStyles((theme) => ({
   },
   selectCustomer: {
     color: '#0000EE',
+  },
+  checkout: {
+    display: 'grid',
+    gridTemplateColumns: '3fr 1fr',
+    gridGap: '2rem',
+  },
+  checkoutItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '4px',
+  },
+  checkoutElement: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    fontSize: '1.2em',
+    borderBottom: '1px solid #eee',
+    '& h4': {
+      margin: '2px',
+    },
   },
 }));
 
@@ -130,17 +151,18 @@ const ShoppingCart = (props) => {
           Artículos a facturar
         </Typography>
 
-        <div className='Checkout-content'>
+        <div className={classes.checkoutContent}>
           {cart.length > 0 ? ' ' : <h2>Sin Pedidos</h2>}
           {cart.map((item) => {
             return (
-              <div key={item.sku} className='Checkout-item'>
-                <div className='Checkout-element'>
-                  <h4>{item.name}</h4>
-                  <span>{item.amount}</span>
-                  <span>{item.checkoutPartial}</span>
+              <div key={item.sku} className={classes.checkoutItem}>
+                <div className={classes.checkoutElement}>
+                  <h4>
+                    {item.name} ... <span>(x{item.amount})</span>
+                  </h4>
+                  <span>$ {item.checkoutPartial}</span>
                 </div>
-                <DeleteIcon onClick={() => handleCartItems(item.sku)} />
+                <DeleteIcon fontSize='large' onClick={() => handleCartItems(item.sku)} />
               </div>
             );
           })}
