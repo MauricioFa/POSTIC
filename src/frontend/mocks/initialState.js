@@ -7,7 +7,7 @@ const initialState = {
   productsByCategory: '',
   products: [
     {
-      sku: '1',
+      sku: 'soda0001',
       name: 'Coca Cola Lover',
       categories: ['bebida', 'gaseosa', 'cocacola'],
       inStock: 8,
@@ -18,7 +18,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/249/455336901_30f4f85bf6_q.jpg',
     },
     {
-      sku: '2',
+      sku: 'ff0001',
       name: 'Hongos para volar',
       categories: ['comida rápida', 'pizza', 'mushroom'],
       inStock: 6,
@@ -29,7 +29,19 @@ const initialState = {
       image: 'https://live.staticflickr.com/8242/8487666183_75e2e25206_t.jpg',
     },
     {
-      sku: '3',
+      sku: 'end0001',
+      name: 'Papel Higiénico',
+      categories: ['aseo', 'papel'],
+      inStock: 20,
+      limitInStock: 4,
+      buyingPrice: 1860.0,
+      sellingPrice: 2590.0,
+      description: 'Triple hoja para ricos',
+      image:
+        'https://http2.mlstatic.com/rollo-de-papel-higienico-billetes-dolares-fiestas-eventos-dj-D_NQ_NP_672579-MLA27571002430_062018-F.webp',
+    },
+    {
+      sku: 'ff0002',
       name: 'Salchichón brutal',
       categories: ['embutido', 'carne'],
       inStock: 6,
@@ -40,7 +52,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/8215/8314519232_af6b7bed29_t.jpg',
     },
     {
-      sku: '4',
+      sku: 'deli0001',
       name: 'Barquito de Chocolate',
       categories: ['postre', 'chocolate'],
       inStock: 3,
@@ -51,7 +63,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/1646/26680445546_9086b7cd27_t.jpg',
     },
     {
-      sku: '5',
+      sku: 'ff0003',
       name: "Don't worry its low fat",
       categories: ['comida rápida', 'hamburguesa'],
       inStock: 4,
@@ -62,7 +74,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/2083/1616104514_8c12518912_t.jpg',
     },
     {
-      sku: '6',
+      sku: 'ff0004',
       name: 'Tradicional Sushi',
       categories: ['comida rápida', 'sushi'],
       inStock: 0,
@@ -73,7 +85,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/729/32762213142_fb28993753_t.jpg',
     },
     {
-      sku: '7',
+      sku: 'coffee0001',
       name: 'Coffee Hearts',
       categories: ['bebida', 'café'],
       inStock: 20,
@@ -84,7 +96,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/6183/6083139179_728921bccc.jpg',
     },
     {
-      sku: '8',
+      sku: 'deli0002',
       name: 'Artabria postre',
       categories: ['postre'],
       inStock: 8,
@@ -95,7 +107,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/3065/3064798535_1aab23750c_t.jpg',
     },
     {
-      sku: '9',
+      sku: 'soda2',
       name: 'Fanta Naranja - lata',
       categories: ['debida', 'gaseosa', 'cocacola'],
       inStock: 12,
@@ -106,7 +118,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/8509/8563942072_01b5850567_t.jpg',
     },
     {
-      sku: '10',
+      sku: 'ff0005',
       name: 'Camaron en la nube voladora',
       categories: ['comida rápida', 'sushi'],
       inStock: 0,
@@ -117,7 +129,7 @@ const initialState = {
       image: 'https://live.staticflickr.com/5464/8960691111_6bae8ae117_t.jpg',
     },
     {
-      sku: '11',
+      sku: 'ff0006',
       name: 'Mini spicy burger',
       categories: ['comida rápida', 'hamburguesa'],
       inStock: 16,
@@ -126,17 +138,6 @@ const initialState = {
       sellingPrice: 6000.0,
       description: 'Pequeñas hamburguesas picantes x2',
       image: 'https://live.staticflickr.com/8863/18127010258_36f7c87c63_t.jpg',
-    },
-    {
-      sku: '12',
-      name: 'Papel Higiénico',
-      categories: ['aseo', 'papel'],
-      inStock: 20,
-      limitInStock: 4,
-      buyingPrice: 1860.0,
-      sellingPrice: 2590.0,
-      description: 'Triple hoja para ricos',
-      image: 'https://http2.mlstatic.com/rollo-de-papel-higienico-billetes-dolares-fiestas-eventos-dj-D_NQ_NP_672579-MLA27571002430_062018-F.webp',
     },
   ],
   customersList: [

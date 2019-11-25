@@ -25,10 +25,34 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeightCart: {
-    height: '30em',
+    height: '20em',
   },
   fixedHeightProducts: {
-    height: '30em',
+    height: '20em',
+  },
+  [theme.breakpoints.up('768')]: {
+    fixedHeightCart: {
+      height: '26em',
+    },
+    fixedHeightProducts: {
+      height: '30em',
+    },
+  },
+  [theme.breakpoints.up('960')]: {
+    fixedHeightCart: {
+      height: '38em',
+    },
+    fixedHeightProducts: {
+      height: '38em',
+    },
+  },
+  [theme.breakpoints.up('1024')]: {
+    fixedHeightCart: {
+      height: '44em',
+    },
+    fixedHeightProducts: {
+      height: '44em',
+    },
   },
 }));
 
