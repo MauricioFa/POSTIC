@@ -9,6 +9,11 @@ const reducers = (state, action) => {
         products: action.payload.newProductsList,
       };
 
+    case 'USER_NAME':
+      return {
+        ...state,
+        userName: action.payload,
+      };
     case 'REMOVE_FROM_CART':
       return {
         ...state,

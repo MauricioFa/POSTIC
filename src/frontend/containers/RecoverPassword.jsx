@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { Person as PersonIcon } from '@material-ui/icons';
+import * as firebase from 'firebase';
 import useStyles from '../assets/styles/style--LogInUpRpw';
 
 const RecoverPassword = () => {
@@ -19,19 +20,40 @@ const RecoverPassword = () => {
     widthSectionBottom: '86%',
   });
 
-  const [values, setValues] = useState({
-    email: '',
-  });
+  const [email, setEmail] = useState('');
+  const [error, setErrors] = useState('');
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const history = useHistory();
+
+  const handleRecoverPassword = (event) => {
+    event.preventDefault();
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        alert('Se ha enviado un correo para restablecer la contraseña');
+        history.push('/');
+      })
+      .catch((event) => {
+        switch (event.code) {
+          case 'auth/invalid-email':
+            setErrors('Dirección de correo inválida');
+            break;
+          case 'auth/user-not-found':
+            setErrors('Dirección de correo no encontrada');
+            break;
+          default:
+            setErrors(event.message);
+            break;
+        }
+      });
   };
 
   return (
     <main className={classes.main}>
       <div className={classes.container}>
         <h1>Recuperar clave</h1>
-        <form action='' method='get' className={classes.form}>
+        <form className={classes.form} onSubmit={(event) => handleRecoverPassword(event)}>
           <TextField
             type='email'
             name='email'
@@ -40,7 +62,8 @@ const RecoverPassword = () => {
             required={true}
             label={label}
             variant={variant}
-            onChange={handleChange}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             InputProps={{
               classes: {
                 input: classes.textSize,
@@ -59,6 +82,7 @@ const RecoverPassword = () => {
           <Button type='submit' color='primary' variant='contained' classes={{ label: classes.textSize }}>
             RESTABLECER
           </Button>
+          <span>{error}</span>
         </form>
 
         <section className={classes.sectionBottom}>
