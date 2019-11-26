@@ -33,7 +33,7 @@ La descripción al avance en el proyecto se resumirá de la siguiente manera:
 
 - Pantalla de Sign in / Sign up / Logout , agregar opción de registro y login con redes sociales.
   - _V 100%_
-  - **_A 20% fake_**
+  - **_A 60% noFake_**
 - Pantalla de generación de facturas.
   - _V 100% extra_
   - _A 100% extra_
@@ -44,7 +44,7 @@ La descripción al avance en el proyecto se resumirá de la siguiente manera:
   - **_V 10%_**
   - **_A 0%_**
 
-_fake_: permite el ingreso a la app con solamente disponer de un texto para el _e-mail_ y contraseña que supere las comprobaciones mínimas de html5 para estos campos.
+_noFake_: por medio de Firebase se habilita la creación de cuentas e ingreso a la app usando un correo más contraseña o por medio de la cuenta de google.
 
 _extra_: se puede imprimir una factura previa (no importa el tiempo atrás) mientras se pueda encontrar en la lista completa de pedidos.
 
