@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, IconButton, InputAdornment, TextField } from '@material-ui/core';
+import { connect } from 'react-redux';
 import {
   Person as PersonIcon,
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
-import { faGoogle, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as firebase from 'firebase';
 import useStyles from '../assets/styles/style--LogInUpRpw';
+import { authenticatedToTrue, setuserName } from '../actions/indexActions';
 
-const LogUp = () => {
+const LogUp = (props) => {
   const label = 'Correo electrónico',
     variant = 'outlined',
     textPlaceholder = 'Clave',
-    textPlaceholderPasswordAnew = 'Repetir Clave',
-    helperText = 'Mínimo 8 caracteres';
+    /* textPlaceholderPasswordAnew = 'Repetir Clave', */
+    helperText = 'Mínimo 6 caracteres';
 
   const classes = useStyles({
     heightSection: '44em',
@@ -36,25 +39,82 @@ const LogUp = () => {
     showPasswordAnew: false,
   });
 
-  const handleChange = (prop) => (event) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setErrors] = useState('');
+
+  /* const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
-  };
+  }; */
 
   const handleClickShowPassword = (event) => {
     event.preventDefault();
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const handleClickShowPasswordAnew = (event) => {
+  /* const handleClickShowPasswordAnew = (event) => {
     event.preventDefault();
     setValues({ ...values, showPasswordAnew: !values.showPassword });
+  }; */
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        if (res.user) {
+          props.authenticatedToTrue(true);
+          if (res.user.displayName != null) {
+            props.setuserName(res.user.displayName);
+          }
+        }
+      })
+      .catch((event) => {
+        switch (event.code) {
+          case 'auth/email-already-in-use':
+            setErrors('Este correo ya existe');
+            break;
+          case 'auth/invalid-email':
+            setErrors('Dirección de correo inválida');
+            break;
+          case 'auth/weak-password':
+            setErrors('La contraseña debe tener al menos 6 caracteres');
+            break;
+          default:
+            setErrors(event.message);
+            break;
+        }
+      });
+  };
+
+  const handleGoogleLogin = (event) => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((res) => {
+        // This gives you a Google Access Token.
+        // const token = res.credential.accessToken;
+        // The signed-in user info.
+        // const user = res.user;
+        if (res.user) {
+          props.authenticatedToTrue(true);
+          props.setuserName(res.user.displayName);
+        }
+      })
+      .catch((event) => {
+        setErrors(event.message);
+      });
   };
 
   return (
     <main className={classes.main}>
       <div className={classes.container}>
         <h1>Crea tu cuenta</h1>
-        <form action='' method='get' className={classes.form}>
+        <form className={classes.form} onSubmit={(event) => handleOnSubmit(event)}>
           <TextField
             type='email'
             name='email'
@@ -63,7 +123,8 @@ const LogUp = () => {
             required={true}
             label={label}
             variant={variant}
-            onChange={handleChange}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             InputProps={{
               classes: {
                 input: classes.textSize,
@@ -85,9 +146,9 @@ const LogUp = () => {
             variant={variant}
             type={values.showPassword ? 'text' : 'password'}
             label={textPlaceholder}
-            value={values.password}
+            value={password}
             helperText={helperText}
-            onChange={handleChange('password')}
+            onChange={(event) => setPassword(event.target.value)}
             autoComplete='new-password'
             InputProps={{
               classes: { input: classes.textSize },
@@ -110,7 +171,7 @@ const LogUp = () => {
             }}
           />
 
-          <TextField
+          {/* <TextField
             required={true}
             error={false}
             variant={variant}
@@ -133,24 +194,28 @@ const LogUp = () => {
                     {values.showPasswordAnew ? (
                       <VisibilityIcon fontSize='large' />
                     ) : (
-                      <VisibilityOffIcon fontSize='large' />
-                    )}
+                        <VisibilityOffIcon fontSize='large' />
+                      )}
                   </IconButton>
                 </InputAdornment>
               ),
             }}
-          />
+          /> */}
 
           <Button type='submit' color='primary' variant='contained' classes={{ label: classes.textSize }}>
             CREAR CUENTA
           </Button>
+          <span>{error}</span>
         </form>
 
         <section className={classes.sectionBottom}>
           <h2>O Regístrate con</h2>
           <div>
             <span>
-              <Link to='/API-google'>
+              <Button onClick={(event) => handleGoogleLogin(event)}>
+                <FontAwesomeIcon icon={faGoogle} size='3x' />
+              </Button>
+              {/* <Link to='/API-google'>
                 <FontAwesomeIcon icon={faGoogle} size='3x' />
               </Link>
               <Link to='/API-facebook'>
@@ -158,7 +223,7 @@ const LogUp = () => {
               </Link>
               <Link to='/API-twitter'>
                 <FontAwesomeIcon icon={faTwitter} size='3x' />
-              </Link>
+              </Link> */}
             </span>
           </div>
           <Link to='/' className='linkToLogin-logUp'>
@@ -170,4 +235,9 @@ const LogUp = () => {
   );
 };
 
-export default LogUp;
+const mapDispatchToProps = {
+  authenticatedToTrue,
+  setuserName,
+};
+
+export default connect(null, mapDispatchToProps)(LogUp);
