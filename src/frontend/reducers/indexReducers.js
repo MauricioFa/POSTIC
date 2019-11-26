@@ -8,11 +8,6 @@ const reducers = (state, action) => {
         shoppingCartList: auxAddToCart(state.shoppingCartList, action.payload.productToAdd),
         products: action.payload.newProductsList,
       };
-    case 'UPDATE_PRODUCTS_LIST':
-      return {
-        ...state,
-        products: action.payload,
-      };
 
     case 'USER_NAME':
       return {
