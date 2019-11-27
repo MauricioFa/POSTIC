@@ -22,6 +22,8 @@ const render = (html, css, preloadedState) => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://upload.wikimedia.org/wikipedia/commons/3/3e/Tree-256x256.png" />
+        <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/3/3e/Tree-256x256.png" type="image/png/ico" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link rel="stylesheet" href="${files['main.css']}" type="text/css" />
         <style id="jss-server-side">${css}</style>

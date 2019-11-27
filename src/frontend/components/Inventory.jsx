@@ -20,7 +20,7 @@ const ProductsList = (props) => {
   const { products, modeAdmin } = props;
   const productsLimitInStock = products.filter((item) => item.inStock <= item.limitInStock).length;
   const [showProdsLimitInStock, setShowProdsLimitInStock] = useState(false);
-  const [productsList, setProductsList] = useState([]);
+  const [productsList, setProductsList] = useState(products);
 
   useEffect(() => {
     let arrayTemp = products.map((item) => ({

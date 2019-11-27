@@ -41,8 +41,8 @@ La descripción al avance en el proyecto se resumirá de la siguiente manera:
   - _V 100% **noAdmin**_
   - _A 100% **noAdmin**_
 - Pantalla de Reportes, administración y gestión de gastos.
-  - **_V 10%_**
-  - **_A 0%_**
+  - **_V 30%_**
+  - **_A 20%_**
 
 _noFake_: por medio de Firebase se habilita la creación de cuentas e ingreso a la app usando un correo más contraseña o por medio de la cuenta de google.
 
