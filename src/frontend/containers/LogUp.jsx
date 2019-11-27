@@ -11,13 +11,12 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as firebase from 'firebase';
 import useStyles from '../assets/styles/style--LogInUpRpw';
-import { authenticatedToTrue, setuserName } from '../actions/indexActions';
+import { authenticatedToTrue, setUserName } from '../actions/indexActions';
 
 const LogUp = (props) => {
   const label = 'Correo electrónico',
     variant = 'outlined',
     textPlaceholder = 'Clave',
-    /* textPlaceholderPasswordAnew = 'Repetir Clave', */
     helperText = 'Mínimo 6 caracteres';
 
   const classes = useStyles({
@@ -43,19 +42,10 @@ const LogUp = (props) => {
   const [password, setPassword] = useState('');
   const [error, setErrors] = useState('');
 
-  /* const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  }; */
-
   const handleClickShowPassword = (event) => {
     event.preventDefault();
     setValues({ ...values, showPassword: !values.showPassword });
   };
-
-  /* const handleClickShowPasswordAnew = (event) => {
-    event.preventDefault();
-    setValues({ ...values, showPasswordAnew: !values.showPassword });
-  }; */
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -66,7 +56,7 @@ const LogUp = (props) => {
         if (res.user) {
           props.authenticatedToTrue(true);
           if (res.user.displayName != null) {
-            props.setuserName(res.user.displayName);
+            props.setUserName(res.user.displayName);
           }
         }
       })
@@ -96,13 +86,9 @@ const LogUp = (props) => {
       .auth()
       .signInWithPopup(provider)
       .then((res) => {
-        // This gives you a Google Access Token.
-        // const token = res.credential.accessToken;
-        // The signed-in user info.
-        // const user = res.user;
         if (res.user) {
           props.authenticatedToTrue(true);
-          props.setuserName(res.user.displayName);
+          props.setUserName(res.user.displayName);
         }
       })
       .catch((event) => {
@@ -171,37 +157,6 @@ const LogUp = (props) => {
             }}
           />
 
-          {/* <TextField
-            required={true}
-            error={false}
-            variant={variant}
-            type={values.showPasswordAnew ? 'text' : 'password'}
-            label={textPlaceholderPasswordAnew}
-            value={values.passwordAnew}
-            helperText={helperText}
-            onChange={handleChange('passwordAnew')}
-            autoComplete='new-password'
-            InputProps={{
-              classes: { input: classes.textSize },
-              endAdornment: (
-                <InputAdornment position='end'>
-                  <IconButton
-                    edge='end'
-                    aria-label='toggle password visibility'
-                    color='primary'
-                    onClick={handleClickShowPasswordAnew}
-                  >
-                    {values.showPasswordAnew ? (
-                      <VisibilityIcon fontSize='large' />
-                    ) : (
-                        <VisibilityOffIcon fontSize='large' />
-                      )}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          /> */}
-
           <Button type='submit' color='primary' variant='contained' classes={{ label: classes.textSize }}>
             CREAR CUENTA
           </Button>
@@ -215,15 +170,6 @@ const LogUp = (props) => {
               <Button onClick={(event) => handleGoogleLogin(event)}>
                 <FontAwesomeIcon icon={faGoogle} size='3x' />
               </Button>
-              {/* <Link to='/API-google'>
-                <FontAwesomeIcon icon={faGoogle} size='3x' />
-              </Link>
-              <Link to='/API-facebook'>
-                <FontAwesomeIcon icon={faFacebook} size='3x' />
-              </Link>
-              <Link to='/API-twitter'>
-                <FontAwesomeIcon icon={faTwitter} size='3x' />
-              </Link> */}
             </span>
           </div>
           <Link to='/' className='linkToLogin-logUp'>
@@ -237,7 +183,7 @@ const LogUp = (props) => {
 
 const mapDispatchToProps = {
   authenticatedToTrue,
-  setuserName,
+  setUserName,
 };
 
 export default connect(null, mapDispatchToProps)(LogUp);

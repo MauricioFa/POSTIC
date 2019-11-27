@@ -82,12 +82,12 @@ _noSearch_: el objetivo se cumple perfectamente. Pero sería más comodo agregar
 1. Revisar el total de ventas en un periodo de tiempo.
    - **_V 0%_**
    - **_A 0%_**
-2. Validar el inventario.
+2. Validar el inventario. **undefined**
    - **_V 0%_**
    - **_A 0%_**
 3. El sistema debe generar alertas sobre productos elegidos para informar que se están agotando.
-   - **_V 0%_**
-   - **_A 0%_**
+   - _V 100% **forAll**_
+   - _A 100%_
 4. Agregar, modificar, eliminar productos del inventario.
    - _V 100%_
    - _A 100%_
@@ -98,8 +98,8 @@ _noSearch_: el objetivo se cumple perfectamente. Pero sería más comodo agregar
    - _V 100%_
    - _A 100%_
 7. Consultar facturas asociadas a usuarios.
-   - **_V 0%_**
-   - **_A 0%_**
+   - **_V 50%_**
+   - **_A 50%_**
 
 #### Requerimientos técnicos adicionales
 
