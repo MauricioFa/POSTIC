@@ -4,21 +4,32 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { StaticRouter } from 'react-router';
 import { renderRoutes } from 'react-router-config';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import Routes from '../../frontend/routes/serverRoutes';
 import Layout from '../../frontend/components/Layout';
 import reducer from '../../frontend/reducers/indexReducers';
-import initialState from '../../frontend/mocks/initialState';
+import initialState from '../utils/initialState';
 
-const dotenv = require('dotenv');
+const axios = require('axios');
 const render = require('../render/indexRender');
+require('dotenv').config();
 
-dotenv.config();
+const { URL_API_PRODUCTS } = process.env;
 
-const main = (req, res, next) => {
+const main = async (req, res, next) => {
+  let initialStateFix = { ...initialState };
+  try {
+    const dataGetProducts = await axios.get(URL_API_PRODUCTS);
+    initialStateFix = { ...initialStateFix, products: dataGetProducts.data };
+  } catch (error) {
+    next(err);
+  }
+
   try {
     const sheets = new ServerStyleSheets();
-    const store = createStore(reducer, { ...initialState, urlApiProducts: process.env.URL_API_PRODUCTS });
+    const store = createStore(reducer, { ...initialStateFix, urlApiProducts: URL_API_PRODUCTS });
     const html = renderToString(
       sheets.collect(
         <Provider store={store}>
