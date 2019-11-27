@@ -10,12 +10,15 @@ import Layout from '../../frontend/components/Layout';
 import reducer from '../../frontend/reducers/indexReducers';
 import initialState from '../../frontend/mocks/initialState';
 
+const dotenv = require('dotenv');
 const render = require('../render/indexRender');
+
+dotenv.config();
 
 const main = (req, res, next) => {
   try {
     const sheets = new ServerStyleSheets();
-    const store = createStore(reducer, initialState);
+    const store = createStore(reducer, { ...initialState, urlApiProducts: process.env.URL_API_PRODUCTS });
     const html = renderToString(
       sheets.collect(
         <Provider store={store}>
