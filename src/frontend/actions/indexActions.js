@@ -8,11 +8,6 @@ const removeFromCart = (payload) => ({
   payload,
 });
 
-const setuserName = (payload) => ({
-  type: 'USER_NAME',
-  payload,
-});
-
 const calcCheckoutTotalCart = (payload) => ({
   type: 'CALC_CHECKOUT_TOTAL_CART',
   payload,
@@ -73,6 +68,11 @@ const authenticatedToTrue = (payload) => ({
   payload,
 });
 
+const setUserName = (payload) => ({
+  type: 'SET_USER_NAME',
+  payload,
+});
+
 export {
   addToCart,
   removeFromCart,
@@ -88,5 +88,5 @@ export {
   orderNumToPrintByBill,
   orderNumToPrintByOrders,
   authenticatedToTrue,
-  setuserName,
+  setUserName,
 };

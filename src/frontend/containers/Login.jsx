@@ -8,7 +8,7 @@ import {
   VisibilityOff as VisibilityOffIcon,
 } from '@material-ui/icons';
 import * as firebase from 'firebase';
-import { authenticatedToTrue, setuserName } from '../actions/indexActions';
+import { authenticatedToTrue, setUserName } from '../actions/indexActions';
 import useMyStyles from '../assets/styles/style--LogInUpRpw';
 import imageAuxMediaQuery from '../assets/statics/office-1081807_640.jpg';
 
@@ -53,7 +53,7 @@ const Login = (props) => {
         if (res.user) {
           props.authenticatedToTrue(true);
           if (res.user.displayName != null) {
-            props.setuserName(res.user.displayName);
+            props.setUserName(res.user.displayName);
           }
         }
       })
@@ -169,7 +169,7 @@ const Login = (props) => {
 
 const mapDispatchToProps = {
   authenticatedToTrue,
-  setuserName,
+  setUserName,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

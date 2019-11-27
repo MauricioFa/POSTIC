@@ -5,7 +5,7 @@ import tableIcons from './utils/tableIconsByMaterialTable';
 import { addToCustomersList, removeFromCustomersList, updateToCustomersList } from '../actions/indexActions';
 
 const CustomersList = (props) => {
-  const { customers } = props;
+  const { customers, modeAdmin } = props;
 
   const columns = [
     {
@@ -79,7 +79,10 @@ const CustomersList = (props) => {
         onRowUpdate: (updateData, oldData) =>
           new Promise((resolve) => resolve(props.updateToCustomersList({ oldData, updateData }))),
         onRowDelete: (deleteData) =>
-          new Promise((resolve) => resolve(props.removeFromCustomersList(deleteData))),
+          new Promise((resolve, reject) => {
+            if (!modeAdmin) reject(alert('Sin permisos para eliminar'));
+            else resolve(props.removeFromCustomersList(deleteData));
+          }),
       }}
     />
   );
@@ -88,6 +91,7 @@ const CustomersList = (props) => {
 const mapStateToProps = (state) => {
   return {
     customers: state.customersList,
+    modeAdmin: state.modeAdmin,
   };
 };
 

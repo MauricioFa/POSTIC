@@ -109,12 +109,13 @@ const ShoppingCart = (props) => {
         const { idType, id, name, surname } = selectCustomerById.value;
         let orderNumber = ordersList.slice(-1);
         orderNumber = orderNumber.length > 0 ? orderNumber[0].orderNumber + 1 : 1;
-        let today = new Date();
+        const today = new Date();
         // eslint-disable-next-line prettier/prettier
-        today = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${today.getHours()}-${today.getMinutes()}-${today.getSeconds()}.${today.getMilliseconds()}`;
+        let todayString = `${today.getFullYear()}-${today.getMonth() + 1}`;
+        todayString = `${todayString}-${today.getDate()}T${today.getHours()}-${today.getMinutes()}-${today.getSeconds()}.${today.getMilliseconds()}`;
         const newOrderDo = {
           orderNumber,
-          date: today,
+          date: todayString,
           customer: { idType, id, name, surname },
           checkoutTotal: checkoutTotalCart,
           soldProducts: cart,
