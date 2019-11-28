@@ -6,7 +6,7 @@ import tableIcons from './utils/tableIconsByMaterialTable';
 import { registerProduct, deleteProduct, editProduct } from '../actions/indexActions';
 
 const columns = [
-  { title: 'SKU', field: 'sku', editable: 'never' },
+  { title: 'SKU', field: 'sku', editable: 'onAdd' },
   { title: 'Producto', field: 'name' },
   { title: 'Descripción', field: 'description', emptyValue: 'Sin descripción' },
   { title: 'Categoría', field: 'categories', emptyValue: 'Sin categoría' },
