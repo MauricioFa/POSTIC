@@ -7,7 +7,7 @@ const initialState = {
   checkoutTotalBuy: 0.0,
   productsByCategory: '',
   products: [
-    {
+   /*  {
       sku: 'soda0001',
       name: 'Coca Cola Lover',
       categories: ['bebida', 'gaseosa', 'cocacola'],
@@ -139,7 +139,7 @@ const initialState = {
       sellingPrice: 6000.0,
       description: 'Pequeñas hamburguesas picantes x2',
       image: 'https://live.staticflickr.com/8863/18127010258_36f7c87c63_t.jpg',
-    },
+    }, */
   ],
   customersList: [
     {

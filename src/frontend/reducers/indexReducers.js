@@ -36,14 +36,14 @@ const reducers = (state, action) => {
     case 'REMOVE_FROM_INVENTORY':
       return {
         ...state,
-        products: state.products.filter((item) => item.sku !== action.payload),
+        products: state.products.filter((item) => item._id !== action.payload),
       };
 
     case 'UPDATE_TO_INVENTORY':
       return {
         ...state,
         products: state.products.map((item) =>
-          item.sku === action.payload.oldData.sku ? { ...action.payload.updateData } : item
+          item._id === action.payload.oldData._id ? { ...action.payload.updateData } : item
         ),
       };
 
