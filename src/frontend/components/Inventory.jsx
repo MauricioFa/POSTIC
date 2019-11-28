@@ -17,7 +17,7 @@ const columns = [
 ];
 
 const ProductsList = (props) => {
-  const { products, modeAdmin } = props;
+  const { products, modeAdmin, urlApiProducts } = props;
   const productsLimitInStock = products.filter((item) => item.inStock <= item.limitInStock).length;
   const [showProdsLimitInStock, setShowProdsLimitInStock] = useState(false);
   const [productsList, setProductsList] = useState(products);
@@ -93,14 +93,18 @@ const ProductsList = (props) => {
               } else if (newData.buyingPrice === undefined || newData.sellingPrice === undefined) {
                 reject(alert('Debe agregar Precios de compra y venta validos'));
               } else {
+                console.log(newData);
                 resolve(
                   props.registerProduct({
-                    ...newData,
-                    categories: [newData.categories],
-                    buyingPrice: Number(newData.buyingPrice),
-                    sellingPrice: Number(newData.sellingPrice),
-                    inStock: Number(newData.inStock),
-                    limitInStock: Number(newData.limitInStock),
+                    newData: {
+                      ...newData,
+                      categories: [newData.categories],
+                      buyingPrice: Number(newData.buyingPrice),
+                      sellingPrice: Number(newData.sellingPrice),
+                      inStock: newData.inStock !== undefined ? Number(newData.inStock) : 0,
+                      limitInStock: newData.limitInStock !== undefined ? Number(newData.limitInStock) : 0,
+                    },
+                    urlApiProducts,
                   })
                 );
               }
@@ -115,6 +119,7 @@ const ProductsList = (props) => {
               } else {
                 const ary = products.filter((item) => item.sku === updateData.sku)[0].categories;
                 ary[0] = updateData.categories;
+                console.log(updateData);
                 resolve(
                   props.editProduct({
                     updateData: {
@@ -122,10 +127,11 @@ const ProductsList = (props) => {
                       categories: ary,
                       buyingPrice: Number(updateData.buyingPrice),
                       sellingPrice: Number(updateData.sellingPrice),
-                      inStock: Number(updateData.inStock),
-                      limitInStock: Number(updateData.limitInStock),
+                      inStock: updateData.inStock === '' ? 0 : Number(updateData.inStock),
+                      limitInStock: updateData.limitInStock === '' ? 0 : Number(updateData.limitInStock),
                     },
                     oldData,
+                    urlApiProducts,
                   })
                 );
               }
@@ -133,7 +139,7 @@ const ProductsList = (props) => {
           onRowDelete: (deleteData) =>
             new Promise((resolve, reject) => {
               if (!modeAdmin) reject(alert('Sin permisos para eliminar'));
-              else resolve(props.deleteProduct(deleteData._id));
+              else resolve(props.deleteProduct({ _id: deleteData._id, urlApiProducts }));
             }),
         }}
       />
@@ -145,6 +151,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.products,
     modeAdmin: state.modeAdmin,
+    urlApiProducts: state.urlApiProducts,
   };
 };
 

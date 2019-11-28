@@ -106,7 +106,10 @@ _noSearch_: el objetivo se cumple perfectamente. Pero sería más comodo agregar
 El sistema debe funcionar en la nube. **_100%_**
 
 - **Frontend:** <https://www.nemo1co.xyz>
-- **Backend**: <https://postic.now.sh/api/products>
+- **Backend**: <https://postic.now.sh>
+  - _Ruta productos_: </api/products>
+  - _Ruta clientes_: </api/customers>
+  - _Ruta pedidos_: </api/orders>
 
 ## Modo de uso
 
