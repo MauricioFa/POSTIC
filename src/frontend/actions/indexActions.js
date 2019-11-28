@@ -78,8 +78,8 @@ const setUserName = (payload) => ({
 const registerProduct = (payload) => {
   return (dispatch) => {
     axios
-      .post('https://postic.now.sh/api/products', payload)
-      .then(() => dispatch(addToInventory(payload)))
+      .post(payload.urlApiProducts, payload.newData)
+      .then(() => dispatch(addToInventory(payload.newData)))
       .catch((err) => console.log(`ESTO ES UN ERROR ${err}`));
   };
 };
@@ -87,8 +87,8 @@ const registerProduct = (payload) => {
 const deleteProduct = (payload) => {
   return (dispatch) => {
     axios
-      .delete(`https://postic.now.sh/api/products/${payload}`)
-      .then(() => dispatch(removeFromInventory(payload)))
+      .delete(`${payload.urlApiProducts}${payload._id}`)
+      .then(() => dispatch(removeFromInventory(payload._id)))
       .catch((err) => console.log(`ESTO ES UN ERROR ${err}`));
   };
 };
@@ -106,7 +106,7 @@ const editProduct = (payload) => {
       limitInStock: payload.updateData.limitInStock,
     };
     axios
-      .put(`https://postic.now.sh/api/products/${payload.oldData._id}`, newData)
+      .put(`${payload.urlApiProducts}${payload.oldData._id}`, newData)
       .then(() => dispatch(updateToInventory(payload)))
       .catch(() => console.log(newData));
   };
