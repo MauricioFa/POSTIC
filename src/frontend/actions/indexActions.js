@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const addToCart = (payload) => ({
   type: 'ADD_TO_CART',
   payload,
@@ -73,6 +75,43 @@ const setUserName = (payload) => ({
   payload,
 });
 
+const registerProduct = (payload) => {
+  return (dispatch) => {
+    axios
+      .post('https://postic.now.sh/api/products', payload)
+      .then(() => dispatch(addToInventory(payload)))
+      .catch((err) => console.log(`ESTO ES UN ERROR ${err}`));
+  };
+};
+
+const deleteProduct = (payload) => {
+  return (dispatch) => {
+    axios
+      .delete(`https://postic.now.sh/api/products/${payload}`)
+      .then(() => dispatch(removeFromInventory(payload)))
+      .catch((err) => console.log(`ESTO ES UN ERROR ${err}`));
+  };
+};
+
+const editProduct = (payload) => {
+  return (dispatch) => {
+    const newData = {
+      sku: payload.updateData.sku,
+      name: payload.updateData.name,
+      description: payload.updateData.description,
+      categories: payload.updateData.categories,
+      buyingPrice: payload.updateData.buyingPrice,
+      sellingPrice: payload.updateData.sellingPrice,
+      inStock: payload.updateData.inStock,
+      limitInStock: payload.updateData.limitInStock,
+    };
+    axios
+      .put(`https://postic.now.sh/api/products/${payload.oldData._id}`, newData)
+      .then(() => dispatch(updateToInventory(payload)))
+      .catch(() => console.log(newData));
+  };
+};
+
 export {
   addToCart,
   removeFromCart,
@@ -89,4 +128,7 @@ export {
   orderNumToPrintByOrders,
   authenticatedToTrue,
   setUserName,
+  registerProduct,
+  deleteProduct,
+  editProduct,
 };

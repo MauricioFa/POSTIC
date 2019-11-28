@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import { Button } from '@material-ui/core';
 import tableIcons from './utils/tableIconsByMaterialTable';
-import { addToInventory, removeFromInventory, updateToInventory } from '../actions/indexActions';
+import { registerProduct, deleteProduct, editProduct } from '../actions/indexActions';
 
 const columns = [
   { title: 'SKU', field: 'sku' },
@@ -94,7 +94,7 @@ const ProductsList = (props) => {
                 reject(alert('Debe agregar Precios de compra y venta validos'));
               } else {
                 resolve(
-                  props.addToInventory({
+                  props.registerProduct({
                     ...newData,
                     categories: [newData.categories],
                     buyingPrice: Number(newData.buyingPrice),
@@ -116,7 +116,7 @@ const ProductsList = (props) => {
                 const ary = products.filter((item) => item.sku === updateData.sku)[0].categories;
                 ary[0] = updateData.categories;
                 resolve(
-                  props.updateToInventory({
+                  props.editProduct({
                     updateData: {
                       ...updateData,
                       categories: ary,
@@ -133,7 +133,7 @@ const ProductsList = (props) => {
           onRowDelete: (deleteData) =>
             new Promise((resolve, reject) => {
               if (!modeAdmin) reject(alert('Sin permisos para eliminar'));
-              else resolve(props.removeFromInventory(deleteData.sku));
+              else resolve(props.deleteProduct(deleteData._id));
             }),
         }}
       />
@@ -149,9 +149,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addToInventory,
-  removeFromInventory,
-  updateToInventory,
+  registerProduct,
+  deleteProduct,
+  editProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
