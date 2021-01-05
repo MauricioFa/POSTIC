@@ -36,7 +36,7 @@
     "@material-ui/styles": "^4.6.0",
     "asset-require-hook": "^1.2.0",
     "autoprefixer": "^9.7.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "clsx": "1.0.4",
     "core-js": "^3.4.4",
     "dotenv": "^8.2.0",
