@@ -41,7 +41,7 @@
     "core-js": "^3.4.4",
     "dotenv": "^8.2.0",
     "eslint-loader": "^3.0.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase": "^7.5.0",
     "helmet": "^3.21.2",
     "history": "^4.10.1",
